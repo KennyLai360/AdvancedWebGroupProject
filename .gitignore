@@ -122,3 +122,5 @@ bower_components
 # Gradle Wrapper
 ######################
 !gradle/wrapper/gradle-wrapper.jar
+/nb-configuration.xml
+/nbactions.xml
