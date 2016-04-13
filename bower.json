@@ -1,0 +1,28 @@
+{
+  "name": "pictionaryGroup10",
+  "version": "1.0.0",
+  "description": "Pictionary online game web development as part of COM3014 module",
+  "authors": [
+    "Ade Oladejo",
+	"Shane Tan",
+	"Jonny Briers",
+	"Kenny Lai"
+  ],
+  "appPath": "src/main/webapp/WEB-INF/jsp",
+  "keywords": [
+    "bower",
+    "pictionary"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
