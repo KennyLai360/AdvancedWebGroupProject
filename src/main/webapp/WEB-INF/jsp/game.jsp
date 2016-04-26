@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 
 <jsp:include page="../templates/headerTemplate.jsp" />
+
 <body>
     <div class="container" style="padding-top:30px;">
         <div class="row">
@@ -34,5 +35,6 @@
         <jsp:include page="../templates/footerTemplate.jsp" />
     </div>
 </body>
+
 </html>
 
