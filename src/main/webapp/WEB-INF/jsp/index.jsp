@@ -12,8 +12,8 @@
 </head>
 <body>
     <script>
-var canvasWidth = 1000;
-var canvasHeight = 1000;
+var canvasWidth = 500;
+var canvasHeight = 500;
 
 function prepareCanvas() {
     var canvasDiv = document.getElementById('canvasDiv');
@@ -70,7 +70,7 @@ function prepareCanvas() {
       context.lineJoin = "round";
       context.lineWidth = 5;
 
-      for(var i=0; i < clickX.length; i++) {		
+      for(var i=0; i < clickX.length; i++) {
         context.beginPath();
         if(clickDrag[i] && i){
           context.moveTo(clickX[i-1], clickY[i-1]);
@@ -86,11 +86,20 @@ function prepareCanvas() {
 }
 </script>
     <h1>Hello nknjhbu!</h1>
-    <div id="canvasDiv" ><br /><br /><br /><br /></div>
-    <script type="text/javascript"> 
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-10" id="canvasDiv" style="border:solid 1px black;">
+
+            </div>
+            <div class="col-md-2" style="border: solid 1px black;height:500px;">
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
         prepareCanvas();
     </script>
-    
-    
+
+
 </body>
 </html>
