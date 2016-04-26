@@ -13,6 +13,21 @@ public class IndexController {
         return "home";
     }
 
+    @RequestMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @RequestMapping("/game")
+    public String game() {
+        return "game";
+    }
+
     @RequestMapping("/index")
     public String index(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
