@@ -9,16 +9,16 @@
     <div class="container" style="padding-top:30px;">
         <div class="row">
             <div class="col-md-3">
-                <div style="border: black 1px solid; height:500px;">
+                <div style="border: black 1px solid; height:500px; border-radius: 25px">
                     <!--User in game info here-->
                 </div>
-                <div style="border: black 1px solid; height:50px;">
+                <div style="border: black 1px solid; height:50px;  border-radius: 25px">
                     <!-Some other info icon etc etc here?-->
                 </div>
             </div>
 
             <div class="col-md-9">
-                <div style="border: black 1px solid; height:500px;">
+                <div style="border: black 1px solid; height:500px;  border-radius: 25px;">
                     <!--Drawing canvas here-->
                 </div>
                 <div class="input-group">
