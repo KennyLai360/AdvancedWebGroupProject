@@ -9,11 +9,18 @@
     <div class="container" style="padding-top:30px;">
         <div class="row">
             <div class="col-md-3">
-                <p>Box Listing users in the game.</p>
+                <div style="border: black 1px solid; height:500px;">
+                    <!--User in game info here-->
+                </div>
+                <div style="border: black 1px solid; height:50px;">
+                    <!-Some other info icon etc etc here?-->
+                </div>
             </div>
 
             <div class="col-md-9">
-                <p>Box with drawing canvas here</p>
+                <div style="border: black 1px solid; height:500px;">
+                    <!--Drawing canvas here-->
+                </div>
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Send some message here!">
                     <span class="input-group-btn">
