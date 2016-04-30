@@ -16,11 +16,20 @@
         </div>
 
     </div>
-        <div class="row">
+        <div class="row" style="padding:10px;">
             <div class="col-md-3" style="border: black 1px solid; height:50px;  border-radius: 25px;">
-                <!-Some other info icon etc etc here?-->
+                <img src="../icons/pencil_btn.png" onClick="pencilButtonClick()" height="45"/>
+                <img src="../icons/eraser_btn.png" onClick="eraserButtonClick()" height="45"/>
+                <button onclick="clearCanvas()">Clear</button>
+                <input type="color" id="colourSelector" onchange="onColourChange(this.value)" value="#000000"/>
+                <select>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
             </div>
-            <div class="input-group col-md-9" style="">
+            <div class="input-group col-md-9" style="padding:5px;">
             <input type="text" class="form-control" placeholder="Send some message here!">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="button">Send</button>
@@ -36,7 +45,7 @@
     </div>
 </div>
 
-<div  style="padding: 10px;"></div>
+<div style="padding: 10px;"></div>
 
 <script type="text/javascript">
     prepareCanvas();
