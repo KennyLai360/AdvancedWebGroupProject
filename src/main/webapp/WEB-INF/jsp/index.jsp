@@ -89,7 +89,5 @@
 <script type="text/javascript">
     prepareCanvas();
 </script>
-
-
 </body>
 </html>
