@@ -3,18 +3,20 @@ var ERASER_POINTER = "url('../icons/eraser_cur.png'), default";
 var BLACK_COLOUR = "#000000";
 var WHITE_COLOUR = "#FFFFFF";
 
-var colourOfBrush = BLACK_COLOUR;
 var storePreviousColourBrush;
 
-var clickX = new Array();
-var clickY = new Array();
-var clickDrag = new Array();
+var clickX = [];
+var clickY = [];
+var clickDrag = [];
 var paint;
-var clickColor = new Array();
+var clickColor = [];
+var clickSize = [];
+var canvasDivStore = $("#canvasDiv");
 
 window.onload = function() {
-var colourSelector = document.getElementById('colourSelector');
-colourSelector.value = BLACK_COLOUR;
+    var colourSelector = document.getElementById('colourSelector');
+    colourSelector.value = BLACK_COLOUR;
+    var lineWidthSelector = document.getElementById('lineWidthSelector');
 };
 
 /**
@@ -27,7 +29,7 @@ function pencilButtonClick() {
     if (canvas.style.cursor !== PENCIL_POINTER) {
         colourSelector.value = storePreviousColourBrush;
     }
-};
+}
 
 /**
  * Executed when the eraser button is pressed in the tool box.
@@ -52,11 +54,21 @@ function onColourChange(colourToChangeTo) {
 
 /**
  * Function just to change the cursor directly from css.
- * @param a - a string which contains the URL for the image and the settings of property of icon..
+ * @param cursor - a string which contains the URL for the image and the settings of property of icon..
  */
 function changeCursor(cursor) {
     canvas.style.cursor = cursor;
-};
+}
+
+/**
+ * Used by the line width input, if the user decides to enter a value less than 1, then this function will be executed
+ * and automatically change the value to the default number of: 1.
+ */
+function autoValidateLineWidthInput() {
+    if (lineWidthSelector.value < 1) {
+        lineWidthSelector.value = 1;
+    }
+}
 
 /**
  * Basically clearing the canvas
@@ -67,7 +79,8 @@ function clearCanvas() {
     clickY = [];
     clickDrag = [];
     clickColor = [];
-    context.clearRect(0, 0, $("#canvasDiv").width(), $("#canvasDiv").height());
+    clickSize = [];
+    context.clearRect(0, 0, canvasDivStore.width(), canvasDivStore.height());
 }
 
 /**
@@ -77,8 +90,8 @@ function clearCanvas() {
 function prepareCanvas() {
     var canvasDiv = document.getElementById('canvasDiv');
     canvas = document.createElement('canvas');
-    canvas.setAttribute('width', $("#canvasDiv").width());
-    canvas.setAttribute('height', $("#canvasDiv").height());
+    canvas.setAttribute('width', canvasDivStore.width());
+    canvas.setAttribute('height', canvasDivStore.height());
     canvas.setAttribute('id', 'canvas');
     changeCursor(PENCIL_POINTER);
     canvasDiv.appendChild(canvas);
@@ -87,27 +100,27 @@ function prepareCanvas() {
     }
     context = canvas.getContext("2d");
 
-    $('#canvas').mousedown(function(e){
-        var mouseX = e.pageX - this.offsetLeft;
-        var mouseY = e.pageY - this.offsetTop;
+    canvasDivStore.mousedown(function(e){
+        //var mouseX = e.pageX - this.offsetLeft;
+        //var mouseY = e.pageY - this.offsetTop;
 
         paint = true;
         addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
         redraw();
     });
 
-    $('#canvas').mousemove(function(e){
+    canvasDivStore.mousemove(function(e){
         if(paint){
             addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
             redraw();
         }
     });
 
-    $('#canvas').mouseup(function(e){
+    canvasDivStore.mouseup(function(){
         paint = false;
     });
 
-    $('#canvas').mouseleave(function(e){
+    canvasDivStore.mouseleave(function(){
         paint = false;
     });
 
@@ -117,12 +130,11 @@ function prepareCanvas() {
         clickY.push(y);
         clickDrag.push(dragging);
         clickColor.push(colourSelector.value);
+        clickSize.push(lineWidthSelector.value);
     }
 
     function redraw() {
-        context.strokeStyle = colourSelector.value;
         context.lineJoin = "round";
-        context.lineWidth = 5;
 
         for(var i=0; i < clickX.length; i++)
         {
@@ -135,6 +147,7 @@ function prepareCanvas() {
             context.lineTo(clickX[i], clickY[i]);
             context.closePath();
             context.strokeStyle = clickColor[i];
+            context.lineWidth = clickSize[i];
             context.stroke();
         }
     }
