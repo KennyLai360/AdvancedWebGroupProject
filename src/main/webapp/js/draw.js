@@ -11,7 +11,6 @@ var clickDrag = [];
 var paint;
 var clickColor = [];
 var clickSize = [];
-var canvasDivStore = $("#canvasDiv");
 
 window.onload = function() {
     var colourSelector = document.getElementById('colourSelector');
@@ -80,7 +79,7 @@ function clearCanvas() {
     clickDrag = [];
     clickColor = [];
     clickSize = [];
-    context.clearRect(0, 0, canvasDivStore.width(), canvasDivStore.height());
+    context.clearRect(0, 0, $("#canvasDiv").width(), $("#canvasDiv").height());
 }
 
 /**
@@ -90,8 +89,8 @@ function clearCanvas() {
 function prepareCanvas() {
     var canvasDiv = document.getElementById('canvasDiv');
     canvas = document.createElement('canvas');
-    canvas.setAttribute('width', canvasDivStore.width());
-    canvas.setAttribute('height', canvasDivStore.height());
+    canvas.setAttribute('width', $("#canvasDiv").width());
+    canvas.setAttribute('height', $("#canvasDiv").height());
     canvas.setAttribute('id', 'canvas');
     changeCursor(PENCIL_POINTER);
     canvasDiv.appendChild(canvas);
@@ -100,7 +99,7 @@ function prepareCanvas() {
     }
     context = canvas.getContext("2d");
 
-    canvasDivStore.mousedown(function(e){
+    $("#canvasDiv").mousedown(function(e){
         //var mouseX = e.pageX - this.offsetLeft;
         //var mouseY = e.pageY - this.offsetTop;
 
@@ -109,18 +108,18 @@ function prepareCanvas() {
         redraw();
     });
 
-    canvasDivStore.mousemove(function(e){
+    $("#canvasDiv").mousemove(function(e){
         if(paint){
             addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
             redraw();
         }
     });
 
-    canvasDivStore.mouseup(function(){
+    $("#canvasDiv").mouseup(function(e){
         paint = false;
     });
 
-    canvasDivStore.mouseleave(function(){
+    $("#canvasDiv").mouseleave(function(e){
         paint = false;
     });
 
