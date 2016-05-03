@@ -10,20 +10,12 @@ package com.surrey.com3014.group10.controllers;
  * @author Jonny
  */
 public class DrawData {
-    
-    
-int clickX;
-int clickY;
-int clickDrag;
-int paint;
-int clickColor;
-int clickSize;
-    
-    
-    public int[] getImageData(){
-        int[] stuff = new int[]{clickX, clickY, clickDrag, clickSize};
-        return stuff;
+
+    private int[] drawing;
+
+    public int[] getCoor(){
+        return drawing;
     }
 
-    
+
 }

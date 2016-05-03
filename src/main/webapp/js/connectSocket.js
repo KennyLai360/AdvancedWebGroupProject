@@ -25,6 +25,7 @@ function drawConnect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/drawings', function(drawing){
             showDrawing(JSON.parse(drawing.body).content);
+            // console.log("ests");
         });
     });
 }
@@ -43,7 +44,7 @@ function sendMessage() {
 }
 
 function sendDrawing() {
-    var arr = [clickX,clickY,clickDrag,clickSize];
+    var arr = [clickX,clickY,clickSize];
     stompClient.send("/app/draw", {}, JSON.stringify({ 'drawing':  arr}));
 }
 
@@ -56,9 +57,9 @@ function showGreeting(message) {
 }
 
 function showDrawing(drawing) {
-    clickX.push(drawing[0]);
-    clickY.push(drawing[1]);
-    clickDrag.push(drawing[2]);
-    clickSize.push(drawing[3]);
+    clickX.push(drawing.getContent()[0]);
+    clickY.push(drawing.getContent()[1]);
+    clickSize.push(drawing.getContent()[2]);
+    redraw();
 }
 
