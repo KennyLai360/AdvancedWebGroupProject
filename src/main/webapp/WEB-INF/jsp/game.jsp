@@ -5,8 +5,14 @@
 <script type="text/javascript" src="../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
 <script type="text/javascript" src="../../js/connectSocket.js"></script>
     <script>
-        $(window).load(messengerConnect());
+//        $(window).load(messengerConnect());
         // $(window).unload(messengerDisconnect());
+                $(window).load(function(){
+                    drawConnect();
+                    var tid = setInterval(sendDrawing,500);
+                    var tip = setInterval(showDrawing,500);
+                });
+
     </script>
     <script type="text/javascript" src="../../js/draw.js"></script>
 
@@ -38,6 +44,9 @@
             <input type="text" id="messagebox" class="form-control" placeholder="Send some message here!">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="button" onclick="sendMessage()">Send</button>
+                    </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button" onclick="sendDrawing()">Send Drawing</button>
                     </span>
         </div>
         </div>
