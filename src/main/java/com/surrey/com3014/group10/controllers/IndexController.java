@@ -28,9 +28,7 @@ public class IndexController {
     }
 
     @RequestMapping("/index")
-    public String index(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
-        System.out.println("name: ===> " + name);
+    public String index() {
         return "index";
     }
 
