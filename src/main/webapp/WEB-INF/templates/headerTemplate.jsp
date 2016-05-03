@@ -11,9 +11,7 @@
         }
         <%@include file="../../bower_components/bootstrap/dist/css/bootstrap.css" %>
     </style>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+    <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

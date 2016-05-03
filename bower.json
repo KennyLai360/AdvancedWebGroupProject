@@ -4,9 +4,9 @@
   "description": "Pictionary online game web development as part of COM3014 module",
   "authors": [
     "Ade Oladejo",
-	"Shane Tan",
-	"Jonny Briers",
-	"Kenny Lai"
+    "Shane Tan",
+    "Jonny Briers",
+    "Kenny Lai"
   ],
   "appPath": "src/main/webapp/WEB-INF/jsp",
   "keywords": [
@@ -23,6 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3"
   }
 }
