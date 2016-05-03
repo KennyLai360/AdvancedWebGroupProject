@@ -28,6 +28,11 @@ public class IndexController {
         return "game";
     }
 
+    @RequestMapping("/menu")
+    public String menu() {
+        return "menu";
+    }
+
     @RequestMapping("/index")
     public String index(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);

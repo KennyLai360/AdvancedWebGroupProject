@@ -33,6 +33,7 @@
             <a class="navbar-brand" href="/about">About us</a>
             <a class="navbar-brand" href="/contact">Contact us</a>
             <a class="navbar-brand" href="/game">Start Game</a>
+            <a class="navbar-brand" href="/menu">Menu</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
@@ -51,5 +52,3 @@
     </div>
 </nav>
 
-</body>
-</html>

@@ -1,9 +1,6 @@
-<html>
 <jsp:include page="../templates/headerTemplate.jsp" />
-<body>
     <script type="text/javascript" src="../../js/draw.js"></script>
 <div class="container" style="padding-top:30px;">
-    <div id="GameMenu"></div>
     <div class="row">
         <div class="col-md-3">
             <div style="border: black 1px solid; height:500px; border-radius: 25px">
@@ -32,22 +29,17 @@
                     </span>
                 </div>
         </div>
-
+    <script type="text/javascript">
+        prepareCanvas();
+    </script>
 </div>
 
-<div class="container">
-    <div class="row">
+
         <jsp:include page="../templates/footerTemplate.jsp" />
-    </div>
-</div>
 
-<div style="padding: 10px;"></div>
-
-<script type="text/javascript">
-    prepareCanvas();
-</script>
 
 </body>
-
 </html>
+
+
 
