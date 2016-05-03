@@ -33,11 +33,7 @@
         prepareCanvas();
     </script>
 </div>
-
-
         <jsp:include page="../templates/footerTemplate.jsp" />
-
-
 </body>
 </html>
 
