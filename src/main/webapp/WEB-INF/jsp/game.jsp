@@ -3,6 +3,7 @@
 <body>
     <script type="text/javascript" src="../../js/draw.js"></script>
 <div class="container" style="padding-top:30px;">
+    <div id="GameMenu"></div>
     <div class="row">
         <div class="col-md-3">
             <div style="border: black 1px solid; height:500px; border-radius: 25px">
@@ -25,11 +26,11 @@
                 <input type="number" min="1" id="lineWidthSelector" style="width:50px;" value="5" onchange="autoValidateLineWidthInput()" /></label>
             </div>
             <div class="input-group col-md-9" style="padding:5px;">
-            <input type="text" class="form-control" placeholder="Send some message here!">
+                <input type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button">Send</button>
+                        <button class="btn btn-secondary" type="submit">Send</button>
                     </span>
-        </div>
+                </div>
         </div>
 
 </div>
