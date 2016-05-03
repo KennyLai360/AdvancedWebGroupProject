@@ -1,9 +1,7 @@
 <html>
 <jsp:include page="../templates/headerTemplate.jsp" />
-
 <body>
     <script type="text/javascript" src="../../js/draw.js"></script>
-
 <div class="container" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-3">
