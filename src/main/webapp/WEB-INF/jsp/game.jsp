@@ -17,10 +17,16 @@
 
     </div>
         <div class="row">
-            <div class="col-md-3" style="border: black 1px solid; height:50px;  border-radius: 25px;">
-                <!-Some other info icon etc etc here?-->
+            <div class="col-md-3" style="border: black 1px solid; height:50px;  border-radius: 25px; padding-top:10px">
+                <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()" height="30"/></label>
+                <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()" height="30"/></label>
+                <label title="Clear the canvas"><button onclick="clearCanvas()">Clear</button></label>
+                <label title="Colour of the brush">
+                <input type="color" id="colourSelector" onchange="onColourChange(this.value)" value="#000000"/></label>
+                <label title="Width of the brush">
+                <input type="number" min="1" id="lineWidthSelector" style="width:50px;" value="5" onchange="autoValidateLineWidthInput()" /></label>
             </div>
-            <div class="input-group col-md-9" style="">
+            <div class="input-group col-md-9" style="padding:5px;">
             <input type="text" class="form-control" placeholder="Send some message here!">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="button">Send</button>
@@ -36,7 +42,7 @@
     </div>
 </div>
 
-<div  style="padding: 10px;"></div>
+<div style="padding: 10px;"></div>
 
 <script type="text/javascript">
     prepareCanvas();
