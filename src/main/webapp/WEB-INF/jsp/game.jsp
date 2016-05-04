@@ -1,6 +1,8 @@
 <html>
 <jsp:include page="../templates/headerTemplate.jsp" />
 <body>
+<script type="text/javascript" src="../../js/draw.js"></script>
+
 <script type="text/javascript" src="../../bower_components/json3/lib/json3.min.js"></script>
 <script type="text/javascript" src="../../bower_components/sockjs/sockjs.min.js"></script>
 <script type="text/javascript" src="../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
@@ -13,9 +15,10 @@
 //                    var tid = setInterval(sendDrawing,500);
 //                    var tip = setInterval(showDrawing,500);
                 });
-
+    function amazingFunc(){
+        sendDrawing();
+    }
     </script>
-    <script type="text/javascript" src="../../js/draw.js"></script>
 
 
 <div class="container" style="padding-top:30px;">
@@ -47,7 +50,7 @@
                         <button class="btn btn-secondary" type="button" onclick="sendMessage()">Send</button>
                     </span>
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button" onclick="sendDrawing()">Send Drawing</button>
+                        <button class="btn btn-secondary" type="button" onclick="amazingFunc()">Send Drawing</button>
                     </span>
         </div>
         </div>
