@@ -19,10 +19,16 @@
         clearCanvas();
         sendDrawing(-1);
     }
+    function sendColor(val){
+        onColourChange(val);
+//        sendDrawing(-2,1,false,1,val);
+    }
     function chooseRole() {
         if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
+            // Indicates Drawer
             prepareCanvas(1);
         } else {
+            // Indicates Guesser
             prepareCanvas(0);
         }
     }
@@ -84,13 +90,13 @@
             <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
                                             height="30"/></label>
             <label title="Colour of the brush">
-                <input type="color" id="colourSelector" onchange="onColourChange(this.value)" value="#000000"/></label>
+                <input type="color" id="colourSelector" onchange="sendColor(this.value)" value="#000000"/></label>
             <label title="Width of the brush">
                 <input class="form-control" type="number" min="1" id="lineWidthSelector" style="width:75px;" value="5"
                        onchange="autoValidateLineWidthInput()"/></label>
             <label title="Clear the canvas">
                 <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top"
-                        title="Clear the Canvas" onclick="clearCanvas()">
+                        title="Clear the Canvas" onclick="sendClear()">
                     Clear
                 </button>
             </label>

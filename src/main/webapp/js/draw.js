@@ -107,14 +107,14 @@ function prepareCanvas(setDrawer) {
 
             paint = true;
             addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-            sendDrawing(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false, lineWidthSelector.value);
+            sendDrawing(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false, lineWidthSelector.value,colourSelector.value);
             redraw();
         });
 
         $("#canvasDiv").mousemove(function (e) {
             if (paint) {
                 addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-                sendDrawing(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true, lineWidthSelector.value);
+                sendDrawing(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true, lineWidthSelector.value,colourSelector.value);
                 redraw();
             }
         });
