@@ -1,14 +1,33 @@
 <html>
 <jsp:include page="../templates/headerTemplate.jsp" />
 <body>
+<script type="text/javascript" src="../../js/draw.js"></script>
+
+<script type="text/javascript" src="../../bower_components/json3/lib/json3.min.js"></script>
 <script type="text/javascript" src="../../bower_components/sockjs/sockjs.min.js"></script>
 <script type="text/javascript" src="../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
 <script type="text/javascript" src="../../js/connectSocket.js"></script>
     <script>
-        $(window).load(messengerConnect());
+//        $(window).load(messengerConnect());
         // $(window).unload(messengerDisconnect());
+        $(window).load(function(){
+                    drawConnect();
+                    chooseRole();
+//                    var tid = setInterval(sendDrawing,500);
+//                    var tip = setInterval(showDrawing,500);
+        });
+        function sendClear(){
+            clearCanvas();
+            sendDrawing(-1);
+        }
+        function chooseRole() {
+            if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
+                prepareCanvas(1);
+            } else {
+                prepareCanvas(0);
+            }
+        }
     </script>
-    <script type="text/javascript" src="../../js/draw.js"></script>
 
 
 <div class="container" style="padding-top:30px;">
@@ -28,7 +47,7 @@
             <div class="col-md-3" style="border: black 1px solid; height:50px;  border-radius: 25px; padding-top:10px">
                 <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()" height="30"/></label>
                 <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()" height="30"/></label>
-                <label title="Clear the canvas"><button onclick="clearCanvas()">Clear</button></label>
+                <label title="Clear the canvas"><button onclick="sendClear()">Clear</button></label>
                 <label title="Colour of the brush">
                 <input type="color" id="colourSelector" onchange="onColourChange(this.value)" value="#000000"/></label>
                 <label title="Width of the brush">
@@ -38,6 +57,9 @@
             <input type="text" id="messagebox" class="form-control" placeholder="Send some message here!">
                     <span class="input-group-btn">
                         <button class="btn btn-secondary" type="button" onclick="sendMessage()">Send</button>
+                    </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button" onclick="sendDrawing()">Send Drawing</button>
                     </span>
         </div>
         </div>
@@ -53,7 +75,7 @@
 <div style="padding: 10px;"></div>
 
 <script type="text/javascript">
-    prepareCanvas();
+//    prepareCanvas();
 </script>
 
 </body>
