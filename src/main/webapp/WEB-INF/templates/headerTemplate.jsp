@@ -9,9 +9,14 @@
             padding-top: 50px;
             padding-bottom: 20px;
         }
+        #scrollChat {
+            max-height: 250px;
+            overflow-y:auto;
+        }
         <%@include file="../../bower_components/bootstrap/dist/css/bootstrap.css" %>
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -32,11 +37,17 @@
             <a class="navbar-brand" href="/home">Home</a>
             <a class="navbar-brand" href="/about">About us</a>
             <a class="navbar-brand" href="/contact">Contact us</a>
-            <a class="navbar-brand" href="/game">Start Game</a>
-            <a class="navbar-brand" href="/menu">Menu</a>
+
+            <div class="btn-group">
+                <a style="cursor: hand;" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Game</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/game">Create Gameoom</a></li>
+                    <li><a href="/join">Join a Game</a></li>
+                </ul>
+            </div>
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-
             <form class="navbar-form navbar-right" role="form" onsubmit>
                 <div class="form-group">
                     <input type="text" placeholder="Username" class="form-control">

@@ -18,6 +18,12 @@ window.onload = function() {
     var lineWidthSelector = document.getElementById('lineWidthSelector');
 };
 
+function scrollToBottomOfChat() {
+    var wtf = $('#scrollChat');
+    var height = wtf[0].scrollHeight;
+    wtf.scrollTop(height);
+}
+
 /**
  * Executed when the pencil button in the tool box is clicked.
  * Changes the cursor to the pencil, then change the colour of the brush back to what it was originally

@@ -28,9 +28,9 @@ public class IndexController {
         return "game";
     }
 
-    @RequestMapping("/menu")
+    @RequestMapping("/join")
     public String menu() {
-        return "menu";
+        return "join";
     }
 
     @RequestMapping("/index")
