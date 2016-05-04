@@ -1,6 +1,34 @@
 <jsp:include page="../templates/headerTemplate.jsp"/>
 <script type="text/javascript" src="../../js/draw.js"></script>
 
+<script type="text/javascript" src="../../bower_components/json3/lib/json3.min.js"></script>
+<script type="text/javascript" src="../../bower_components/sockjs/sockjs.min.js"></script>
+<script type="text/javascript" src="../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+<script type="text/javascript" src="../../js/connectSocket.js"></script>
+
+<script>
+    //        $(window).load(messengerConnect());
+    // $(window).unload(messengerDisconnect());
+    $(window).load(function(){
+        drawConnect();
+        chooseRole();
+//                    var tid = setInterval(sendDrawing,500);
+//                    var tip = setInterval(showDrawing,500);
+    });
+    function sendClear(){
+        clearCanvas();
+        sendDrawing(-1);
+    }
+    function chooseRole() {
+        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
+            prepareCanvas(1);
+        } else {
+            prepareCanvas(0);
+        }
+    }
+</script>
+
+
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-3">
@@ -21,47 +49,25 @@
                 </div>
             </div>
             <div style="padding:5px;"></div>
-            <div style="border: black 1px solid; height:310px; border-radius: 20px;">
+            <div style="border: black 1px solid; height:310px; border-radius: 20px;" id="conversationDiv">
                 <div style="padding-top:10px; padding-left:5px;">
                     <h5><b><u>Chat</u></b></h5>
 
                     <div id="scrollChat">
                         <!-- ENTER YOUR CHAT CODE BELOW -->
-                        <p>amsdmakasdadasdasdasdasdsad asdadasda asdaa sda dasd admdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
-
-                        <p>amsdmakmdkad</p>
+                        <p id="response"></p>
+                        <p>u wot m8</p>
+                        <p>stfu u skrubl0rd</p>
+                        <p>wut r u drawing blad</p>
+                        <p>git rekt m8</p>
+                        <p>rekt.</p>
+                        <p>rektmastah</p>
+                        <p>u wot m8</p>
+                        <p>stfu u skrubl0rd</p>
+                        <p>wut r u drawing blad</p>
+                        <p>git rekt m8</p>
+                        <p>rekt.</p>
+                        <p>rektmastah</p>
                     </div>
                 </div>
             </div>
@@ -103,7 +109,7 @@
         <hr>
     </div>
     <div class="input-group col-md-8 preventSelection" style="padding:7px;">
-        <input type="text" class="form-control" placeholder="Send some message here!"/>
+        <input id="messagebox" type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
                         <div onclick="scrollToBottomOfChat()">
                             <button class="btn btn-secondary" type="submit">Send</button>
@@ -112,7 +118,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    prepareCanvas();
+//    prepareCanvas();
 </script>
 
 <jsp:include page="../templates/footerTemplate.jsp"/>

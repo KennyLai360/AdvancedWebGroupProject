@@ -86,62 +86,63 @@ function clearCanvas() {
  * Function that creates a canvas then attached to the property that has the id of "canvasDiv"
  * NOTE: Canvas is available in HTML5 but creating canvas manually in javascript ensures back-compatibility.
  */
-function prepareCanvas() {
+function prepareCanvas(setDrawer) {
+    drawer = setDrawer;
     var canvasDiv = document.getElementById('canvasDiv');
     canvas = document.createElement('canvas');
     canvas.setAttribute('width', $("#canvasDiv").width());
     canvas.setAttribute('height', $("#canvasDiv").height());
     canvas.setAttribute('id', 'canvas');
-    changeCursor(PENCIL_POINTER);
     canvasDiv.appendChild(canvas);
-    if(typeof G_vmlCanvasManager != 'undefined') {
+    if (typeof G_vmlCanvasManager != 'undefined') {
         canvas = G_vmlCanvasManager.initElement(canvas);
     }
     context = canvas.getContext("2d");
+    if(drawer) {
+        changeCursor(PENCIL_POINTER);
 
-    $("#canvasDiv").mousedown(function(e){
-        //var mouseX = e.pageX - this.offsetLeft;
-        //var mouseY = e.pageY - this.offsetTop;
+        $("#canvasDiv").mousedown(function (e) {
+            //var mouseX = e.pageX - this.offsetLeft;
+            //var mouseY = e.pageY - this.offsetTop;
 
-        paint = true;
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-        redraw();
-    });
-
-    $("#canvasDiv").mousemove(function(e){
-        if(paint){
-            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+            paint = true;
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+            sendDrawing(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false, lineWidthSelector.value);
             redraw();
+        });
+
+        $("#canvasDiv").mousemove(function (e) {
+            if (paint) {
+                addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+                sendDrawing(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true, lineWidthSelector.value);
+                redraw();
+            }
+        });
+
+        $("#canvasDiv").mouseup(function (e) {
+            paint = false;
+        });
+
+        $("#canvasDiv").mouseleave(function (e) {
+            paint = false;
+        });
+
+        function addClick(x, y, dragging) {
+            clickX.push(x);
+            clickY.push(y);
+            clickDrag.push(dragging);
+            clickColor.push(colourSelector.value);
+            clickSize.push(lineWidthSelector.value);
         }
-    });
-
-    $("#canvasDiv").mouseup(function(e){
-        paint = false;
-    });
-
-    $("#canvasDiv").mouseleave(function(e){
-        paint = false;
-    });
-
-    function addClick(x, y, dragging)
-    {
-        clickX.push(x);
-        clickY.push(y);
-        clickDrag.push(dragging);
-        clickColor.push(colourSelector.value);
-        clickSize.push(lineWidthSelector.value);
     }
-
     function redraw() {
         context.lineJoin = "round";
-
-        for(var i=0; i < clickX.length; i++)
-        {
+        for (var i = 0; i < clickX.length; i++) {
             context.beginPath();
-            if(clickDrag[i] && i){
-                context.moveTo(clickX[i-1], clickY[i-1]);
-            }else{
-                context.moveTo(clickX[i]-1, clickY[i]);
+            if (clickDrag[i] && i) {
+                context.moveTo(clickX[i - 1], clickY[i - 1]);
+            } else {
+                context.moveTo(clickX[i] - 1, clickY[i]);
             }
             context.lineTo(clickX[i], clickY[i]);
             context.closePath();
@@ -149,5 +150,8 @@ function prepareCanvas() {
             context.lineWidth = clickSize[i];
             context.stroke();
         }
+    }
+    if(!drawer){
+        setInterval(redraw,25);
     }
 }
