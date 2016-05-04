@@ -6,7 +6,7 @@
         <div class="col-md-3">
             <div style="border: black 1px solid; height:175px; border-radius: 20px;">
                 <div style="padding-top:5px; padding-left:5px;">
-                    <h5><b><u>Users in-lobby</u></b></h5>
+                    <h5><b><u>Users in-lobby [4/4]</u></b></h5>
 
                     <div style="padding-left:10px;">
                         <!-- PUT THE ACTIVE USERS BELOW -->

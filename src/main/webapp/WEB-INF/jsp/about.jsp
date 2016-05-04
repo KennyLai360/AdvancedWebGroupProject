@@ -34,7 +34,7 @@
                 libero enim in eros. Proin semper mauris a leo convallis ultrices.</p>
             <h3>Kenny Lai</h3>
             <p>Integer et nibh ac lorem porta volutpat at eu ipsum. Aenean in erat quis orci dictum suscipit. Phasellus convallis ipsum sit amet justo tristique,
-                rhoncus lacinia erat dictum. Nunc placerat dignissim leo. <h5><b>ASIANz</b></h5> Etiam vitae euismod odio. Vivamus ut sapien tortor. Curabitur imperdiet,
+                rhoncus lacinia erat dictum. Nunc placerat dignissim leo. Etiam vitae euismod odio. Vivamus ut sapien tortor. Curabitur imperdiet,
                 turpis sed eleifend lacinia, odio libero accumsan lorem, nec semper sapien lacus eu est. Curabitur sagittis sodales vestibulum.</p>
         </div>
     </div>
