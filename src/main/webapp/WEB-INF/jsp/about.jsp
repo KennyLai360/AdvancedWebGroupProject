@@ -1,12 +1,4 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-
 <jsp:include page="../templates/headerTemplate.jsp" />
-
-<body>
 
 <div class="jumbotron">
     <div class="container">
@@ -42,7 +34,7 @@
                 libero enim in eros. Proin semper mauris a leo convallis ultrices.</p>
             <h3>Kenny Lai</h3>
             <p>Integer et nibh ac lorem porta volutpat at eu ipsum. Aenean in erat quis orci dictum suscipit. Phasellus convallis ipsum sit amet justo tristique,
-                rhoncus lacinia erat dictum. Nunc placerat dignissim leo. <h5><b>ASIANz</b></h5> Etiam vitae euismod odio. Vivamus ut sapien tortor. Curabitur imperdiet,
+                rhoncus lacinia erat dictum. Nunc placerat dignissim leo. Etiam vitae euismod odio. Vivamus ut sapien tortor. Curabitur imperdiet,
                 turpis sed eleifend lacinia, odio libero accumsan lorem, nec semper sapien lacus eu est. Curabitur sagittis sodales vestibulum.</p>
         </div>
     </div>
