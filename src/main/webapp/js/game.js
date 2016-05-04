@@ -1,8 +1,6 @@
-window.onload = function() {
+window.onload = function () {
     var roomNumber = document.getElementById('roomNumber');
     var joinRoomButton = document.getElementById('connectLobbyBtn');
-
-
 }
 
 var path = window.location.pathname;
@@ -13,7 +11,7 @@ function scrollToBottomOfChat() {
     wtf.scrollTop(height);
 }
 
-function roomNumberInput() {
+function roomNumberInputValidation() {
     if (roomNumber.value < 1) {
         roomNumber.value = 0;
         document.getElementsByName("connectLobbyBtn")[0].disabled = true;
@@ -26,11 +24,11 @@ function roomNumberInput() {
 
 function gameMenuButtonClick() {
     if (path === "/game") {
-        document.getElementsByName("joinButton")[0].disabled = true;
-        document.getElementsByName("joinButton")[0].style.cursor = "not-allowed";
+        document.getElementById("gameMenuBtn").className += " disabled";
+        document.getElementById("gameMenuBtn").style.cursor = "not-allowed";
     } else {
-        document.getElementsByName("joinButton")[0].disabled = false;
-        document.getElementsByName("joinButton")[0].style.cursor = "hand";
+        document.getElementById("gameMenuBtn").className.replace(" disabled", "");
+        document.getElementById("gameMenuBtn").style.cursor = "hand";
     }
 }
 

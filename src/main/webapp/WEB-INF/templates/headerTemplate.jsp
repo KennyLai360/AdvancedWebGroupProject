@@ -14,7 +14,13 @@
             max-height: 250px;
             overflow-y: auto;
         }
-
+        .preventSelection {
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
         <%@include file="../../bower_components/bootstrap/dist/css/bootstrap.css" %>
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
@@ -37,7 +43,7 @@
             <a class="navbar-brand" href="/contact" id="contactBtn">Contact us</a>
 
             <div class="btn-group">
-                <a style="cursor: hand;" class="navbar-brand dropdown-toggle" data-toggle="dropdown"
+                <a id="gameMenuBtn" style="cursor: hand;" class="navbar-brand dropdown-toggle" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" onclick="gameMenuButtonClick()">Game</a>
                 <ul class="dropdown-menu">
                     <li><a href="/game">Create Gameroom</a></li>
@@ -71,7 +77,7 @@
             </div>
             <div class="modal-body">
                 <label>Enter the room number you wish to join:</label>
-                <input id="roomNumber" type="number" class="form-control" placeholder="Room number" onchange="roomNumberInput()">
+                <input id="roomNumber" type="number" class="form-control" placeholder="Room number" onchange="roomNumberInputValidation()">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

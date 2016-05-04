@@ -1,7 +1,7 @@
 <jsp:include page="../templates/headerTemplate.jsp"/>
 <script type="text/javascript" src="../../js/draw.js"></script>
 
-<div class="container" style="padding-top:30px;">
+<div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-3">
             <div style="border: black 1px solid; height:175px; border-radius: 20px;">
@@ -71,7 +71,7 @@
         </div>
 
     </div>
-    <div class="row" style="padding-top:5px;">
+    <div class="row preventSelection" style="padding-top:5px;">
         <div class="col-md-4" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
             <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
                                            height="30"/></label>
@@ -102,7 +102,7 @@
         </div>
         <hr>
     </div>
-    <div class="input-group col-md-8" style="padding:7px;">
+    <div class="input-group col-md-8 preventSelection" style="padding:7px;">
         <input type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
                         <div onclick="scrollToBottomOfChat()">
