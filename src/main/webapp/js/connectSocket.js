@@ -42,8 +42,8 @@ function sendMessage() {
     stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
 }
 
-function sendDrawing(x,y,drag,size,paintd) {
-    var arr = [x,y,drag? 1:0,size,paintd? 1: 0];
+function sendDrawing(x,y,drag,size) {
+    var arr = [x,y,drag? 1:0,size];
     stompClient.send("/app/draw", {}, JSON.stringify({'drawing': arr}));
 }
 
