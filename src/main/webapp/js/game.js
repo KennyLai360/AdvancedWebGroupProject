@@ -9,6 +9,8 @@ function scrollToBottomOfChat() {
     var wtf = $('#scrollChat');
     var height = wtf[0].scrollHeight;
     wtf.scrollTop(height);
+    sendMessage();
+    $('#messagebox').val("");
 }
 
 function roomNumberInputValidation() {
