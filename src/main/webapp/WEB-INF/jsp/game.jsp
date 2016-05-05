@@ -15,6 +15,10 @@
 //                    var tid = setInterval(sendDrawing,500);
 //                    var tip = setInterval(showDrawing,500);
     });
+    $( window ).on('beforeunload',function() {
+        sendDisconnection();
+        drawDisconnect();
+    });
     function sendClear(){
         clearCanvas();
         sendDrawing(-1);
@@ -61,19 +65,6 @@
 
                     <div id="scrollChat">
                         <!-- ENTER YOUR CHAT CODE BELOW -->
-                        <p id="response"></p>
-                        <p>u wot m8</p>
-                        <p>stfu u skrubl0rd</p>
-                        <p>wut r u drawing blad</p>
-                        <p>git rekt m8</p>
-                        <p>rekt.</p>
-                        <p>rektmastah</p>
-                        <p>u wot m8</p>
-                        <p>stfu u skrubl0rd</p>
-                        <p>wut r u drawing blad</p>
-                        <p>git rekt m8</p>
-                        <p>rekt.</p>
-                        <p>rektmastah</p>
                     </div>
                 </div>
             </div>

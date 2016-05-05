@@ -2,20 +2,7 @@ var stompClient = null;
 var drawer = 0;
 function setConnected(connected) {
     document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-    document.getElementById('response').innerHTML = '';
 }
-
-// function messengerConnect() {
-//     var socket = new SockJS('/chat');
-//     stompClient = Stomp.over(socket);
-//     stompClient.connect({}, function(frame) {
-//         setConnected(true);
-//         console.log('Connected: ' + frame);
-//         stompClient.subscribe('/topic/greetings', function(greeting){
-//             showGreeting(JSON.parse(greeting.body).content);
-//         });
-//     });
-// }
 
 function drawConnect() {
     var socket = new SockJS('/draw');
@@ -26,22 +13,31 @@ function drawConnect() {
         stompClient.subscribe('/topic/drawings', function(drawing){
             showDrawing(JSON.parse(drawing.body).content);
         });
+        stompClient.subscribe('/topic/greetings', function(greeting){
+            showGreeting(JSON.parse(greeting.body).content);
+        });
     });
 }
 
-function messengerDisconnect() {
+function drawDisconnect() {
     if (stompClient != null) {
         stompClient.disconnect();
     }
     setConnected(false);
+    sendDisconnection();
     console.log("Disconnected");
+}
+
+function sendDisconnection() {
+    var msg = "User has disconnected.";
+    stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendMessage() {
     var msg = document.getElementById('messagebox').value;
+    msg = "User: " + msg;
     stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
 }
-
 
 function sendDrawing(x,y,drag,size,color) {
     var hextoInt;
@@ -54,11 +50,12 @@ function sendDrawing(x,y,drag,size,color) {
 }
 
 function showGreeting(message) {
-    var response = document.getElementById('response');
-    var p = document.createElement('p');
-    p.style.wordWrap = 'break-word';
-    p.appendChild(document.createTextNode(message));
-    response.appendChild(p);
+    // var response = document.getElementById('response');
+    // var p = document.createElement('p');
+    // p.style.wordWrap = 'break-word';
+    // p.appendChild(document.createTextNode(message));
+    // response.appendChild(p);
+    $('#scrollChat').append('<p>' + message + '</p>');
 }
 
 function showDrawing(drawing) {
