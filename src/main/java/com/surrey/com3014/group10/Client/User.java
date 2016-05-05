@@ -9,7 +9,7 @@ public class User {
     private String name;
     private boolean allowedToDraw;
     private long gameSessionId;
-    
+
     public long getUserId() {
         return id;
     }
