@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * Main application
  *
- * @author Aung Thu Moe
  */
 @ComponentScan
 @EnableAutoConfiguration

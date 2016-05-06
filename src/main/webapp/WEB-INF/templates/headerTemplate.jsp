@@ -14,6 +14,10 @@
             max-height: 250px;
             overflow-y: auto;
         }
+        #joinGameLobbyTable {
+            max-height: 380px;
+            overflow-y: auto;
+        }
         .preventSelection {
             -webkit-user-select: none;
             -khtml-user-select: none;
