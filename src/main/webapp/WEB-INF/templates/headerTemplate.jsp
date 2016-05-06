@@ -42,15 +42,7 @@
             <a class="navbar-brand" href="/home" id="homeBtn">Home</a>
             <a class="navbar-brand" href="/about" id="aboutBtn">About us</a>
             <a class="navbar-brand" href="/contact" id="contactBtn">Contact us</a>
-
-            <div class="btn-group">
-                <a id="gameMenuBtn" style="cursor: hand;" class="navbar-brand dropdown-toggle" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" onclick="gameMenuButtonClick()">Game</a>
-                <ul class="dropdown-menu">
-                    <li><a href="/game">Create Gameroom</a></li>
-                    <li><a style="cursor: hand;" data-toggle="modal" data-target="#myModal" name="joinButton">Join a Game</a></li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="/join" id="GameBtn">Game</a>
 
         </div>
 
@@ -63,26 +55,4 @@
 
     </div>
 </nav>
-
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Join game</h4>
-            </div>
-            <div class="modal-body">
-                <label>Enter the room number you wish to join:</label>
-                <input id="roomNumber" type="number" class="form-control" placeholder="Room number" onchange="roomNumberInputValidation()">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" name="connectLobbyBtn" class="btn btn-primary" disabled >Connect</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
