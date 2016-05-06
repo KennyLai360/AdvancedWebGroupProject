@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/home")
-    public String home() {
-        return "home";
-    }
-
     @RequestMapping("/contact")
     public String contact() {
         return "contact";
