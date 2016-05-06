@@ -1,5 +1,7 @@
 package com.surrey.com3014.group10.Client;
 
+import org.springframework.security.core.userdetails.User;
+
 /**
  * Created by KENNY on 03/05/2016.
  */

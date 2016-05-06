@@ -23,7 +23,7 @@ public class MainController {
   @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
         model.addAttribute("greeting", "Hi, Welcome to mysite");
-        return "login";
+        return "home";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)

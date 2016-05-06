@@ -5,9 +5,12 @@
  */
 package com.surrey.com3014.group10.configs;
 
+import javax.persistence.EntityManagerFactory;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,13 +22,12 @@ import org.springframework.web.servlet.view.JstlView;
  *
  * @author maudf_000
  */
-
-
 @Configuration
 @EnableWebMvc
+@EntityScan
 @ComponentScan(basePackages = "com.surrey.com3014.group10")
-public class JavaConfig extends WebMvcConfigurerAdapter  {
-    
+public class JavaConfig extends WebMvcConfigurerAdapter {
+
     
       @Bean(name="HelloWorld")
     public ViewResolver viewResolver() {
@@ -37,15 +39,14 @@ public class JavaConfig extends WebMvcConfigurerAdapter  {
         return viewResolver;
     }
     
-    
+     
+
     /*
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
      *
      */
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 }
-

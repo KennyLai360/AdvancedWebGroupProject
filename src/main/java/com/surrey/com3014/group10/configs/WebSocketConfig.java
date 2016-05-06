@@ -1,4 +1,4 @@
-package com.surrey.com3014.group10.controllers;
+package com.surrey.com3014.group10.configs;
 
 /**
  * Created by Xyline on 03/05/2016.
@@ -24,3 +24,5 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/chat", "/draw").withSockJS();
     }
 }
+
+

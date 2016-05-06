@@ -13,6 +13,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @author maudf_000
  */
 
+/*
+
 public class SpringMvcInitialiser extends AbstractAnnotationConfigDispatcherServletInitializer {
  
     @Override
@@ -31,4 +33,6 @@ public class SpringMvcInitialiser extends AbstractAnnotationConfigDispatcherServ
     }
  
 }
+
+*/
 
