@@ -32,28 +32,36 @@
     <script type="text/javascript" src="../../js/game.js"></script>
 
 </head>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/home" id="homeBtn">Home</a>
-            <a class="navbar-brand" href="/about" id="aboutBtn">About us</a>
-            <a class="navbar-brand" href="/contact" id="contactBtn">Contact us</a>
-            <a class="navbar-brand" href="/join" id="GameBtn">Game</a>
+            <a class="navbar-brand" href="<c:url value="/home" />" id="homeBtn">Home</a>
+            <a class="navbar-brand" href="<c:url value="/about" />" id="aboutBtn">About us</a>
+            <a class="navbar-brand" href="<c:url value="/contact" />" id="contactBtn">Contact us</a>
+            <a class="navbar-brand" href="<c:url value="/login" />" id="GameBtn">Game</a>
 
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <div class="navbar-form navbar-right">
-                <span style="color: white">Welcome Blah Blah</span>
-                <button type="submit" class="btn btn-danger">Sign Out</button>
+                <c:choose>
+                    <c:when test="${empty user}">
+                        <a href="<c:url value='/login' />"><button class="btn btn-success">Log In</button></a>
+                    </c:when>
+                    <c:when test="${user == 'anonymousUser'}">
+                        <a href="<c:url value='/login' />"><button class="btn btn-success">Log In</button></a>
+                    </c:when>
+                    <c:otherwise>
+                        <span style="color: white">Hello ${user}!</span>
+                        <a href="<c:url value='/logout' />"><button class="btn btn-danger">Logout</button></a>
+                        <a href="<c:url value='/admin' />"<button class="btn btn-info">Admin Panel</button></a>
+                    </c:otherwise>
+                </c:choose>
+
             </div>
         </div>
 

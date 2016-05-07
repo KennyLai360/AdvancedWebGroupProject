@@ -36,52 +36,52 @@
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>654</td>
                                     <td>3/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                                 <tr>
                                     <td>345</td>
                                     <td>1/4</td>
-                                    <td><button class="form-control btn-danger">Join</button></td>
+                                    <td><button class="form-control btn btn-danger">Join</button></td>
                                 </tr>
                             </table>
 
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="/game"><button class="form-control btn-success">Create a room</button></a>
+                    <a href="<c:url value=''/game' />"><button class="form-control btn btn-success">Create a room</button></a>
                 </div>
 
             </div>
