@@ -1,9 +1,9 @@
 <jsp:include page="../templates/headerTemplate.jsp"/>
 <script type="text/javascript" src="../../js/draw.js"></script>
 
-<script type="text/javascript" src="../../bower_components/json3/lib/json3.min.js"></script>
-<script type="text/javascript" src="../../bower_components/sockjs/sockjs.min.js"></script>
-<script type="text/javascript" src="../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+<script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
+<script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
+<script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
 <script type="text/javascript" src="../../js/connectSocket.js"></script>
 
 <script>
