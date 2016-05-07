@@ -58,7 +58,7 @@
                     <c:otherwise>
                         <span style="color: white">Hello ${user}!</span>
                         <a href="<c:url value='/logout' />"><button class="btn btn-danger">Logout</button></a>
-                            <a href="<c:url value='/admin' />"<button class="btn btn-info">Admin Panel</button></a>
+                        <a href="<c:url value='/admin' />"<button class="btn btn-info">Admin Panel</button></a>
 
 
                     </c:otherwise>
