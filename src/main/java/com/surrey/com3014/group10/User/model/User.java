@@ -27,7 +27,10 @@ public class User {
 
 	@Column(name="PASSWORD", nullable=false)
 	private String password;
-
+        
+        @Column(name="SCORE", nullable=false)
+	private int score;
+        
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE",
              joinColumns = { @JoinColumn(name = "USER_ID") },
@@ -65,6 +68,17 @@ public class User {
 	public void setUserProfiles(Set<UserRole> userProfiles) {
 		this.userProfiles = userProfiles;
 	}
+        
+        public int getScore()
+        {
+            return this.score;
+        }
+        
+        public void setScore(int score)
+        {
+            this.score = score;
+        }
+        
 
 	@Override
 	public int hashCode() {

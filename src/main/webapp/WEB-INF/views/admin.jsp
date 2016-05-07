@@ -1,4 +1,4 @@
-<jsp:include page="../templates/headerTemplate.jsp" />
+    <jsp:include page="../templates/headerTemplate.jsp" />
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -23,6 +23,9 @@
             <div style="padding-left:20px;">
                 <div class="row">
                     <h3><b>Admin Control Panel</b></h3>
+                    <c:forEach items = "${item.roles}" var = "role">
+   <c:out value = "${role.id}"/>
+</c:forEach>
                     <hr>
                 </div>
             </div>
