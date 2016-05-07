@@ -92,8 +92,7 @@
                 </button>
             </label>
 
-            <div class="btn-group dropup"
-            ">
+            <div class="btn-group dropup">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                 Room Info
