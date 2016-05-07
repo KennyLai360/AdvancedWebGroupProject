@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.surrey.com3014.group10.User.model.User;
 import java.util.Collection;
 import java.util.List;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -43,6 +40,11 @@ public class UserServiceImpl implements UserService {
     public List<User> listAllUsers()
     {
         return dao.findAllUsers();
+    }
+    
+    public void deleteUserById(int id)
+    {
+        dao.deleteUser(id);
     }
     
 }

@@ -1,7 +1,9 @@
 package com.surrey.com3014.group10.User.model;
 
 import com.surrey.com3014.group10.User.model.UserRole;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,6 +38,8 @@ public class User {
              joinColumns = { @JoinColumn(name = "USER_ID") },
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserRole> userProfiles = new HashSet<UserRole>();
+        
+        private String userRoleType;
 
 	public int getId() {
 		return id;
@@ -64,6 +68,17 @@ public class User {
 	public Set<UserRole> getUserProfiles() {
 		return userProfiles;
 	}
+        
+        public String getUserRoleType()
+        {
+            List<UserRole> user = new ArrayList<>(userProfiles);
+            return user.get(0).getType();
+        }
+        
+        public void setUserRoleType(String user)
+        {
+            this.userRoleType = user;
+        }
 
 	public void setUserProfiles(Set<UserRole> userProfiles) {
 		this.userProfiles = userProfiles;
