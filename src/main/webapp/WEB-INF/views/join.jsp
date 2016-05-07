@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="margin:0px;">
                 <hr>
             </div>
 
@@ -26,7 +26,7 @@
                     <div style="padding:10px;">
                         <div id="joinGameLobbyTable" class="table-responsive table-bordered">
 
-                            <table class="table" style="table-layout:fixed;width:100%;">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th>Room Name</th>

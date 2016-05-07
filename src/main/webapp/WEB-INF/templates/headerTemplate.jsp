@@ -18,6 +18,10 @@
             max-height: 380px;
             overflow-y: auto;
         }
+        #deleteTable {
+            max-height: 380px;
+            overflow-y: auto;
+        }
         .preventSelection {
             -webkit-user-select: none;
             -khtml-user-select: none;
