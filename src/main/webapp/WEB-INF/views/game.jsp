@@ -9,21 +9,21 @@
 <script>
     //        $(window).load(messengerConnect());
     // $(window).unload(messengerDisconnect());
-    $(window).load(function(){
+    $(window).load(function () {
         drawConnect();
         chooseRole();
 //                    var tid = setInterval(sendDrawing,500);
 //                    var tip = setInterval(showDrawing,500);
     });
-    $( window ).on('beforeunload',function() {
+    $(window).on('beforeunload', function () {
         sendDisconnection();
         drawDisconnect();
     });
-    function sendClear(){
+    function sendClear() {
         clearCanvas();
         sendDrawing(-1);
     }
-    function sendColor(val){
+    function sendColor(val) {
         onColourChange(val);
 //        sendDrawing(-2,1,false,1,val);
     }
@@ -74,25 +74,26 @@
         </div>
 
     </div>
-    <div class="row preventSelection" style="padding-top:5px;">
-        <div class="col-md-4" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
-            <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
-                                           height="30"/></label>
-            <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
-                                            height="30"/></label>
-            <label title="Colour of the brush">
-                <input type="color" id="colourSelector" onchange="sendColor(this.value)" value="#000000"/></label>
-            <label title="Width of the brush">
-                <input class="form-control" type="number" min="1" id="lineWidthSelector" style="width:75px;" value="5"
-                       onchange="autoValidateLineWidthInput()"/></label>
-            <label title="Clear the canvas">
-                <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top"
-                        title="Clear the Canvas" onclick="sendClear()">
-                    Clear
-                </button>
-            </label>
+</div>
+<div class="row preventSelection" style="padding-top:5px;">
+    <div class="col-md-4" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
+        <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
+                                       height="30"/></label>
+        <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
+                                        height="30"/></label>
+        <label title="Colour of the brush">
+            <input type="color" id="colourSelector" onchange="sendColor(this.value)" value="#000000"/></label>
+        <label title="Width of the brush">
+            <input class="form-control" type="number" min="1" id="lineWidthSelector" style="width:75px;" value="5"
+                   onchange="autoValidateLineWidthInput()"/></label>
+        <label title="Clear the canvas">
+            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top"
+                    title="Clear the Canvas" onclick="sendClear()">
+                Clear
+            </button>
+        </label>
 
-            <div class="btn-group dropup">
+        <div class="btn-group dropup">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                 Room Info
@@ -114,7 +115,7 @@
     </div>
 </div>
 <script type="text/javascript">
-//    prepareCanvas();
+    //    prepareCanvas();
 </script>
 
 <jsp:include page="../templates/footerTemplate.jsp"/>
