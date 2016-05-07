@@ -24,13 +24,13 @@ public class User {
 
 	@Column(name="SSO_ID", unique=true, nullable=false)
 	private String ssoId;
-	
+
 	@Column(name="PASSWORD", nullable=false)
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "APP_USER_USER_PROFILE", 
-             joinColumns = { @JoinColumn(name = "USER_ID") }, 
+	@JoinTable(name = "APP_USER_USER_PROFILE",
+             joinColumns = { @JoinColumn(name = "USER_ID") },
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserRole> userProfiles = new HashSet<UserRole>();
 
@@ -100,5 +100,5 @@ public class User {
 				+  ", userProfiles=" + userProfiles +"]";
 	}
 
-	
+
 }
