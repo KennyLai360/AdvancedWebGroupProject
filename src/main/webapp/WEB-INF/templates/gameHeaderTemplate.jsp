@@ -39,34 +39,45 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<c:url value="/home" />" id="homeBtn">Home</a>
-            <a class="navbar-brand" href="<c:url value="/about" />" id="aboutBtn">About us</a>
-            <a class="navbar-brand" href="<c:url value="/contact" />" id="contactBtn">Contact us</a>
-            <a class="navbar-brand" href="<c:url value="/login" />" id="GameBtn">Game</a>
-
+            <a class="navbar-brand" id="quitBtn" data-toggle="modal"
+               data-target="#confirmationModal">Quit</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <div class="navbar-form navbar-right">
-                <c:choose>
-                    <c:when test="${empty user}">
-                        <a href="<c:url value='/login' />"><button class="btn btn-success">Log In</button></a>
-                    </c:when>
-                    <c:when test="${user == 'anonymousUser'}">
-                        <a href="<c:url value='/login' />"><button class="btn btn-success">Log In</button></a>
-                    </c:when>
-                    <c:otherwise>
+
                         <span style="color: white">Hello ${user}!</span>
                         <a href="<c:url value='/logout' />"><button class="btn btn-danger">Logout</button></a>
-                        <a href="<c:url value='/admin' />"<button class="btn btn-info">Admin Panel</button></a>
 
-
-                    </c:otherwise>
-                </c:choose>
 
             </div>
         </div>
 
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Are you sure you wish to quit the current game?</h4>
+            </div>
+            <div class="modal-body">
+                Hello
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <a href="<c:url value='/home' />">
+                    <button class="btn btn-success">Yes</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
 
