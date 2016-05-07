@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Admin page</title>
+    <script type="text/javascript" src="../../js/game.js"></script>
 </head>
 <body>
 
@@ -46,7 +47,7 @@
                                                 <td><c:out value="${user.userProfiles}"/></td>
                                                 <td><c:out value="${user.score}"/></td>
                                                 <td>
-                                                    <button class="form-control btn btn-danger">Delete</button>
+                                                    <button class="form-control btn btn-danger" onclick="">Delete</button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
