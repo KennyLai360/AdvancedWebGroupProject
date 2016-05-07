@@ -28,18 +28,18 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = "com.surrey.com3014.group10")
 public class JavaConfig extends WebMvcConfigurerAdapter {
 
-    
+
       @Bean(name="HelloWorld")
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
- 
+
         return viewResolver;
     }
-    
-     
+
+
 
     /*
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
@@ -48,5 +48,8 @@ public class JavaConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+        registry.addResourceHandler("/bower_components/**").addResourceLocations("/bower_components/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+        registry.addResourceHandler("/icons/**").addResourceLocations("/icons/");
     }
 }

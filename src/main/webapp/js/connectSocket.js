@@ -29,13 +29,13 @@ function drawDisconnect() {
 }
 
 function sendDisconnection() {
-    var msg = "User has disconnected.";
+    var msg = "test has disconnected.";
     stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendMessage() {
     var msg = document.getElementById('messagebox').value;
-    msg = "User: " + msg;
+    msg = "test: " + msg;
     stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
 }
 

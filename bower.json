@@ -8,7 +8,7 @@
     "Jonny Briers",
     "Kenny Lai"
   ],
-  "appPath": "src/main/webapp/WEB-INF/jsp",
+  "appPath": "src/main/webapp/WEB-INF/views",
   "keywords": [
     "bower",
     "pictionary"
