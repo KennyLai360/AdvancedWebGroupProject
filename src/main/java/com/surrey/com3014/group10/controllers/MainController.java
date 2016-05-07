@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.web.servlet.ModelAndView;
 
 
 /**
@@ -47,8 +49,17 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        if(isAuthenticated())
+        {
+          return "redirect:/join";
+        }
+        else
+        {
+           return "login";
     }
+        
+    }
+    
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
@@ -70,5 +81,21 @@ public class MainController {
         }
         return userName;
     }
+    
+    private boolean isAuthenticated()
+    {
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+    /* The user is logged in :) */
+    return true;
+}
+else 
+{
+    return false;
+}
+
+}
+    
 }

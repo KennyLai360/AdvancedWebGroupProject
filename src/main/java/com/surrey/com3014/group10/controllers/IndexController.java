@@ -1,5 +1,8 @@
 package com.surrey.com3014.group10.controllers;
 import com.surrey.com3014.group10.User.model.User;
+import java.util.Collection;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -52,6 +55,10 @@ public class IndexController {
         }
         return userName;
     }
+   
+    
+    
+   
 
 
 

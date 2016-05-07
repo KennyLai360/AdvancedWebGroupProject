@@ -40,7 +40,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" id="quitBtn" data-toggle="modal"
-               data-target="#confirmationModal">Quit</a>
+               data-target="#confirmationModal" style="cursor:hand">Quit</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -63,10 +63,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Are you sure you wish to quit the current game?</h4>
+                <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
             </div>
             <div class="modal-body">
-                Hello
+                Are you sure you wish to quit the game?
             </div>
 
 

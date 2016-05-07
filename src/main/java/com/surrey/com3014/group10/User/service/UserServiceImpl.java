@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.surrey.com3014.group10.User.model.User;
+import java.util.Collection;
 import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -40,6 +44,6 @@ public class UserServiceImpl implements UserService {
     {
         return dao.findAllUsers();
     }
-
+    
 }
 

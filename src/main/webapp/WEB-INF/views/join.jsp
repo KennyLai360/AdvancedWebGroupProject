@@ -29,81 +29,103 @@
                             <table class="table" style="table-layout:fixed;width:100%;">
                                 <thead>
                                 <tr>
+                                    <th>Room Name</th>
                                     <th>Room Number</th>
                                     <th>Players</th>
+                                    <th>Rounds</th>
                                     <th>Join?</th>
                                 </tr>
                                 </thead>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>654</td>
-                                    <td>3/4</td>
+                                    <td>uWotm8</td>
+                                    <td>345</td>
+                                    <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
+                                    <td>
+                                        <button class="form-control btn btn-danger">Join</button>
+                                    </td>
+                                </tr> <tr>
+                                <td>uWotm8</td>
+                                <td>345</td>
+                                <td>1/4</td>
+                                <td>12</td>
+                                <td>
+                                    <button class="form-control btn btn-danger">Join</button>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td>uWotm8</td>
+                                    <td>345</td>
+                                    <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>uWotm8</td>
                                     <td>345</td>
                                     <td>1/4</td>
+                                    <td>12</td>
                                     <td>
                                         <button class="form-control btn btn-danger">Join</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>345</td>
-                                    <td>1/4</td>
-                                    <td>
-                                        <button class="form-control btn btn-danger">Join</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>345</td>
-                                    <td>1/4</td>
-                                    <td>
-                                        <button class="form-control btn btn-danger">Join</button>
-                                    </td>
-                                </tr>
+
                             </table>
 
                         </div>
