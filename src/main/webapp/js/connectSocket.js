@@ -41,6 +41,7 @@ function disconnectMainChannel() {
 }
 
 function sendRoomCommand(msg){
+    console.log(msg);
     stompClient.send("/app/chat/main", {}, JSON.stringify({ 'message': msg }));
 }
 
@@ -49,7 +50,6 @@ function updateRoomInfo(message){
     if(message == "remove") {
         // do something
     } else if(message == "add"){
-        $('#roomsTable').remove();
         getRoom();
     }
 }

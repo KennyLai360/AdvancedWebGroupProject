@@ -6,7 +6,9 @@
     function callThisOnLoad(data){
 
         // This connects the user to the main channel
-        connectMainChannel();
+        if(stompClient == null) {
+            connectMainChannel();
+        }
 
         // This creates the handlebars room template and displays it.
         var source   = $("#entry-template").html();
@@ -16,6 +18,9 @@
         $('#joinGameLobbyTable').append(newPage);
     }
     function getRoom(){
+        if($('#roomsTable').length > 0){
+            $('#roomsTable').remove();
+        }
         $.ajax({
             url:"/getRooms",
             type:'GET',
@@ -124,8 +129,6 @@
                         Create a room
                     </button>
                 </div>
-
-
             </div>
 
         </div>
