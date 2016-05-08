@@ -29,7 +29,7 @@ function validateNewRoomSettings() {
     }
 }
 
-function doSomething(value) {
+function deleteUser(value) {
     window.location.href = "/admin/deleteUser?id=" + value;
 }
 
