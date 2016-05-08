@@ -68,7 +68,11 @@ return new ModelAndView("redirect:/admin");
     }
 
     }
-
+    
+    @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
+    public String leaderboard() {
+        return "leaderboard";
+    }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {

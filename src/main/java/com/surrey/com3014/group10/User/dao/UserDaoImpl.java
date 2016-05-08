@@ -47,5 +47,15 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         User user = (User)crit.uniqueResult();
         delete(user);
     }
+   
+   public void update(int id)
+   {
+       User user = findById(id);
+   }
+   
+   public void update(String username)
+   {
+       User user = findByUserName(username);
+   }
 
 }

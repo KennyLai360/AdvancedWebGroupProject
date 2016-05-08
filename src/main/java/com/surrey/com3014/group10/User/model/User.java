@@ -1,5 +1,6 @@
 package com.surrey.com3014.group10.User.model;
 
+import com.surrey.com3014.group10.User.Medal;
 import com.surrey.com3014.group10.User.model.UserRole;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,6 +39,19 @@ public class User {
              joinColumns = { @JoinColumn(name = "USER_ID") },
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserRole> userProfiles = new HashSet<UserRole>();
+        
+        @Column(name="MEDAL", nullable=false)
+	private Medal medal = Medal.NONE;
+        
+        public Medal getMedal()
+        {
+            return this.medal;
+        }
+        
+        public void setMedal(Medal medal)
+        {
+            this.medal = medal;
+        }
 
 	public int getId() {
 		return id;
