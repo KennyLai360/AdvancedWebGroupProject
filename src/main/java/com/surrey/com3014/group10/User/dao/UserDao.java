@@ -10,7 +10,8 @@ import java.util.List;
 
 /**
  *
- * @author maudf_000
+ * @author Ade Oladejo
+ * Interface class that provides a list of Data Access Object operations.
  */
 public interface UserDao {
 
@@ -23,10 +24,5 @@ public interface UserDao {
     List<User> findAllUsers();
 
    void deleteUser(int id);
-
-    void update(int id);
-
-    void update(String username);
-
-
+   
 }
