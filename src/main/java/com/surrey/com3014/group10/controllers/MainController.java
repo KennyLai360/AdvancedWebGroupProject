@@ -97,6 +97,7 @@ public class MainController {
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String game(ModelMap model) {
         model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
         return "game";
     }
 

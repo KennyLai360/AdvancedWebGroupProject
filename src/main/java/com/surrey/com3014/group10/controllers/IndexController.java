@@ -27,18 +27,6 @@ public class IndexController {
         return "about";
     }
 
-    @RequestMapping(value ="/game", method = RequestMethod.GET)
-    public String game(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "game";
-    }
-
-    @RequestMapping(value ="/join", method = RequestMethod.GET)
-    public String menu(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "join";
-    }
-
     private String getPrincipal(){
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

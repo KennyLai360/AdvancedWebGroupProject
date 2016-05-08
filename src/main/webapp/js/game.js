@@ -18,8 +18,8 @@ function scrollToBottomOfChat() {
  */
 function validateNewRoomSettings() {
     var createRoomBtn = document.getElementById("createRoomBtn");
-    var rounds = document.getElementById("rounds");
-    var roomName = document.getElementById("roomName");
+    var rounds = document.getElementById("roundBox");
+    var roomName = document.getElementById("rnBox");
     console.log(roomName.value);
     console.log(rounds.value);
     if (roomName.value === '' || rounds.value === '') {
