@@ -3,8 +3,12 @@
 <script type="text/javascript" src="../../js/connectSocket.js"></script>
 <script>
     var availableRooms = [];
-    function callThisOnLoad(data){
 
+    /*  Call this function when after the rooms have been successfully retrieved.
+        This connects the user to the MAIN Channel which consists of messages to prompt certain actions.
+        This function also creates the room lobby.
+    */
+    function callThisOnLoad(data){
         // This connects the user to the main channel
         if(stompClient == null) {
             connectMainChannel();
@@ -17,6 +21,35 @@
 
         $('#joinGameLobbyTable').append(newPage);
     }
+
+    function addToUserList(){
+        var userName = ${user};
+        var userId = $('#roundBox').val();
+        var d = new Date();
+        var n = d.getTime();
+        var room = {
+            gameRoomId: n,
+            gameRoomName: rName,
+            numberOfRounds: nRounds,
+            listOfUsers: []
+        };
+        $.ajax({
+            url:"/addRooms",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(room),
+            success:function(data) {
+                console.log("Success!!");
+                return false;
+            }
+        });
+    }
+
+    // Retrieves the information of rooms using a GET AJAX call.
+    // This method gets checks if a roomTable already exists or not. (Prevents duplicate table creations).
     function getRoom(){
         if($('#roomsTable').length > 0){
             $('#roomsTable').remove();
@@ -33,11 +66,22 @@
         });
     }
 
+    // Called when a room is created.
+    // Sends the addRoom function to the webSocket to be received by everyone connected to MAIN Channel.
+    // Creates a room and dynamically updates the rooms.
     function callWhenCreateRoom(){
         createRoom();
         sendRoomCommand("add");
     }
 
+    function joinRoom(roomId){
+        curRoom = roomId;
+        console.log(curRoom);
+    }
+
+    // Creates a room.
+    // Gets the values of the boxes and adds it to an array.
+    // AJAX POST call to send the data to the server to be stored in the current gameList.
     function createRoom(){
         var rName = $('#rnBox').val();
         var nRounds = $('#roundBox').val();
@@ -63,8 +107,11 @@
             }
         });
     }
+
+    // Retrieves room list from server.
     getRoom();
 
+    // Disconnects from the MAIN Channel when the window is closed or page is changed.
     $(window).on('beforeunload', function(){
         disconnectMainChannel();
     });
@@ -87,7 +134,10 @@
             <td>{{gameRoomId}}</td>
             <td>1/4</td>
             <td>{{numberOfRounds}}</td>
-            <td><button class="form-control btn btn-danger">Join</button></td>
+            <td>
+                <a href="<c:url value='/game'/>">
+                <%--<a>--%>
+                <button class="form-control btn btn-danger" onclick="joinRoom({{gameRoomId}});">Join</button></a></td>
         </tr>
         {{/each}}
     </table>
@@ -183,8 +233,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <%--<a href="<c:url value='/game'/>">--%>
-                    <a>
+                <a href="<c:url value='/game'/>">
                     <button id="createRoomBtn" class="btn btn-success" data-dismiss="modal" onclick="callWhenCreateRoom()">Create Room</button>
                 </a>
             </div>

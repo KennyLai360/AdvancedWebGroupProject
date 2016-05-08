@@ -1,13 +1,12 @@
 var stompClient = null;
 var drawer = 0;
-var roomList = [];
 var curUser;
 var curRoom;
 
 
 function drawConnect(thisUser) {
     var socket = new SockJS('/draw');
-    var userName = thisUser;
+    var curUser = thisUser;
 
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
@@ -80,15 +79,11 @@ function sendDrawing(x,y,drag,size,color) {
         hextoInt = parseInt(hextoInt, 16);
     }
     var arr = [x,y,drag? 1:0,size,hextoInt];
-    stompClient.send("/app/draw/testroom", {}, JSON.stringify({'drawing': arr}));
+    stompClient.send("/app/draw/" +curRoom, {}, JSON.stringify({'drawing': arr}));
 }
 
 function showGreeting(message) {
     $('#scrollChat').append('<p>' + message + '</p>');
-}
-
-function sendTime(time) {
-
 }
 
 function showDrawing(drawing) {

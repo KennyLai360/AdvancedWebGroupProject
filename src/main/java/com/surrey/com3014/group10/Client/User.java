@@ -7,9 +7,9 @@ public class User {
 
     private long id;
     private String name;
-    private boolean allowedToDraw;
-    private long gameSessionId;
-    
+    private long gameRoomId;
+    private int state;
+
     public long getUserId() {
         return id;
     }
@@ -18,11 +18,22 @@ public class User {
         return name;
     }
 
-    public void allowedToDraw(boolean value) {
-        allowedToDraw = value;
+    public long getGameRoomId() {
+        return gameRoomId;
     }
 
-    public long getGameSessionId() {
-        return gameSessionId;
+    public int getState(){
+        return state;
+    }
+
+    public User(){
+        super();
+    }
+
+    public User(long id, String name, int state, long gameRoomId){
+        this.id = id;
+        this.name = name;
+        this.state = state;
+        this.gameRoomId = gameRoomId;
     }
 }

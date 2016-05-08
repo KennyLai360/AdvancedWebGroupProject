@@ -5,14 +5,14 @@
     //        $(window).load(messengerConnect());
     // $(window).unload(messengerDisconnect());
     $(window).load(function(){
-        drawConnect("${user}","testroom");
+        drawConnect("${user}",curRoom);
         chooseRole();
 //                    var tid = setInterval(sendDrawing,500);
 //                    var tip = setInterval(showDrawing,500);
     });
     $( window ).on('beforeunload',function() {
-        sendDisconnection("testroom");
-        drawDisconnect("testroom");
+        sendDisconnection(curRoom);
+        drawDisconnect(curRoom);
     });
     function sendClear(){
         clearCanvas();
@@ -41,7 +41,7 @@
                 <div style="padding-top:5px; padding-left:5px;">
                     <h5><b><u>Users in-lobby [4/4]</u></b></h5>
 
-                    <div style="padding-left:10px;">
+                    <div id="userList" style="padding-left:10px;">
                         <!-- PUT THE ACTIVE USERS BELOW -->
                         <p>${user}</p>
 
@@ -93,8 +93,8 @@
                 Room Info
             </button>
             <ul class="dropdown-menu">
-                <li><a>Room id: 192371327813</a></li>
-                <li><a>Room number: 123</a></li>
+                <li><a>Room id: ${curRoom}</a></li>
+                <li><a>Room Name: 123</a></li>
             </ul>
         </div>
         <hr>
