@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 
 /**
  * @author maudff_000
@@ -62,9 +64,9 @@ public class MainController {
         {
            return "login";
     }
-        
+
     }
-    
+
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
@@ -86,7 +88,7 @@ public class MainController {
         }
         return userName;
     }
-    
+
     private boolean isAuthenticated()
     {
          Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -96,11 +98,11 @@ if (!(auth instanceof AnonymousAuthenticationToken)) {
     /* The user is logged in :) */
     return true;
 }
-else 
+else
 {
     return false;
 }
 
 }
-    
+
 }

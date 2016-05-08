@@ -29,3 +29,7 @@ function validateNewRoomSettings() {
     }
 }
 
+function doSomething(value) {
+    console.log("HELLO: " + value);
+}
+

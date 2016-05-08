@@ -29,17 +29,15 @@ public class User {
 
 	@Column(name="PASSWORD", nullable=false)
 	private String password;
-        
+
         @Column(name="SCORE", nullable=false)
 	private int score;
-        
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE",
              joinColumns = { @JoinColumn(name = "USER_ID") },
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserRole> userProfiles = new HashSet<UserRole>();
-        
-        private String userRoleType;
 
 	public int getId() {
 		return id;
@@ -68,32 +66,21 @@ public class User {
 	public Set<UserRole> getUserProfiles() {
 		return userProfiles;
 	}
-        
-        public String getUserRoleType()
-        {
-            List<UserRole> user = new ArrayList<>(userProfiles);
-            return user.get(0).getType();
-        }
-        
-        public void setUserRoleType(String user)
-        {
-            this.userRoleType = user;
-        }
 
 	public void setUserProfiles(Set<UserRole> userProfiles) {
 		this.userProfiles = userProfiles;
 	}
-        
+
         public int getScore()
         {
             return this.score;
         }
-        
+
         public void setScore(int score)
         {
             this.score = score;
         }
-        
+
 
 	@Override
 	public int hashCode() {
