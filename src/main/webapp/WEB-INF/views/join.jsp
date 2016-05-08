@@ -24,7 +24,7 @@
             <div class="row" style="padding:10px;">
                 <div class="col-md-9">
                     <div style="padding:10px;">
-                        <div id="joinGameLobbyTable" class="table-responsive table-bordered">
+                        <div id="tableContent" class="table-responsive table-bordered">
 
                             <table class="table">
                                 <thead>

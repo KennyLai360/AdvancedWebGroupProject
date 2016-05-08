@@ -5,7 +5,7 @@ var roomName = document.getElementById("roomName");
  * Function used for chat
  */
 function scrollToBottomOfChat() {
-    var wtf = $('#scrollChat');
+    var chat = $('#scrollChat');
     var height = chat[0].scrollHeight;
     chat.scrollTop(height);
     sendMessage();
@@ -29,6 +29,10 @@ function validateNewRoomSettings() {
     }
 }
 
+/**
+ * Function used to delete a user based off their unique user Id.
+ * @param value
+ */
 function deleteUser(value) {
     window.location.href = "/admin/deleteUser?id=" + value;
 }

@@ -14,7 +14,7 @@
             max-height: 250px;
             overflow-y: auto;
         }
-        #joinGameLobbyTable {
+        #tableContent {
             max-height: 380px;
             overflow-y: auto;
         }
@@ -30,9 +30,9 @@
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../js/game.js"></script>
+    <script type="text/javascript" src="../../bower_components/tablesorter/jquery.tablesorter.min.js"></script>
 
 </head>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <body>
