@@ -27,7 +27,7 @@ function connectMainChannel(){
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function(greeting){
+        stompClient.subscribe('/topic/greetings/main', function(greeting){
             updateRoomInfo(JSON.parse(greeting.body).content);
         });
     });
@@ -41,11 +41,11 @@ function disconnectMainChannel() {
 }
 
 function sendRoomCommand(msg){
-    stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/main", {}, JSON.stringify({ 'message': msg }));
 }
 
 function updateRoomInfo(message){
-    console.log(msg);
+    console.log(message);
     if(message == "remove") {
         // do something
     } else if(message == "add"){
