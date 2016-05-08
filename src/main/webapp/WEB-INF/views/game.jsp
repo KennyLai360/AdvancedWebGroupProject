@@ -1,23 +1,18 @@
 <jsp:include page="../templates/headerTemplate.jsp"/>
 <script type="text/javascript" src="../../js/draw.js"></script>
 
-<script type="text/javascript" src="../../bower_components/json3/lib/json3.min.js"></script>
-<script type="text/javascript" src="../../bower_components/sockjs/sockjs.min.js"></script>
-<script type="text/javascript" src="../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
-<script type="text/javascript" src="../../js/connectSocket.js"></script>
-
 <script>
     //        $(window).load(messengerConnect());
     // $(window).unload(messengerDisconnect());
     $(window).load(function(){
-        drawConnect();
+        drawConnect("${user}",curRoom);
         chooseRole();
 //                    var tid = setInterval(sendDrawing,500);
 //                    var tip = setInterval(showDrawing,500);
     });
     $( window ).on('beforeunload',function() {
-        sendDisconnection();
-        drawDisconnect();
+        sendDisconnection(curRoom);
+        drawDisconnect(curRoom);
     });
     function sendClear(){
         clearCanvas();
@@ -46,9 +41,9 @@
                 <div style="padding-top:5px; padding-left:5px;">
                     <h5><b><u>Users in-lobby [4/4]</u></b></h5>
 
-                    <div style="padding-left:10px;">
+                    <div id="userList" style="padding-left:10px;">
                         <!-- PUT THE ACTIVE USERS BELOW -->
-                        <p>User1</p>
+                        <p>${user}</p>
 
                         <p>User1</p>
 
@@ -92,15 +87,14 @@
                 </button>
             </label>
 
-            <div class="btn-group dropup"
-            ">
+            <div class="btn-group dropup">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                 Room Info
             </button>
             <ul class="dropdown-menu">
-                <li><a>Room id: 192371327813</a></li>
-                <li><a>Room number: 123</a></li>
+                <li><a>Room id: ${curRoom}</a></li>
+                <li><a>Room Name: 123</a></li>
             </ul>
         </div>
         <hr>

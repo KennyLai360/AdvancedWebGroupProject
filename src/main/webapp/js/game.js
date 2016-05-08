@@ -9,7 +9,7 @@ function scrollToBottomOfChat() {
     var wtf = $('#scrollChat');
     var height = wtf[0].scrollHeight;
     wtf.scrollTop(height);
-    sendMessage();
+    sendMessage("testroom");
     $('#messagebox').val("");
 }
 
@@ -34,3 +34,6 @@ function gameMenuButtonClick() {
     }
 }
 
+function userList(userObj) {
+    var newRoomList = userObj;
+}

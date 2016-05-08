@@ -14,6 +14,10 @@
             max-height: 250px;
             overflow-y: auto;
         }
+        #joinGameLobbyTable {
+            max-height: 380px;
+            overflow-y: auto;
+        }
         .preventSelection {
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -25,7 +29,12 @@
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="../../js/game.js"></script>
+    <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+    <script type="text/javascript" src="../../js/connectSocket.js"></script>
 
 </head>
 
@@ -42,52 +51,17 @@
             <a class="navbar-brand" href="/home" id="homeBtn">Home</a>
             <a class="navbar-brand" href="/about" id="aboutBtn">About us</a>
             <a class="navbar-brand" href="/contact" id="contactBtn">Contact us</a>
-
-            <div class="btn-group">
-                <a id="gameMenuBtn" style="cursor: hand;" class="navbar-brand dropdown-toggle" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" onclick="gameMenuButtonClick()">Game</a>
-                <ul class="dropdown-menu">
-                    <li><a href="/game">Create Gameroom</a></li>
-                    <li><a style="cursor: hand;" data-toggle="modal" data-target="#myModal" name="joinButton">Join a Game</a></li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="/join" id="GameBtn">Game</a>
 
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="form" onsubmit>
-                <div class="form-group">
-                    <input type="text" placeholder="Username" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-                <button class="btn btn-info">Register</button>
-            </form>
+            <div class="navbar-form navbar-right">
+                <span style="color: white">Welcome Blah Blah</span>
+                <button type="submit" class="btn btn-danger">Sign Out</button>
+            </div>
         </div>
 
     </div>
 </nav>
-
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Join game</h4>
-            </div>
-            <div class="modal-body">
-                <label>Enter the room number you wish to join:</label>
-                <input id="roomNumber" type="number" class="form-control" placeholder="Room number" onchange="roomNumberInputValidation()">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" name="connectLobbyBtn" class="btn btn-primary" disabled >Connect</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
