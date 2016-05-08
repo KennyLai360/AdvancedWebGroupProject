@@ -15,7 +15,7 @@
                     <div class="col-md-12">
                         <div id="joinGameLobbyTable" class="table-responsive table-bordered">
 
-                            <table class="table" >
+                            <table class="table" style="padding-left:10px; padding-right:10px;">
                                 <thead>
                                 <tr>
                                     <th>Room Name</th>
