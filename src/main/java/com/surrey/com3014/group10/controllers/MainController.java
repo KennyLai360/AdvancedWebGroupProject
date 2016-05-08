@@ -43,13 +43,13 @@ public class MainController {
         model.addAttribute("listOfUsers", userService.listAllUsers());
         return "admin";
     }
-    
-@RequestMapping("deleteUser")
+
+@RequestMapping("/deleteUser")
 public ModelAndView deleteUser(@RequestParam int id) {
 userService.deleteUserById(id);
 return new ModelAndView("redirect:/admin");
 }
-    
+
     @RequestMapping(value = "/db", method = RequestMethod.GET)
     public String dbaPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());

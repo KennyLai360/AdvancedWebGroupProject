@@ -47,8 +47,7 @@
                                                 <td><c:out value="${user.userProfiles}"/></td>
                                                 <td><c:out value="${user.score}"/></td>
                                                 <td>
-                                                    <a href="deleteUser?id=<c:out value='${user.id}'"><button class="form-control btn btn-danger">Delete</button></a>
-                                                <th><a href="/>">Delete</a></th>
+                                                    <a href="/home"><button class="form-control btn btn-danger">Delete</button></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
