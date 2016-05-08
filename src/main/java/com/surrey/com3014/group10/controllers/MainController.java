@@ -44,17 +44,11 @@ public class MainController {
         return "admin";
     }
 
-@RequestMapping("/deleteUser")
+@RequestMapping("/admin/deleteUser")
 public ModelAndView deleteUser(@RequestParam int id) {
 userService.deleteUserById(id);
 return new ModelAndView("redirect:/admin");
 }
-
-    @RequestMapping(value = "/db", method = RequestMethod.GET)
-    public String dbaPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "dba";
-    }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {

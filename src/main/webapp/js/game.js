@@ -30,6 +30,6 @@ function validateNewRoomSettings() {
 }
 
 function doSomething(value) {
-    console.log("HELLO: " + value);
+    window.location.href = "/admin/deleteUser?id=" + value;
 }
 

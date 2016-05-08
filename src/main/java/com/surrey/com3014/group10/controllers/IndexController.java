@@ -39,11 +39,6 @@ public class IndexController {
         return "join";
     }
 
-    @RequestMapping(value ="/index", method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
-
     private String getPrincipal(){
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -55,10 +50,10 @@ public class IndexController {
         }
         return userName;
     }
-   
-    
-    
-   
+
+
+
+
 
 
 
