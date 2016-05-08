@@ -8,6 +8,7 @@ package com.surrey.com3014.group10.User.dao;
 import com.surrey.com3014.group10.User.model.User;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -38,5 +39,23 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         Criteria criteria = createEntityCriteria();
         return (List<User>) criteria.list();
     }
+    
+   public void deleteUser(int id)
+    {
+        Criteria crit = createEntityCriteria();
+        crit.add(Restrictions.eq("id", id));
+        User user = (User)crit.uniqueResult();
+        delete(user);
+    }
+   
+   public void update(int id)
+   {
+       User user = findById(id);
+   }
+   
+   public void update(String username)
+   {
+       User user = findByUserName(username);
+   }
 
 }

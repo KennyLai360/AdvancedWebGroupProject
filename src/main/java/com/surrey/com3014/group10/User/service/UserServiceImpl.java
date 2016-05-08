@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.surrey.com3014.group10.User.model.User;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -40,6 +41,21 @@ public class UserServiceImpl implements UserService {
     {
         return dao.findAllUsers();
     }
-
+    
+    public void deleteUserById(int id)
+    {
+        dao.deleteUser(id);
+    }
+    
+     public void update(int id)
+   {
+       dao.update(id);
+   }
+   
+   public void update(String username)
+   {
+       dao.update(username);
+   }
+    
 }
 

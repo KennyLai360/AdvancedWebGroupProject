@@ -38,7 +38,7 @@ public class PlayerUserDetailService implements UserDetailsService {
             System.out.println("User not found");
             throw new UsernameNotFoundException("Username not found");
         }
-            return new org.springframework.security.core.userdetails.User(user.getSsoId(), user.getPassword(), getGrantedAuthorities(user));
+            return new org.springframework.security.core.userdetails.User(user.getSsoId(), user.getPassword() , getGrantedAuthorities(user));
     }
  
      

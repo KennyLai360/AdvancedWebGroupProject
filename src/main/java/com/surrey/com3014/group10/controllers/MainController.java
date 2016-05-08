@@ -1,8 +1,13 @@
 package com.surrey.com3014.group10.controllers;
 
+
 import com.surrey.com3014.group10.Client.GameRoom;
 import org.springframework.expression.ParseException;
 import org.springframework.http.HttpStatus;
+
+import com.surrey.com3014.group10.User.model.User;
+import com.surrey.com3014.group10.User.service.UserService;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +18,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  * @author maudff_000
@@ -22,25 +35,30 @@ import java.util.ArrayList;
 @Controller
 public class MainController {
     //private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+
     public static GameList gl = new GameList();
+
+    @Autowired
+    private UserService userService;
 
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        model.addAttribute("greeting", "Hi, Welcome to mysite");
+        model.addAttribute("user", getPrincipal());
         return "home";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
         return "admin";
     }
 
-    @RequestMapping(value = "/db", method = RequestMethod.GET)
-    public String dbaPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "dba";
+    @RequestMapping("/admin/deleteUser")
+    public ModelAndView deleteUser(@RequestParam int id) {
+    userService.deleteUserById(id);
+    return new ModelAndView("redirect:/admin");
     }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
@@ -51,7 +69,20 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        if(isAuthenticated())
+        {
+          return "redirect:/join";
+        }
+        else
+        {
+           return "login";
+    }
+
+    }
+
+    @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
+    public String leaderboard() {
+        return "leaderboard";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -60,7 +91,7 @@ public class MainController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/login?logout";
+        return "home";
     }
 
     @RequestMapping(value = "/game", method = RequestMethod.GET)
@@ -87,5 +118,21 @@ public class MainController {
         }
         return userName;
     }
+
+    private boolean isAuthenticated()
+    {
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+    /* The user is logged in :) */
+    return true;
+}
+else
+{
+    return false;
+}
+
+}
 
 }

@@ -17,11 +17,16 @@ public interface UserDao {
     User findById(int id);
 
     User findByUserName(String username);
-    
+
     void createUser(User user);
-    
+
     List<User> findAllUsers();
-    
-   // void deleteUser(String username);
+
+   void deleteUser(int id);
+
+    void update(int id);
+
+    void update(String username);
+
 
 }

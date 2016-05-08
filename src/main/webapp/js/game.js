@@ -1,37 +1,36 @@
-window.onload = function () {
-    var roomNumber = document.getElementById('roomNumber');
-    var joinRoomButton = document.getElementById('connectLobbyBtn');
-}
-
 var path = window.location.pathname;
+var roomName = document.getElementById("roomName");
 
+/**
+ * Function used for chat
+ */
 function scrollToBottomOfChat() {
     var wtf = $('#scrollChat');
-    var height = wtf[0].scrollHeight;
-    wtf.scrollTop(height);
-    sendMessage("testroom");
+    var height = chat[0].scrollHeight;
+    chat.scrollTop(height);
+    sendMessage();
     $('#messagebox').val("");
 }
 
-function roomNumberInputValidation() {
-    if (roomNumber.value < 1) {
-        roomNumber.value = 0;
-        document.getElementsByName("connectLobbyBtn")[0].disabled = true;
+/**
+ * Function used to validate the modal when the user enters something. Enables the create room button depending on if
+ * both fields are filled in.
+ */
+function validateNewRoomSettings() {
+    var createRoomBtn = document.getElementById("createRoomBtn");
+    var rounds = document.getElementById("rounds");
+    var roomName = document.getElementById("roomName");
+    console.log(roomName.value);
+    console.log(rounds.value);
+    if (roomName.value === '' || rounds.value === '') {
+        document.getElementById("createRoomBtn").disabled = true;
     } else {
-        console.log(path);
-        document.getElementsByName("connectLobbyBtn")[0].disabled = false;
+        document.getElementById("createRoomBtn").disabled = false;
     }
 }
 
-
-function gameMenuButtonClick() {
-    if (path === "/game") {
-        document.getElementById("gameMenuBtn").className += " disabled";
-        document.getElementById("gameMenuBtn").style.cursor = "not-allowed";
-    } else {
-        document.getElementById("gameMenuBtn").className.replace(" disabled", "");
-        document.getElementById("gameMenuBtn").style.cursor = "hand";
-    }
+function deleteUser(value) {
+    window.location.href = "/admin/deleteUser?id=" + value;
 }
 
 function userList(userObj) {

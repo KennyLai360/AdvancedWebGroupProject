@@ -1,24 +1,20 @@
-<jsp:include page="../templates/headerTemplate.jsp"/>
+<jsp:include page="../templates/gameHeaderTemplate.jsp"/>
 <script type="text/javascript" src="../../js/draw.js"></script>
 
 <script>
-    //        $(window).load(messengerConnect());
-    // $(window).unload(messengerDisconnect());
     $(window).load(function(){
         drawConnect("${user}",curRoom);
         chooseRole();
-//                    var tid = setInterval(sendDrawing,500);
-//                    var tip = setInterval(showDrawing,500);
     });
     $( window ).on('beforeunload',function() {
         sendDisconnection(curRoom);
         drawDisconnect(curRoom);
     });
-    function sendClear(){
+    function sendClear() {
         clearCanvas();
         sendDrawing(-1);
     }
-    function sendColor(val){
+    function sendColor(val) {
         onColourChange(val);
 //        sendDrawing(-2,1,false,1,val);
     }
@@ -69,8 +65,10 @@
         </div>
 
     </div>
+
     <div class="row preventSelection" style="padding-top:5px;">
         <div class="col-md-4" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
+<<<<<<< HEAD
             <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
                                            height="30"/></label>
             <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
@@ -97,19 +95,18 @@
                 <li><a>Room Name: 123</a></li>
             </ul>
         </div>
-        <hr>
-    </div>
-    <div class="input-group col-md-8 preventSelection" style="padding:7px;">
-        <input id="messagebox" type="text" class="form-control" placeholder="Send some message here!"/>
+        <div class="input-group col-md-8 preventSelection" style="padding:7px;">
+            <input id="messagebox" type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
                         <div onclick="scrollToBottomOfChat()">
                             <button class="btn btn-secondary" type="submit">Send</button>
                         </div>
                     </span>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
-//    prepareCanvas();
+    //    prepareCanvas();
 </script>
 
 <jsp:include page="../templates/footerTemplate.jsp"/>

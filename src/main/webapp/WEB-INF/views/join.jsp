@@ -166,19 +166,17 @@
                 <div class="col-md-9">
                     <div style="padding:10px;">
                         <div id="joinGameLobbyTable" class="table-responsive table-bordered">
-
-
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-3">
-
                     <button type="button" class="btn btn-success form-control" data-toggle="modal"
                             data-target="#createGameModal">
                         Create a room
                     </button>
                 </div>
+
             </div>
 
         </div>
@@ -193,50 +191,50 @@
 <div class="modal fade" id="createGameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Enter settings for the new room</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-8">
-                        <span><b>Room Name</b></span>
-                        <input id="rnBox" type="text" class="form-control" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enter settings for the new room</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <span><b>Room Name</b></span>
+                            <input id="rnBox" type="text" class="form-control" onchange="validateNewRoomSettings()">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <span><b>Rounds</b></span>
+                            <select id="roundBox" class="input-small form-control" onchange="validateNewRoomSettings()">
+                                <option value="" selected="selected">--Select amount of rounds--</option>
+                                <option value="4">4 - (one round of drawing each)</option>
+                                <option value="8">8 - (two rounds of drawing each)</option>
+                                <option value="12">12 - (three rounds of drawing each)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <span><b>Room Password</b></span>
+                            <input type="password" class="form-control" placeholder="Leave empty if not required">
+                        </div>
                     </div>
                 </div>
 
-                <br>
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <span><b>Rounds</b></span>
-                        <select id="roundBox" class="input-small form-control">
-                            <option value="" selected="selected">--Select amount of rounds--</option>
-                            <option value="4">4 - (one round of drawing each)</option>
-                            <option value="8">8 - (two rounds of drawing each)</option>
-                            <option value="12">12 - (three rounds of drawing each)</option>
-                        </select>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <a href="<c:url value='/game' />">
+                        <button id="createRoomBtn" class="btn btn-success" disabled="disabled" onclick="callWhenCreateRoom()" >Create Room</button>
+                    </a>
                 </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <span><b>Room Password</b></span>
-                        <input type="password" class="form-control" placeholder="Leave empty if not required">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <a href="<c:url value='/game'/>">
-                    <button id="createRoomBtn" class="btn btn-success" data-dismiss="modal" onclick="callWhenCreateRoom()">Create Room</button>
-                </a>
-            </div>
         </div>
 
     </div>

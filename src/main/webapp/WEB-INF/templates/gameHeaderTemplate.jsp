@@ -18,10 +18,6 @@
             max-height: 380px;
             overflow-y: auto;
         }
-        #deleteTable {
-            max-height: 380px;
-            overflow-y: auto;
-        }
         .preventSelection {
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -33,12 +29,7 @@
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../bower_components/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="../../js/game.js"></script>
-    <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
-    <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
-    <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
-    <script type="text/javascript" src="../../js/connectSocket.js"></script>
 
 </head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -48,32 +39,45 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<c:url value="/home" />" id="homeBtn">Home</a>
-            <a class="navbar-brand" href="<c:url value="/about" />" id="aboutBtn">About us</a>
-            <a class="navbar-brand" href="<c:url value="/contact" />" id="contactBtn">Contact us</a>
-            <a class="navbar-brand" href="<c:url value="/login" />" id="GameBtn">Game</a>
-
+            <a class="navbar-brand" id="quitBtn" data-toggle="modal"
+               data-target="#confirmationModal" style="cursor:hand">Quit</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <div class="navbar-form navbar-right">
-                <c:choose>
-                    <c:when test="${empty user}">
-                        <a href="<c:url value='/login' />"><button class="btn btn-success">Log In</button></a>
-                    </c:when>
-                    <c:when test="${user == 'anonymousUser'}">
-                        <a href="<c:url value='/login' />"><button class="btn btn-success">Log In</button></a>
-                    </c:when>
-                    <c:otherwise>
+
                         <span style="color: white">Hello ${user}!</span>
                         <a href="<c:url value='/logout' />"><button class="btn btn-danger">Logout</button></a>
-                            <a href="<c:url value='/admin' />"<button class="btn btn-info">Admin Panel</button></a>
-                    </c:otherwise>
-                </c:choose>
+
 
             </div>
         </div>
 
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you wish to quit the game?
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <a href="<c:url value='/home' />">
+                    <button class="btn btn-success">Yes</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
 
