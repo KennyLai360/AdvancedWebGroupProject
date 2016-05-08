@@ -1,42 +1,76 @@
 var stompClient = null;
 var drawer = 0;
-function setConnected(connected) {
-    document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-}
+var roomList = [];
+var curUser;
+var curRoom;
 
-function drawConnect() {
+
+function drawConnect(thisUser) {
     var socket = new SockJS('/draw');
+    var userName = thisUser;
+
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
-        setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/drawings', function(drawing){
+        stompClient.subscribe('/topic/drawings/'+curRoom, function(drawing){
             showDrawing(JSON.parse(drawing.body).content);
         });
-        stompClient.subscribe('/topic/greetings', function(greeting){
+        stompClient.subscribe('/topic/greetings/'+curRoom, function(greeting){
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
 }
 
-function drawDisconnect() {
+function connectMainChannel(){
+    var socket = new SockJS('/chat');
+
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/greetings', function(greeting){
+            updateRoomInfo(JSON.parse(greeting.body).content);
+        });
+    });
+}
+
+function disconnectMainChannel() {
     if (stompClient != null) {
         stompClient.disconnect();
     }
-    setConnected(false);
+    console.log("Disconnected");
+}
+
+function sendRoomCommand(msg){
+    stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
+}
+
+function updateRoomInfo(message){
+    console.log(msg);
+    if(message == "remove") {
+        // do something
+    } else if(message == "add"){
+        $('#roomsTable').remove();
+        getRoom();
+    }
+}
+
+function drawDisconnect(thisUser) {
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }
     sendDisconnection();
     console.log("Disconnected");
 }
 
-function sendDisconnection() {
+function sendDisconnection(whichRoom) {
     var msg = "test has disconnected.";
-    stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/"+whichRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
-function sendMessage() {
+function sendMessage(whichRoom) {
     var msg = document.getElementById('messagebox').value;
-    msg = "test: " + msg;
-    stompClient.send("/app/chat", {}, JSON.stringify({ 'message': msg }));
+    msg =  curUser + ": " + msg;
+    stompClient.send("/app/chat/"+whichRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendDrawing(x,y,drag,size,color) {
@@ -46,16 +80,15 @@ function sendDrawing(x,y,drag,size,color) {
         hextoInt = parseInt(hextoInt, 16);
     }
     var arr = [x,y,drag? 1:0,size,hextoInt];
-    stompClient.send("/app/draw", {}, JSON.stringify({'drawing': arr}));
+    stompClient.send("/app/draw/testroom", {}, JSON.stringify({'drawing': arr}));
 }
 
 function showGreeting(message) {
-    // var response = document.getElementById('response');
-    // var p = document.createElement('p');
-    // p.style.wordWrap = 'break-word';
-    // p.appendChild(document.createTextNode(message));
-    // response.appendChild(p);
     $('#scrollChat').append('<p>' + message + '</p>');
+}
+
+function sendTime(time) {
+
 }
 
 function showDrawing(drawing) {

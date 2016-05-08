@@ -27,6 +27,7 @@
     "jquery": "^2.2.3",
     "sockjs": "^0.3.4",
     "stomp-websocket": "^2.3.4",
-    "json3": "^3.3.2"
+    "json3": "^3.3.2",
+    "handlebars": "^4.0.5"
   }
 }

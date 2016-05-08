@@ -29,7 +29,12 @@
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="../../js/game.js"></script>
+    <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+    <script type="text/javascript" src="../../js/connectSocket.js"></script>
 
 </head>
 

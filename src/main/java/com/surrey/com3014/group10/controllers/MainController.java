@@ -1,17 +1,20 @@
 package com.surrey.com3014.group10.controllers;
 
+import com.surrey.com3014.group10.Client.GameRoom;
+import org.springframework.expression.ParseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author maudff_000
@@ -19,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class MainController {
     //private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+    public static GameList gl = new GameList();
 
-  @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
         model.addAttribute("greeting", "Hi, Welcome to mysite");
         return "home";
@@ -49,13 +54,26 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";
+    }
+
+    @RequestMapping(value = "/game", method = RequestMethod.GET)
+    public String game(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        return "game";
+    }
+
+    @RequestMapping(value = "/join", method = RequestMethod.GET)
+    public String menu(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("rooms", gl.getRooms());
+        return "join";
     }
 
     private String getPrincipal(){

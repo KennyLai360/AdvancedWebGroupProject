@@ -1,6 +1,7 @@
 package com.surrey.com3014.group10.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,15 +19,6 @@ public class IndexController {
         return "about";
     }
 
-    @RequestMapping(value ="/game", method = RequestMethod.GET)
-    public String game() {
-        return "game";
-    }
-
-    @RequestMapping(value ="/join", method = RequestMethod.GET)
-    public String menu() {
-        return "join";
-    }
 
     @RequestMapping(value ="/index", method = RequestMethod.GET)
     public String index() {
