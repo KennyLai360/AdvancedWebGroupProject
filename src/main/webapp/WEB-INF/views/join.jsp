@@ -5,6 +5,7 @@
 <script type="text/javascript" src="../../js/game.js"></script>
 <script>
     var availableRooms = [];
+    var userData;
     curUser = '${user}';
     var globalUserList = [];
     var curRoomData;
@@ -17,8 +18,6 @@
         // This connects the user to the main channel
         if(stompClient == null) {
             connectMainChannel();
-            addToUserList();
-            getUserList();
         }
 
         // This creates the handlebars room template and displays it.
@@ -77,6 +76,10 @@
         });
     }
 
+    /*
+        Called when a user joins a room.
+        Sends the user data to the controller.
+     */
     function joinRoom(roomId){
         var userName = '${user}';
         var user = {
@@ -93,6 +96,7 @@
             },
             data: JSON.stringify(user),
             complete:function(data){
+                sendRoomCommand("join");
                 window.location.href = "/game";
                 console.log("Success!!");
                 return false;
@@ -125,7 +129,7 @@
             },
             data: JSON.stringify(room),
             complete:function(data) {
-                sendRoomCommand("add");
+//                sendRoomCommand("add");
                 joinRoom(n);
                 console.log("Success!!");
                 return false;
@@ -138,12 +142,16 @@
     function checkRoom(roomId){
         getRoom();
         for(i=0; i < availableRooms.length; i++){
-            if(availableRooms[i].gameRoomId == roomId) {
-                if (availableRooms[i].listOfUsers.length < 4){
-                    // Room is not full
-                    joinRoom(roomId);
-                } else {
-                    alert("Room is full!");
+            if(userData.state == 1){
+                alert("Apparently... You're already in-game.");
+            } else {
+                if (availableRooms[i].gameRoomId == roomId) {
+                    if (availableRooms[i].listOfUsers.length < 4) {
+                        // Room is not full
+                        joinRoom(roomId);
+                    } else {
+                        alert("Room is full!");
+                    }
                 }
             }
         }

@@ -15,6 +15,11 @@ function drawConnect(theRoom) {
         stompClient.subscribe('/topic/greetings/'+theRoom, function(greeting){
             showGreeting(JSON.parse(greeting.body).content);
         });
+        stompClient.subscribe('/topic/greetings/'+theRoom, function(greeting){
+            updateInGameInfo(JSON.parse(greeting.body).content);
+        });
+        sendInGameInfo("User connected"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
+
     });
 }
 
@@ -27,6 +32,9 @@ function connectMainChannel(){
         stompClient.subscribe('/topic/greetings/main', function(greeting){
             updateRoomInfo(JSON.parse(greeting.body).content);
         });
+        getUser();
+        addToUserList();
+        getUserList();
     });
 }
 
@@ -42,13 +50,18 @@ function sendRoomCommand(msg){
     stompClient.send("/app/chat/main", {}, JSON.stringify({ 'message': msg }));
 }
 
+function sendInGameInfo(msg){
+    stompClient.send("/app/chat/" + curRoom, {}, JSON.stringify({ 'message' : msg}));
+}
+
+function updateInGameInfo(message){
+    getJoinedRoom();
+}
+
 function updateRoomInfo(message){
-    console.log(message);
-    if(message == "remove") {
-        // do something
-    } else if(message == "add"){
-        getRoom();
-    }
+    console.log("Incoming " + message + " command.");
+    getRoom();
+    getUser();
 }
 
 function drawDisconnect(thisUser) {

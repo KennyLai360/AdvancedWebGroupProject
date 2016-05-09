@@ -1,13 +1,26 @@
 <jsp:include page="../templates/gameHeaderTemplate.jsp"/>
 
 <script>
-    var userData = [];
-    var availableRooms = [];
-    curUser = '${user}';
-    var globalUserList = [];
-    var curRoomData;
-    var userObjData;
 
+    // Stores the user object data here.
+    var userData;
+
+    // Global Room List
+    var availableRooms = [];
+
+    // Stores current logged-in username. Takes the value from the database.
+    curUser = '${user}';
+
+    // Global User List. Useres that are logged in to the game server are stored here.
+    var globalUserList = [];
+
+    // Current Room Object.
+    var curRoomData;
+
+    /*
+        This creates the user room display list and updates it when a change has been made.
+        Shows users in the room.
+     */
     function createUserListDisplay(){
         if($('#userDisplay').length > 0){
             $('#userDisplay').remove();
@@ -20,17 +33,9 @@
         $('#userList').append(newPage);
     }
 
-    function getUser(){
-        $.ajax({
-            url:"/getUser",
-            type:'GET',
-            success:function(data) {
-                userObjData = data;
-                return false;
-            }
-        });
-    }
-
+    /*
+        Retrieves the current joined room Object Data by the user.
+    */
     function getJoinedRoom(){
         $.ajax({
             url:"/getJoinedRoom",
@@ -39,13 +44,17 @@
                 getUserList();
                 console.log(data);
                 curRoomData = data;
-                getUser();
                 createUserListDisplay();
                 console.log("getjoinedroom thing");
                 return false;
             }
         });
     }
+
+    /*
+        Called on load.
+        On load - Get User Object Data.
+    */
     $(window).load(function(){
         $.ajax({
             url:"/getUser",
@@ -95,8 +104,9 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(userObjData),
+            data: JSON.stringify(userData),
             success:function(data) {
+                sendRoomCommand("remove");
                 spliceTheArray();
                 sendDisconnection(curRoom);
                 drawDisconnect(curRoom);
@@ -105,16 +115,19 @@
             }
         });
     }
+
+
+    // Remove current user from roomlist.
     function spliceTheArray() {
-        console.log(curUser);
 
         for(i=0;i<curRoomData.listOfUsers.length;i++){
-            if(curRoomData.listOfUsers[i].name == curUser){
-                curRoomData.listOfUsers.splice(i-1,1);
+            if(curRoomData.listOfUsers[i].name == userData.name){
+                curRoomData.listOfUsers.splice(i,1);
                 console.log(curUser);
             }
         }
         updateRoomUserList();
+        sendInGameInfo("Updating the in-game Rooms.");
     }
     /*
      Removes user from GlobalList.
@@ -131,7 +144,7 @@
             data: JSON.stringify(curRoomData),
             success:function(data) {
                 console.log("Success!!");
-                                window.location.href = "/";
+                window.location.href = "/";
                 return false;
             }
         });
@@ -139,7 +152,6 @@
 
     $( window ).on('beforeunload',function() {
         resetUser();
-
     });
     function sendClear() {
         clearCanvas();
@@ -177,9 +189,10 @@
 
 </script>
 <script id="users-template" type="text/x-handlebars-template">
-    <h5><b><u>Users in-lobby [{{listOfUsers.length}}/4]</u></b></h5>
         <div id="userDisplay" style="padding-left:10px;">
-        {{#each listOfUsers}}
+            <h5><b><u>Users in-lobby [{{listOfUsers.length}}/4]</u></b></h5>
+
+            {{#each listOfUsers}}
             <p>{{name}}</p>
         {{/each}}
         </div>

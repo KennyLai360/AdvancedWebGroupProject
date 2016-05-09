@@ -16,6 +16,18 @@ function getUserList(){
         }
     });
 }
+
+function getUser(){
+    $.ajax({
+        url:"/getUser",
+        type:'GET',
+        success:function(data) {
+            userData = data;
+            return false;
+        }
+    });
+}
+
 // Retrieves the information of rooms using a GET AJAX call.
 // This method gets checks if a roomTable already exists or not. (Prevents duplicate table creations).
 function getRoom(){
