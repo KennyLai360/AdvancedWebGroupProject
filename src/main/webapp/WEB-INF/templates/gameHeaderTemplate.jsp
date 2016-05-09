@@ -72,7 +72,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                <a href="<c:url value='/home' />">
+                <a href="/home">
                     <button class="btn btn-success">Yes</button>
                 </a>
             </div>
