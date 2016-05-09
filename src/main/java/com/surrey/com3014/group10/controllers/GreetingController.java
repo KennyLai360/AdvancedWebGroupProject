@@ -22,7 +22,7 @@ public class GreetingController {
             s = s.substring(0, s.indexOf(':'));
             s = s.replace(":", "");
             s = s.trim();
-            return new Greeting(s + " guessed correctly. The word was: " + WordController.word);
+            return new Greeting("Correct guess! " + s + " guessed correctly. The word was " + WordController.word);
         }
         else {
             return new Greeting(message.getMessage());
