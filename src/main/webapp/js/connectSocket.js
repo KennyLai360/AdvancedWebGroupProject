@@ -2,6 +2,8 @@ var stompClient = null;
 var drawer = 0;
 var curUser;
 var curRoom;
+var musicPlaying = 0;
+var audio = new Audio('../../static/game.mp3');
 
 function drawConnect(theRoom) {
     var socket = new SockJS('/draw');
@@ -19,8 +21,25 @@ function drawConnect(theRoom) {
             updateInGameInfo(JSON.parse(greeting.body).content);
         });
         sendInGameInfo("User connected"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
-
+        toggleAudio();
     });
+
+}
+
+function toggleAudio(){
+    if(musicPlaying){
+        $('#soundBtn').attr('src','../icons/musicOff.png');
+        musicPlaying = 0;
+        audio.pause();
+    } else{
+        musicPlaying = 1;
+        $('#soundBtn').attr('src','../icons/musicOn.png');
+        audio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+        audio.play();
+    }
 }
 
 function connectMainChannel(){

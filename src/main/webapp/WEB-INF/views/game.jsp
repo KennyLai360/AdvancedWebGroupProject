@@ -200,7 +200,7 @@
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-offset-3" style="padding-bottom:5px">
-            <div style="border: black 1px solid; height:20px; border-radius: 20px; ">
+            <div style="border: black 1px solid; height:30px; border-radius: 20px; ">
                 <div class="row">
                     <div class="col-md-12">
                         <c:choose>
@@ -209,7 +209,8 @@
                             </c:when>
                         </c:choose>
 
-                        <b>Timer:</b> <a id="timer"</a>
+                        <b>Timer:</b> <a id="timer"></a>
+
                     </div>
                 </div>
             </div>
@@ -241,12 +242,14 @@
     </div>
 
     <div class="row preventSelection" style="padding-top:5px;">
-        <div class="col-md-4" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
+        <div class="col-md-5" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
             <div> <!--Add some sort of javascript thing to disable drawing tools if the user is a guesser -->
                 <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
                                                height="30"/></label>
                 <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
                                                 height="30"/></label>
+                <label title="Sound tool"><img id="soundBtn" src="../icons/musicOn.png" onClick="toggleAudio();"
+                                                        height="30"/></label>
                 <label title="Colour of the brush">
                     <input type="color" id="colourSelector" onchange="sendColor(this.value)" value="#000000"/></label>
                 <label title="Width of the brush">
@@ -274,7 +277,7 @@
                 </div>
             </div>
         </div>
-        <div class="input-group col-md-8 preventSelection" style="padding:7px;">
+        <div class="input-group col-md-7 preventSelection" style="padding:7px;">
             <input id="messagebox" type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
                         <div onclick="scrollToBottomOfChat()">
