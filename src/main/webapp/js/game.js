@@ -5,7 +5,7 @@ var roomName = document.getElementById("roomName");
  * Function used for chat
  */
 function scrollToBottomOfChat() {
-    var wtf = $('#scrollChat');
+    var chat = $('#scrollChat');
     var height = chat[0].scrollHeight;
     chat.scrollTop(height);
     sendMessage();

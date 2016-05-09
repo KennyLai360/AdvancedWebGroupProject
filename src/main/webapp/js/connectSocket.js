@@ -59,15 +59,15 @@ function drawDisconnect(thisUser) {
     console.log("Disconnected");
 }
 
-function sendDisconnection(whichRoom) {
+function sendDisconnection() {
     var msg = "test has disconnected.";
-    stompClient.send("/app/chat/"+whichRoom, {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
-function sendMessage(whichRoom) {
+function sendMessage() {
     var msg = document.getElementById('messagebox').value;
     msg =  curUser + ": " + msg;
-    stompClient.send("/app/chat/"+whichRoom, {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendDrawing(x,y,drag,size,color) {
@@ -77,7 +77,7 @@ function sendDrawing(x,y,drag,size,color) {
         hextoInt = parseInt(hextoInt, 16);
     }
     var arr = [x,y,drag? 1:0,size,hextoInt];
-    stompClient.send("/app/draw/" +curRoom, {}, JSON.stringify({'drawing': arr}));
+    stompClient.send("/app/draw/" + curRoom, {}, JSON.stringify({'drawing': arr}));
 }
 
 function showGreeting(message) {

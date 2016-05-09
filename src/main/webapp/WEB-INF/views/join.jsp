@@ -92,7 +92,8 @@
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify(user),
-            success:function(data){
+            complete:function(data){
+                window.location.href = "/game";
                 console.log("Success!!");
                 return false;
             }
@@ -126,7 +127,6 @@
             complete:function(data) {
                 sendRoomCommand("add");
                 joinRoom(n);
-                window.location.href = "/game";
                 console.log("Success!!");
                 return false;
             }
@@ -142,7 +142,6 @@
                 if (availableRooms[i].listOfUsers.length < 4){
                     // Room is not full
                     joinRoom(roomId);
-                    window.location.href = "/game";
                 } else {
                     alert("Room is full!");
                 }
