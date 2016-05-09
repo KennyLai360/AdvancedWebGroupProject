@@ -20,7 +20,7 @@ function drawConnect(theRoom) {
         stompClient.subscribe('/topic/greetings/'+theRoom, function(greeting){
             showGreeting(JSON.parse(greeting.body).content);
         });
-        stompClient.subscribe('/topic/greetings/'+theRoom, function(greeting){
+        stompClient.subscribe('/topic/roomOps/'+theRoom, function(greeting){
             updateInGameInfo(JSON.parse(greeting.body).content);
         });
         sendInGameInfo("User connected"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
@@ -78,7 +78,7 @@ function sendRoomCommand(msg){
 }
 
 function sendInGameInfo(msg){
-    stompClient.send("/app/chat/" + curRoom, {}, JSON.stringify({ 'message' : msg}));
+    stompClient.send("/app/chat/roomOps/" + curRoom, {}, JSON.stringify({ 'message' : msg}));
 }
 
 function updateInGameInfo(message){
@@ -124,7 +124,7 @@ function showGreeting(message) {
     $('#scrollChat').append('<p>' + message + '</p>');
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
     if (lastMessage.startsWith("Correct")) {
-        findCorrectGuesser();
+        // findCorrectGuesser();
     }
 }
 
@@ -132,10 +132,12 @@ function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
     }
+
     var r = Math.floor(Math.random() * curRoomData.listOfUsers.length);
     console.log(r);
     curRoomData.listOfUsers[r].isDrawer = 1;
 }
+
 
 function findCorrectGuesser() {
     var x = document.getElementById("scrollChat").lastChild.innerHTML;

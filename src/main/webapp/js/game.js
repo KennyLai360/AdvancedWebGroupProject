@@ -12,6 +12,13 @@ function scrollToBottomOfChat() {
     $('#messagebox').val("");
 }
 
+$(document).ready(function(){
+    $('#messagebox').keyup(function(e){
+        if(e.keyCode==13 && document.getElementById("messagebox").value !== '')
+            scrollToBottomOfChat();
+    });
+});
+
 /**
  * Function used to validate the modal when the user enters something. Enables the create room button depending on if
  * both fields are filled in.

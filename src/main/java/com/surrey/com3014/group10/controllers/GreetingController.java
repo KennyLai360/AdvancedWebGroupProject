@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class GreetingController {
 
-
-
     @MessageMapping("/chat/{room}")
     @SendTo("/topic/greetings/{room}")
     public Greeting greeting(ChatMessage message) throws Exception {
@@ -27,6 +25,12 @@ public class GreetingController {
         else {
             return new Greeting(message.getMessage());
         }
+    }
+    @MessageMapping("/chat/roomOps/{room}")
+    @SendTo("/topic/roomOps/{room}")
+    public Greeting connectionInfo(ChatMessage message) throws Exception {
+//        Thread.sleep(1000); // simulated delay
+        return new Greeting(message.getMessage());
     }
 
     @MessageMapping("/chat/global")

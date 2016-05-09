@@ -45,7 +45,7 @@
                 console.log(data);
                 curRoomData = data;
                 createUserListDisplay();
-                if (curRoomData.listOfUsers.length == 2) {
+                if (curRoomData.listOfUsers.length == 4) {
                     console.log("HERE");
                     initialiseDrawer();
                     makeDrawer();
@@ -172,7 +172,7 @@
         var userPosition = 0;
         //Finds current user in curRoomData in order to access isDrawer
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
-            if (curRoomData.listOfUsers[i].name == curUser) {
+            if (curRoomData.listOfUsers[i].name == userData.name) {
                 userPosition = i;
             }
         }
@@ -186,15 +186,15 @@
         }
     }
 
-    function chooseRole() {
-        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
-            // Indicates Drawer
-            prepareCanvas(1);
-        } else {
-            // Indicates Guesser
-            prepareCanvas(0);
-        }
-    }
+//    function chooseRole() {
+//        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
+//            // Indicates Drawer
+//            prepareCanvas(1);
+//        } else {
+//            // Indicates Guesser
+//            prepareCanvas(0);
+//        }
+//    }
     var time = 60;
     setInterval(refreshTimer,1000);
 
