@@ -39,6 +39,8 @@ public class MainController {
 
     public static GameList gl = new GameList();
 
+    public static WordController wc = new WordController();
+
     @Autowired
     private UserService userService;
 
@@ -96,6 +98,8 @@ public class MainController {
     public String game(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         model.addAttribute("listOfUsers", userService.listAllUsers());
+        wc.randomWord();
+        model.addAttribute("word", wc.getWord());
         return "game";
     }
 

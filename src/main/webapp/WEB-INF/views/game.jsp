@@ -158,6 +158,23 @@
             prepareCanvas(0);
         }
     }
+    var time = 60;
+    setInterval(refreshTimer,1000);
+
+    function refreshTimer() {
+        if (time > 0) {
+            time--;
+            document.getElementById("timer").innerHTML= time;
+        }
+        else {
+
+        }
+    }
+
+    window.onload = function() {
+        document.getElementById("timer").innerHTML=time;
+    }
+
 </script>
 <script id="users-template" type="text/x-handlebars-template">
     <h5><b><u>Users in-lobby [{{listOfUsers.length}}/4]</u></b></h5>
@@ -168,6 +185,24 @@
         </div>
 </script>
 <div class="container preventSelection" style="padding-top:30px;">
+    <div class="row">
+        <div class="col-md-offset-3" style="padding-bottom:5px">
+            <div style="border: black 1px solid; height:20px; border-radius: 20px; ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <c:choose>
+                            <c:when test = "${drawer == null}">
+                                <b> Word: </b> ${word}
+                            </c:when>
+                        </c:choose>
+
+                        <b>Timer:</b> <a id="timer"</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-3">
             <div style="border: black 1px solid; height:175px; border-radius: 20px;">
