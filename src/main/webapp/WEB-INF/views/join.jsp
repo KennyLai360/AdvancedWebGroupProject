@@ -1,17 +1,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../templates/headerTemplate.jsp"/>
 <script type="text/javascript" src="../../js/connectSocket.js"></script>
+<script type="text/javascript" src="../../js/room.js"></script>
+<script type="text/javascript" src="../../js/game.js"></script>
 <script>
     var availableRooms = [];
+    curUser = '${user}';
+    var globalUserList = [];
+    var curRoomData;
 
     /*  Call this function when after the rooms have been successfully retrieved.
-        This connects the user to the MAIN Channel which consists of messages to prompt certain actions.
-        This function also creates the room lobby.
-    */
+     This connects the user to the MAIN Channel which consists of messages to prompt certain actions.
+     This function also creates the room lobby.
+     */
     function callThisOnLoad(data){
         // This connects the user to the main channel
         if(stompClient == null) {
             connectMainChannel();
+            addToUserList();
+            getUserList();
         }
 
         // This creates the handlebars room template and displays it.
@@ -22,25 +29,47 @@
         $('#joinGameLobbyTable').append(newPage);
     }
 
+    /*
+     Add user to global user list.
+     This indicates the user has logged into the game server.
+     */
     function addToUserList(){
-        var userName = ${user};
-        var userId = $('#roundBox').val();
-        var d = new Date();
-        var n = d.getTime();
-        var room = {
-            gameRoomId: n,
-            gameRoomName: rName,
-            numberOfRounds: nRounds,
-            listOfUsers: []
+        var userName = '${user}';
+        var user = {
+            name: userName,
+            gameRoomId: 0,
+            state: 0
         };
         $.ajax({
-            url:"/addRooms",
+            url:"/addUser",
             type:'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(room),
+            data: JSON.stringify(user),
+            success:function(data) {
+                console.log(userName)
+                console.log("this is the " + data);
+                console.log("Success!!");
+                return false;
+            }
+        });
+    }
+    /*
+     Removes user from GlobalList.
+     Indicating that the user has logged out from the game server.
+     */
+    function removeFromUserList(){
+        var thisUser = '${user}';
+        $.ajax({
+            url:"/removeUser",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(thisUser),
             success:function(data) {
                 console.log("Success!!");
                 return false;
@@ -48,40 +77,33 @@
         });
     }
 
-    // Retrieves the information of rooms using a GET AJAX call.
-    // This method gets checks if a roomTable already exists or not. (Prevents duplicate table creations).
-    function getRoom(){
-        if($('#roomsTable').length > 0){
-            $('#roomsTable').remove();
-        }
+    function joinRoom(roomId){
+        var userName = '${user}';
+        var user = {
+            name: userName,
+            gameRoomId: roomId,
+            state: 1
+        };
         $.ajax({
-            url:"/getRooms",
-            type:'GET',
-            success:function(data) {
-                availableRooms = data;
-                console.log(data);
-                callThisOnLoad(data);
+            url:"/joinRoom",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(user),
+            success:function(data){
+                console.log("Success!!");
                 return false;
             }
         });
     }
 
-    // Called when a room is created.
-    // Sends the addRoom function to the webSocket to be received by everyone connected to MAIN Channel.
-    // Creates a room and dynamically updates the rooms.
-    function callWhenCreateRoom(){
-        createRoom();
-        sendRoomCommand("add");
-    }
-
-    function joinRoom(roomId){
-        curRoom = roomId;
-        console.log(curRoom);
-    }
-
     // Creates a room.
     // Gets the values of the boxes and adds it to an array.
     // AJAX POST call to send the data to the server to be stored in the current gameList.
+    // Sends the addRoom function to the webSocket to be received by everyone connected to MAIN Channel.
+    // Creates a room and dynamically updates the rooms.
     function createRoom(){
         var rName = $('#rnBox').val();
         var nRounds = $('#roundBox').val();
@@ -101,16 +123,35 @@
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify(room),
-            success:function(data) {
+            complete:function(data) {
+                sendRoomCommand("add");
+                joinRoom(n);
+                window.location.href = "/game";
                 console.log("Success!!");
                 return false;
             }
         });
     }
+    // Creates a room.
+    // Gets the values of the boxes and adds it to an array.
+    // AJAX POST call to send the data to the server to be stored in the current gameList.
+    function checkRoom(roomId){
+        getRoom();
+        for(i=0; i < availableRooms.length; i++){
+            if(availableRooms[i].gameRoomId == roomId) {
+                if (availableRooms[i].listOfUsers.length < 4){
+                    // Room is not full
+                    joinRoom(roomId);
+                    window.location.href = "/game";
+                } else {
+                    alert("Room is full!");
+                }
+            }
+        }
+    }
 
     // Retrieves room list from server.
     getRoom();
-
     // Disconnects from the MAIN Channel when the window is closed or page is changed.
     $(window).on('beforeunload', function(){
         disconnectMainChannel();
@@ -132,12 +173,12 @@
         <tr>
             <td>{{gameRoomName}}</td>
             <td>{{gameRoomId}}</td>
-            <td>1/4</td>
+            <td>{{listOfUsers.length}}/4</td>
             <td>{{numberOfRounds}}</td>
             <td>
-                <a href="<c:url value='/game'/>">
-                <%--<a>--%>
-                <button class="form-control btn btn-danger" onclick="joinRoom({{gameRoomId}});">Join</button></a></td>
+                <%--<a href="<c:url value='/game'/>">--%>
+                <a>
+                <button class="form-control btn btn-danger" onclick="checkRoom({{gameRoomId}})">Join</button></a></td>
         </tr>
         {{/each}}
     </table>
@@ -231,8 +272,9 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <a href="<c:url value='/game' />">
-                        <button id="createRoomBtn" class="btn btn-success" disabled="disabled" onclick="callWhenCreateRoom()" >Create Room</button>
+                    <%--<a href="<c:url value='/game' />">--%>
+                    <a>
+                        <button id="createRoomBtn" class="btn btn-success" disabled="disabled" onclick="createRoom()" >Create Room</button>
                     </a>
                 </div>
         </div>

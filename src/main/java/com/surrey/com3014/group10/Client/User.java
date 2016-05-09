@@ -5,14 +5,9 @@ package com.surrey.com3014.group10.Client;
  */
 public class User {
 
-    private long id;
     private String name;
     private long gameRoomId;
     private int state;
-
-    public long getUserId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -30,10 +25,22 @@ public class User {
         super();
     }
 
-    public User(long id, String name, int state, long gameRoomId){
-        this.id = id;
+    public void setName(String name) {
         this.name = name;
-        this.state = state;
+    }
+
+    public void setGameRoomId(long gameRoomId) {
         this.gameRoomId = gameRoomId;
     }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+//    public User(long id, String name, int state, long gameRoomId){
+//        this.id = id;
+//        this.name = name;
+//        this.state = state;
+//        this.gameRoomId = gameRoomId;
+//    }
 }

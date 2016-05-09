@@ -1,14 +1,145 @@
 <jsp:include page="../templates/gameHeaderTemplate.jsp"/>
-<script type="text/javascript" src="../../js/draw.js"></script>
 
 <script>
+    var userData = [];
+    var availableRooms = [];
+    curUser = '${user}';
+    var globalUserList = [];
+    var curRoomData;
+    var userObjData;
+
+    function createUserListDisplay(){
+        if($('#userDisplay').length > 0){
+            $('#userDisplay').remove();
+        }
+
+        var source   = $("#users-template").html();
+        var template = Handlebars.compile(source);
+        var newPage = template(curRoomData);
+
+        $('#userList').append(newPage);
+    }
+
+    function getUser(){
+        $.ajax({
+            url:"/getUser",
+            type:'GET',
+            success:function(data) {
+                userObjData = data;
+                return false;
+            }
+        });
+    }
+
+    function getJoinedRoom(){
+        $.ajax({
+            url:"/getJoinedRoom",
+            type:'GET',
+            success:function(data) {
+                getUserList();
+                console.log(data);
+                curRoomData = data;
+                getUser();
+                createUserListDisplay();
+                console.log("getjoinedroom thing");
+                return false;
+            }
+        });
+    }
     $(window).load(function(){
-        drawConnect("${user}",curRoom);
-        chooseRole();
+        $.ajax({
+            url:"/getUser",
+            type:'GET',
+            success:function(data) {
+                userData = data;
+                curRoom = userData.gameRoomId;
+                drawConnect(curRoom);
+                getJoinedRoom();
+                chooseRole();
+                return false;
+            }
+        });
     });
+    /*
+     Removes user from GlobalList.
+     Indicating that the user has logged out from the game server.
+     */
+    function removeUser(){
+        var thisUser = curUser;
+        $.ajax({
+            url:"/removeUser",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(curUser),
+            success:function(data) {
+                sendDisconnection(curRoom);
+                drawDisconnect(curRoom);
+                console.log("Success!!");
+                return false;
+            }
+        });
+    }
+
+    /*
+     Removes user from GlobalList.
+     Indicating that the user has logged out from the game server.
+     */
+    function resetUser(){
+        $.ajax({
+            url:"/resetUser",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(userObjData),
+            success:function(data) {
+                spliceTheArray();
+                sendDisconnection(curRoom);
+                drawDisconnect(curRoom);
+                console.log("Success!!");
+                return false;
+            }
+        });
+    }
+    function spliceTheArray() {
+        console.log(curUser);
+
+        for(i=0;i<curRoomData.listOfUsers.length;i++){
+            if(curRoomData.listOfUsers[i].name == curUser){
+                curRoomData.listOfUsers.splice(i-1,1);
+                console.log(curUser);
+            }
+        }
+        updateRoomUserList();
+    }
+    /*
+     Removes user from GlobalList.
+     Indicating that the user has logged out from the game server.
+     */
+    function updateRoomUserList(){
+        $.ajax({
+            url:"/updateRoomUserList",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(curRoomData),
+            success:function(data) {
+                console.log("Success!!");
+                                window.location.href = "/";
+                return false;
+            }
+        });
+    }
+
     $( window ).on('beforeunload',function() {
-        sendDisconnection(curRoom);
-        drawDisconnect(curRoom);
+        resetUser();
+
     });
     function sendClear() {
         clearCanvas();
@@ -28,24 +159,20 @@
         }
     }
 </script>
-
+<script id="users-template" type="text/x-handlebars-template">
+    <h5><b><u>Users in-lobby [{{listOfUsers.length}}/4]</u></b></h5>
+        <div id="userDisplay" style="padding-left:10px;">
+        {{#each listOfUsers}}
+            <p>{{name}}</p>
+        {{/each}}
+        </div>
+</script>
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-3">
             <div style="border: black 1px solid; height:175px; border-radius: 20px;">
-                <div style="padding-top:5px; padding-left:5px;">
-                    <h5><b><u>Users in-lobby [4/4]</u></b></h5>
+                <div id="userList" style="padding-top:5px; padding-left:5px;">
 
-                    <div style="padding-left:10px;">
-                        <!-- PUT THE ACTIVE USERS BELOW -->
-                        <p>${user}</p>
-
-                        <p>User1</p>
-
-                        <p>User1</p>
-
-                        <p>User1</p>
-                    </div>
                 </div>
             </div>
             <div style="padding:5px;"></div>

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -57,8 +58,8 @@ public class MainController {
 
     @RequestMapping("/admin/deleteUser")
     public ModelAndView deleteUser(@RequestParam int id) {
-    userService.deleteUserById(id);
-    return new ModelAndView("redirect:/admin");
+        userService.deleteUserById(id);
+        return new ModelAndView("redirect:/admin");
     }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
@@ -69,14 +70,11 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        if(isAuthenticated())
-        {
-          return "redirect:/join";
+        if (isAuthenticated()) {
+            return "redirect:/join";
+        } else {
+            return "login";
         }
-        else
-        {
-           return "login";
-    }
 
     }
 
@@ -105,35 +103,29 @@ public class MainController {
     public String menu(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         model.addAttribute("rooms", gl.getRooms());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
         return "join";
     }
 
-    private String getPrincipal(){
+    private String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
+            userName = ((UserDetails) principal).getUsername();
         } else {
             userName = principal.toString();
         }
         return userName;
     }
 
-    private boolean isAuthenticated()
-    {
-         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-if (!(auth instanceof AnonymousAuthenticationToken)) {
-
-    /* The user is logged in :) */
-    return true;
-}
-else
-{
-    return false;
-}
-
-}
-
+    private boolean isAuthenticated() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            /* The user is logged in :) */
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

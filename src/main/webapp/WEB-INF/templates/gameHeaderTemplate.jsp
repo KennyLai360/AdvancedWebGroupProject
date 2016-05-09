@@ -29,7 +29,15 @@
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/handlebars/handlebars.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+    <script type="text/javascript" src="../../js/connectSocket.js"></script>
+    <script type="text/javascript" src="../../js/room.js"></script>
     <script type="text/javascript" src="../../js/game.js"></script>
+    <script type="text/javascript" src="../../js/draw.js"></script>
+
 
 </head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -47,7 +55,8 @@
             <div class="navbar-form navbar-right">
 
                         <span style="color: white">Hello ${user}!</span>
-                        <a href="<c:url value='/logout' />"><button class="btn btn-danger">Logout</button></a>
+                        <%--<a href="<c:url value='/logout' />">--%>
+                            <a><button class="btn btn-danger">Logout</button></a>
 
 
             </div>
@@ -72,8 +81,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                <a href="<c:url value='/home' />">
-                    <button class="btn btn-success">Yes</button>
+                <%--<a href="<c:url value='/home' />">--%>
+                <a>
+                    <button class="btn btn-success" onclick="resetUser()">Yes</button>
                 </a>
             </div>
         </div>

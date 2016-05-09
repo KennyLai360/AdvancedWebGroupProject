@@ -3,18 +3,16 @@ var drawer = 0;
 var curUser;
 var curRoom;
 
-
-function drawConnect(thisUser) {
+function drawConnect(theRoom) {
     var socket = new SockJS('/draw');
-    var curUser = thisUser;
 
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/drawings/'+curRoom, function(drawing){
+        stompClient.subscribe('/topic/drawings/'+theRoom, function(drawing){
             showDrawing(JSON.parse(drawing.body).content);
         });
-        stompClient.subscribe('/topic/greetings/'+curRoom, function(greeting){
+        stompClient.subscribe('/topic/greetings/'+theRoom, function(greeting){
             showGreeting(JSON.parse(greeting.body).content);
         });
     });

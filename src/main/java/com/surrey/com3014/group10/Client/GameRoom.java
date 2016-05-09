@@ -1,7 +1,5 @@
 package com.surrey.com3014.group10.Client;
 
-import org.springframework.security.core.userdetails.User;
-
 import java.util.ArrayList;
 
 /**
@@ -39,6 +37,10 @@ public class GameRoom {
 
     public void setGameRoomName(String gameRoomName) {
         this.gameRoomName = gameRoomName;
+    }
+
+    public void setListOfUsers(ArrayList<User> listOfUsers) {
+        this.listOfUsers = listOfUsers;
     }
 
     public ArrayList<User> getListOfUsers() {
