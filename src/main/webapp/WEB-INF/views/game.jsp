@@ -41,6 +41,12 @@
                 curRoomData = data;
                 getUser();
                 createUserListDisplay();
+                if (curRoomData.listOfUsers.length == 2) {
+                    console.log("HERE");
+                    initialiseDrawer();
+                    makeDrawer();
+                    getMaxRounds();
+                }
                 console.log("getjoinedroom thing");
                 return false;
             }
@@ -55,7 +61,7 @@
                 curRoom = userData.gameRoomId;
                 drawConnect(curRoom);
                 getJoinedRoom();
-                chooseRole();
+//                chooseRole();
                 return false;
             }
         });
@@ -149,6 +155,25 @@
         onColourChange(val);
 //        sendDrawing(-2,1,false,1,val);
     }
+    
+    function makeDrawer() {
+        var userPosition = 0;
+        //Finds current user in curRoomData in order to access isDrawer
+        for (i = 0; i < curRoomData.listOfUsers.length; i++) {
+            if (curRoomData.listOfUsers[i].name == curUser) {
+                userPosition = i;
+            }
+        }
+        if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
+            //Indicates drawer
+            prepareCanvas(1);
+        }
+        else {
+            //Indicates guesser
+            prepareCanvas(0);
+        }
+    }
+    
     function chooseRole() {
         if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
             // Indicates Drawer
@@ -174,16 +199,49 @@
     window.onload = function() {
         document.getElementById("timer").innerHTML=time;
     }
+    
+    function endGame() {
+        for (i = 0; i < curRoomData.listOfUsers.length; i++) {
+            if (curRoomData.listOfUsers[i].name == curUser) {
+                userPosition = i;
+            }
+        }
+        if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
+            Command: toastr["success"]("Congratulations, you won!", "You won!")
+        }
+    }
+
+
+//toastr.options = {
+//  "closeButton": true,
+//  "debug": false,
+//  "newestOnTop": false,
+//  "progressBar": false,
+//  "positionClass": "toast-top-full-width",
+//  "preventDuplicates": false,
+//  "onclick": null,
+//  "showDuration": "300",
+//  "hideDuration": "1000",
+//  "timeOut": "500000",
+//  "extendedTimeOut": "100000",
+//  "showEasing": "swing",
+//  "hideEasing": "linear",
+//  "showMethod": "fadeIn",
+//  "hideMethod": "fadeOut"
+//}
 
 </script>
 <script id="users-template" type="text/x-handlebars-template">
     <h5><b><u>Users in-lobby [{{listOfUsers.length}}/4]</u></b></h5>
         <div id="userDisplay" style="padding-left:10px;">
         {{#each listOfUsers}}
-            <p>{{name}}</p>
+            <p id="{{name}}">{{name}}: 0</p>
         {{/each}}
         </div>
 </script>
+
+
+
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-offset-3" style="padding-bottom:5px">
@@ -191,7 +249,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:choose>
-                            <c:when test = "${drawer == null}">
+                            <c:when test = "${drawer == 1}">
                                 <b> Word: </b> ${word}
                             </c:when>
                         </c:choose>

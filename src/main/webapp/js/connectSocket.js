@@ -2,10 +2,12 @@ var stompClient = null;
 var drawer = 0;
 var curUser;
 var curRoom;
+var round = 0;
+var maxRounds = 0;
+var winner;
 
 function drawConnect(theRoom) {
     var socket = new SockJS('/draw');
-
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
@@ -28,6 +30,11 @@ function connectMainChannel(){
             updateRoomInfo(JSON.parse(greeting.body).content);
         });
     });
+    
+}
+
+function getMaxRounds() {
+    maxRounds = curRoomData.numberOfRounds;
 }
 
 function disconnectMainChannel() {
@@ -82,7 +89,75 @@ function sendDrawing(x,y,drag,size,color) {
 
 function showGreeting(message) {
     $('#scrollChat').append('<p>' + message + '</p>');
+    var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
+    if (lastMessage.startsWith("Correct")) {
+        findCorrectGuesser();
+    }
 }
+
+function initialiseDrawer() {
+    for (i=0; i < curRoomData.listOfUsers.length; i++) {
+        curRoomData.listOfUsers[i].isDrawer = 0;
+    }
+    var r = Math.floor(Math.random() * curRoomData.listOfUsers.length);
+    console.log(r);
+    curRoomData.listOfUsers[r].isDrawer = 1;
+}
+
+function findCorrectGuesser() {
+    var x = document.getElementById("scrollChat").lastChild.innerHTML;
+    var y;
+    for (i = 0; i < curRoomData.listOfUsers.length; i++) {
+        y = x.substring(0, x.indexOf(curRoomData.listOfUsers[i].name))
+        if (x.indexOf(curRoomData.listOfUsers[i].name) !== -1) {
+            if (curRoomData.listOfUsers[i].points == undefined) {
+                curRoomData.listOfUsers[i].points = 0;
+            }
+            curRoomData.listOfUsers[i].points += time;
+            document.getElementById(curRoomData.listOfUsers[i].name).innerHTML =
+                    curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + "points";
+            findDrawer();
+            curRoomData.listOfUsers[i].isDrawer = 1;
+        }
+    }
+    if (round != maxRounds) {
+        round++;
+    }
+    else {
+        chooseWinner();
+    }
+}
+
+function chooseWinner() {
+    var biggest = 0;
+    var best = 0;
+    for (i = 0; i < curRoomData.listOfUsers.length; i++) {    
+        if (curRoomData.listOfUsers[i].points > biggest) {
+            biggest = curRoomData.listOfUsers[i].points;
+            best = i;
+        }
+    }
+    for (i = 0; i < curRoomData.listOfUsers.length; i++) { 
+        if (i == best) {
+            curRoomData.listOfUsers[i].isWinner = 1;
+        }
+        else {
+            curRoomData.listOfUsers[i].isWinner = 0;
+        }
+    }
+    endGame();
+    
+}
+
+function findDrawer() {
+    for (i = 0; i < curRoomData.listOfUsers.length; i++) {
+        if (curRoomData.listOfUsers[i].isDrawer == 1) {
+            curRoomData.listOfUsers[i].isDrawer == 0;
+        }
+    }
+}
+
+
 
 function showDrawing(drawing) {
     if(!drawer) {
