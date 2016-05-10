@@ -96,9 +96,8 @@
     }
 
     function newRound() {
-//        var oldcanv = document.getElementById('canvasDiv');
-//        document.removeChild(oldcanv);
         $('canvas').remove();
+        sendClear();
         initialiseDrawer();
         incrementDrawer();
         time = 60;
