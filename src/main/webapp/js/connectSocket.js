@@ -78,7 +78,7 @@ function disconnectMainChannel() {
 
 function sendRoomCommand(msg){
     console.log(msg);
-    stompClient.send("/app/chat/main", {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/", {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendInGameInfo(msg){
@@ -148,7 +148,7 @@ function showGreeting(message) {
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
-    }    
+    }
 }
 
 var drawUser;
