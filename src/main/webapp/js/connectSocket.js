@@ -77,7 +77,6 @@ function disconnectMainChannel() {
 }
 
 function sendRoomCommand(msg){
-    console.log(msg);
     stompClient.send("/app/chat/global", {}, JSON.stringify({ 'message': msg }));
 }
 
@@ -91,6 +90,7 @@ function updateInGameInfo(message){
             getJoinedRoom();
             break;
         case "Update room":
+            console.log("Calling update room");
             getJoinedRoom();
             break;
         case "New round":
@@ -110,7 +110,6 @@ function startGame() {
 }
 
 function updateRoomInfo(message){
-    console.log("Incoming " + message + " command.");
     getRoom();
     getUser();
 }
@@ -156,7 +155,7 @@ function showGreeting(message) {
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
-    }    
+    }
 }
 
 var drawUser;

@@ -48,11 +48,11 @@
                 initialiseDrawer();
 
                 if (curRoomData.listOfUsers.length == 3) {
-                    sendInGameInfo("Update room");
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
                     //First user in game
                     if (getPositionInUserList(userData.name) == 0) {
+                        console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
                     }
@@ -65,7 +65,6 @@
                     document.getElementById("startGameBtn").innerHTML =  curRoomData.listOfUsers.length + "/4";
 
                 }
-                console.log("getjoinedroom thing");
                 return false;
             }
         });
@@ -149,7 +148,6 @@
             success:function(data) {
                 sendDisconnection(curRoom);
                 drawDisconnect(curRoom);
-                console.log("Success!!");
                 return false;
             }
         });
@@ -181,15 +179,16 @@
             },
             data: JSON.stringify(curRoomData),
             success:function(data) {
-                console.log("Success!!");
                 window.location.href = "/";
                 return false;
             }
         });
     }
 
-    $(window).on('beforeunload',function() {
+    window.addEventListener("beforeunload", function (e) {
         resetUser();
+
+        (e || window.event).returnValue = null;
         return null;
     });
     function sendClear() {
@@ -277,8 +276,7 @@
             }
         }
         if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
-            Command: toastr["success"]("Congratulations, you won!", "You won!")
-            console.log
+            Command: toastr["success"]("Congratulations, you won!", "You won!");
         }
     }
 
