@@ -229,7 +229,6 @@
             //Create canvas with drawing enabled
             swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
             setTimeout(function(){ prepareCanvas(1); }, 3000);
-
         }
         else {
             //Disables drawing buttons for guessers
@@ -290,7 +289,7 @@
             name: userData.name,
             gameRoomId: 0,
             state: 0,
-            score: curRoomData.listOfUsers[userpos].score;
+            score: curRoomData.listOfUsers[userpos].score
         };
         $.ajax({
             url:"/tallyScore",
