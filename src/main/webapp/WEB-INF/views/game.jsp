@@ -51,11 +51,11 @@
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
                     //First user in game
-                    if (getPositionInUserList(userData.name) == 0) {
+
                         console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
-                    }
+
                     chooseDrawer();
                     makeDrawer();
                     getMaxRounds();
@@ -189,7 +189,6 @@
         resetUser();
 
         (e || window.event).returnValue = null;
-        return null;
     });
     function sendClear() {
         clearCanvas();

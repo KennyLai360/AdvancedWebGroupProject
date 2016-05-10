@@ -162,7 +162,6 @@
         disconnectMainChannel();
 
         (e || window.event).returnValue = null;
-        return null;
     });
 
 </script>
