@@ -131,11 +131,23 @@ function showGreeting(message) {
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
-    }
+    }    
+}
 
-    var r = Math.floor(Math.random() * curRoomData.listOfUsers.length);
-    console.log(r);
-    curRoomData.listOfUsers[r].isDrawer = 1;
+var drawUser;
+
+function chooseDrawer() {
+    curRoomData.listOfUsers[0].isDrawer = 1;
+    drawUser = 0;
+}
+
+function incrementDrawer() {
+    drawUser++;
+    curRoomData.listOfUsers[drawUser].isDrawer = 1;
+}
+
+function getDrawUser() {
+    return drawUser;
 }
 
 

@@ -45,11 +45,13 @@
                 console.log(data);
                 curRoomData = data;
                 createUserListDisplay();
-                if (curRoomData.listOfUsers.length == 1) {
+                initialiseDrawer();
+                if (curRoomData.listOfUsers.length == 3) {
                     console.log("HERE");
-                    initialiseDrawer();
-                    makeDrawer();
                     getMaxRounds();
+                    chooseDrawer();
+                    makeDrawer();
+                    setInterval(refreshTimer,1000);
                 }
                 console.log("getjoinedroom thing");
                 return false;
@@ -62,8 +64,37 @@
 //        var oldcanv = document.getElementById('canvasDiv');
 //        document.removeChild(oldcanv);
         $('canvas').remove();
+        initialiseDrawer();
+        incrementDrawer();
         makeDrawer();
+        time = 60;
+//        var word = ${word};
+//        console.log(word.toString());
+//        Command: toastr["success"]("Congratulations, you guessed correctly!",
+//        "The word was " + word.toString() + "!");
+
+//        toastr.options = {
+//            "closeButton": true,
+//            "debug": false,
+//            "newestOnTop": false,
+//            "progressBar": false,
+//            "positionClass": "toast-top-full-width",
+//            "preventDuplicates": false,
+//            "onclick": null,
+//            "showDuration": "300",
+//            "hideDuration": "1000",
+//            "timeOut": "500000",
+//            "extendedTimeOut": "100000",
+//            "showEasing": "swing",
+//            "hideEasing": "linear",
+//            "showMethod": "fadeIn",
+//            "hideMethod": "fadeOut"
+//        }
+        
+        
     }
+    
+    
 
     /*
         Called on load.
@@ -185,13 +216,22 @@
             }
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
+            console.log()
             //Indicates drawer
             prepareCanvas(1);
         }
         else {
             //Indicates guesser
+            $('canvas').remove();
             prepareCanvas(0);
         }
+    }
+    
+    function getPositionInUserList(name) {
+        for (i = 0; i < curRoomData.listOfUsers.length; i++) {
+            if (name == curRoomData.listOfUsers[i]) {
+                return i;
+            }
     }
 
 //    function chooseRole() {
@@ -204,7 +244,6 @@
 //        }
 //    }
     var time = 60;
-    setInterval(refreshTimer,1000);
 
     function refreshTimer() {
         if (time > 0) {
@@ -232,23 +271,23 @@
     }
 
 
-//toastr.options = {
-//  "closeButton": true,
-//  "debug": false,
-//  "newestOnTop": false,
-//  "progressBar": false,
-//  "positionClass": "toast-top-full-width",
-//  "preventDuplicates": false,
-//  "onclick": null,
-//  "showDuration": "300",
-//  "hideDuration": "1000",
-//  "timeOut": "500000",
-//  "extendedTimeOut": "100000",
-//  "showEasing": "swing",
-//  "hideEasing": "linear",
-//  "showMethod": "fadeIn",
-//  "hideMethod": "fadeOut"
-//}
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-full-width",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "500000",
+  "extendedTimeOut": "100000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 
 </script>
 <script id="users-template" type="text/x-handlebars-template">
@@ -269,7 +308,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <c:choose>
-                            <c:when test = "${drawer == 1}">
+                            <c:when test = "${curRoomData.listOfUsers[getPositionInUserList(userData.name)].isDrawer == 1}">
                                 <b> Word: </b> ${word}
                             </c:when>
                         </c:choose>
