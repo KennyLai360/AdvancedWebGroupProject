@@ -64,6 +64,7 @@
                         document.getElementById("startGameBtn").removeAttribute("style");
                     }
                     chooseDrawer();
+                    makeDrawer();
                     getMaxRounds();
                 } else {
                     $('#myModal').modal('show');
@@ -178,11 +179,6 @@
                 window.location.href = "/";
                 return false;}
         });
-    }
-
-    function callWhenClickStart(){
-        makeDrawer();
-        sendInGameInfo('Start');
     }
 
     window.addEventListener("beforeunload", function (e) {
@@ -431,7 +427,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="callWhenClickStart()"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start');"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
