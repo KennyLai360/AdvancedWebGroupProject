@@ -64,6 +64,7 @@
                         document.getElementById("startGameBtn").removeAttribute("style");
                     }
                     chooseDrawer();
+                    makeDrawer();
                     getMaxRounds();
                 } else {
                     $('#myModal').modal('show');
@@ -310,11 +311,6 @@
         }
     }
 
-    function callWhenStartGame(){
-        makeDrawer();
-        sendInGameInfo('Start');
-    }
-
 </script>
 <script id="users-template" type="text/x-handlebars-template">
         <div id="userDisplay" style="padding-left:10px;">
@@ -430,7 +426,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="callWhenStartGame();"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start');"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
