@@ -122,7 +122,6 @@ function getTheWord(message){
 function startGame() {
     hideWaitingForUserModal();
     updateRoom();
-    createWordDisplay(userPosition);
 }
 
 

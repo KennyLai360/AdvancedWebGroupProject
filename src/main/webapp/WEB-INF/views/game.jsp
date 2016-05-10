@@ -303,7 +303,7 @@
         if (curRoomData.listOfUsers[userPosition].isWinner == 1) {
             swal({
                     title: "Congratulations!",
-                    text: "You have won! This is your score: " + curRoomData.listOfUsers[i].points + ". Press 'OK' to leave the room.",
+                    text: "You have won! This is your score: " + curRoomData.listOfUsers[userPosition].points + ". Press 'OK' to leave the room.",
                     type: "success"
                 },
                 function () {
@@ -312,7 +312,7 @@
         } else {
             swal({
                     title: "Nice Try!",
-                    text: "Better luck next time. This is your score:" + curRoomData.listOfUsers[i].points + ". Press 'OK' to leave the room.",
+                    text: "Better luck next time. This is your score:" + curRoomData.listOfUsers[userPosition].points + ". Press 'OK' to leave the room.",
                     type: "error"
                 },
                 function () {
