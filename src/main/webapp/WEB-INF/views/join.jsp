@@ -130,7 +130,7 @@
             },
             data: JSON.stringify(room),
             complete:function(data) {
-                sendRoomCommand("add");
+//                sendRoomCommand("add");
                 joinRoom(n);
                 console.log("Success!!");
                 return false;
@@ -166,6 +166,7 @@
     // Disconnects from the MAIN Channel when the window is closed or page is changed.
     $(window).on('beforeunload', function(){
         disconnectMainChannel();
+        return null;
     });
 
 </script>

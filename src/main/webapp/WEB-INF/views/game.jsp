@@ -189,6 +189,7 @@
 
     $(window).on('beforeunload',function() {
         resetUser();
+        return null;
     });
     function sendClear() {
         clearCanvas();
