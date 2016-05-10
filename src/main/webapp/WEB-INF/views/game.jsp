@@ -100,9 +100,6 @@
         initialiseDrawer();
         incrementDrawer();
         time = 60;
-//        var word = ${word};
-//        console.log(word.toString());
-
     }
 
 
@@ -209,6 +206,7 @@
             $('canvas').remove();
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
+            getWord();
             console.log()
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {

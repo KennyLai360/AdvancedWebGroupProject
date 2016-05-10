@@ -148,7 +148,6 @@ function showGreeting(message) {
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
     if (lastMessage.startsWith("Correct")) {
          findCorrectGuesser();
-         sendInGameInfo("New round");
     }
 }
 
