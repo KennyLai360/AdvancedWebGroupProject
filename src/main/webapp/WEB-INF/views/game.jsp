@@ -182,7 +182,7 @@
             }
         }
         updateRoom();
-        sendInGameInfo("Updating the in-game Rooms.");
+        sendInGameInfo("Update room");
     }
     /*
      Removes user from GlobalList.

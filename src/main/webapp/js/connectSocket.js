@@ -24,7 +24,7 @@ function drawConnect(theRoom) {
             stompClient.subscribe('/topic/roomOps/' + theRoom, function (greeting) {
                 updateInGameInfo(JSON.parse(greeting.body).content);
             });
-            sendInGameInfo("User connected"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
+            sendInGameInfo("connect"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
             toggleAudio();
         });
     } else {
@@ -86,6 +86,19 @@ function sendInGameInfo(msg){
 }
 
 function updateInGameInfo(message){
+    switch (message) {
+        case "connect":
+            getJoinedRoom();
+            break;
+        case "Update room":
+            getJoinedRoom();
+            break;
+        case "New round":
+            newRound();
+            break;
+        default:
+            getJoinedRoom();
+    }
     getJoinedRoom();
 }
 
@@ -177,7 +190,7 @@ function findCorrectGuesser() {
             curRoomData.listOfUsers[i].isDrawer = 1;
         }
     }
-    if (round != maxRounds) {
+    if (round < maxRounds) {
         newRound();
         console.log(round);
     }
