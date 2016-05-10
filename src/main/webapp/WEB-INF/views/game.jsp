@@ -64,7 +64,6 @@
                         document.getElementById("startGameBtn").removeAttribute("style");
                     }
                     chooseDrawer();
-                    makeDrawer();
                     getMaxRounds();
                 } else {
                     $('#myModal').modal('show');
@@ -421,7 +420,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start')"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start');makeDrawer();"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>

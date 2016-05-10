@@ -211,11 +211,11 @@ function findCorrectGuesser() {
 //            findDrawer();
             if (userData.name === curRoomData.listOfUsers[i].name) {
                 // Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
-                swal({title: "Correct!",  type: success, text: "You guessed it correctly! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
+                swal({title: "Correct!",  type: "success", text: "You guessed it correctly! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
             }
             else {
                 // Command: toastr["error"]("Oh no!", "You didn't guess the word in time!");
-                swal({title: "Oh no!",  type: error, text: "Someone else has guessed the word! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
+                swal({title: "Oh no!",  type: "error", text: "Someone else has guessed the word! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
             }
         }
     }
