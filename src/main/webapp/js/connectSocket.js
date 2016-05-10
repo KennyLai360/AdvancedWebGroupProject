@@ -199,7 +199,7 @@ function findCorrectGuesser() {
         }
     }
     if (round < maxRounds) {
-        sendInGameInfo("New round");
+        newRound();
         console.log(round);
     }
     else {
