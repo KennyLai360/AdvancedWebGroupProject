@@ -50,9 +50,9 @@
                 createUserListDisplay();
                 initialiseDrawer();
 
-                if (curRoomData.listOfUsers.length == 3) {
+                if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
-                    document.getElementById("startGameBtn").innerHTML = "Ready!";
+                    document.getElementById("startGameBtn").innerHTML = "Start Game!";
                     // If you are the first user in the room.
                     if(curRoomData.listOfUsers[0].name == userData.name){
                         //First user in game
@@ -102,27 +102,7 @@
         time = 60;
 //        var word = ${word};
 //        console.log(word.toString());
-//        Command: toastr["success"]("Congratulations, you guessed correctly!",
-//        "The word was " + word.toString() + "!");
-
-//        toastr.options = {
-//            "closeButton": true,
-//            "debug": false,
-//            "newestOnTop": false,
-//            "progressBar": false,
-//            "positionClass": "toast-top-full-width",
-//            "preventDuplicates": false,
-//            "onclick": null,
-//            "showDuration": "300",
-//            "hideDuration": "1000",
-//            "timeOut": "500000",
-//            "extendedTimeOut": "100000",
-//            "showEasing": "swing",
-//            "hideEasing": "linear",
-//            "showMethod": "fadeIn",
-//            "hideMethod": "fadeOut"
-//        }
-
+        Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
 
     }
 
@@ -239,6 +219,8 @@
             document.getElementById("messageSendButton").disabled = true;
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
+            Command: toastr["success"]("You are now the drawer!", "The word is " + getWord());
+            getWord();
             prepareCanvas(1);
         }
         else {
@@ -300,6 +282,10 @@
         if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
             Command: toastr["success"]("Congratulations, you won!", "You won!");
         }
+        else {
+            Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
+        }
+        initialiseDrawer();
     }
 
 
