@@ -201,7 +201,7 @@
     //Creates the canvases, one for the drawer with drawing enabled, and one for each
     //guesser with drawing disabled.
     function makeDrawer() {
-        theWord = "";
+//        theWord = "";
         document.getElementById("roomIdInfo").innerHTML = "<a>Room Id: <b>" + curRoomData.gameRoomId + "</b></a>";
         document.getElementById("roomNameInfo").innerHTML = "<a>Room Name: <b>" + curRoomData.gameRoomName + "</b></a>";
         document.getElementById("roundsInfo").innerHTML = "<a>Rounds: <b>" + curRoomData.numberOfRounds + "</b></a>";
