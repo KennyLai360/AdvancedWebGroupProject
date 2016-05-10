@@ -55,7 +55,7 @@ function connectMainChannel(){
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings/main', function(maininfo){
+        stompClient.subscribe('/topic/main', function(maininfo){
             updateRoomInfo(JSON.parse(maininfo.body).content);
         });
         getUser();
@@ -102,7 +102,7 @@ function updateInGameInfo(message){
         default:
             getJoinedRoom();
     }
-    getJoinedRoom();
+    // getJoinedRoom();
 }
 
 function startGame() {

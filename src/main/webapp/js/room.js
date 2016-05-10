@@ -45,3 +45,28 @@ function getRoom(){
         }
     });
 }
+
+
+/*
+ Removes user from GlobalList.
+ Indicating that the user has logged out from the game server.
+ */
+function resetUser(){
+    $.ajax({
+        url:"/resetUser",
+        type:'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(userData),
+        complete:function(data) {
+            sendRoomCommand("remove");
+            spliceTheArray();
+            sendDisconnection(curRoom);
+            drawDisconnect(curRoom);
+            console.log("Success!!");
+            return false;
+        }
+    });
+}

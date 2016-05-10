@@ -34,7 +34,7 @@ public class GreetingController {
     }
 
     @MessageMapping("/chat/global")
-    @SendTo("/topic/main}")
+    @SendTo("/topic/main")
     public Greeting mainInfo(ChatMessage message) throws Exception {
 //        Thread.sleep(1000); // simulated delay
         return new Greeting(message.getMessage());
