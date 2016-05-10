@@ -43,7 +43,7 @@
     <script type="text/javascript" src="../../js/game.js"></script>
     <script type="text/javascript" src="../../js/draw.js"></script>
     <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
-    <script type="text/javascript" src="../../../bower_components/sweetalert/sweetalert-dev.js"></script>
+    <script type="text/javascript" src="../../bower_components/sweetalert/sweetalert-dev.js"></script>
 
 
 </head>
