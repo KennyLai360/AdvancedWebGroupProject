@@ -183,7 +183,7 @@
         </thead>
         {{#each this}}
         <tr>
-            <td><button class="form-control btn btn-info" disabled>{{gameState}}</button></td>
+            <td><span class="label label-warning">{{gameState}}</span></td>
             <td>{{gameRoomName}}</td>
             <td>{{gameRoomId}}</td>
             <td>{{listOfUsers.length}}/4</td>
