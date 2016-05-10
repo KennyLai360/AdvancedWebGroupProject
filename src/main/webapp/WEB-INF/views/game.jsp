@@ -228,6 +228,10 @@
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
             console.log()
+            var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
+            for (var i = 0; i < buttonsToDisable.length; i++) {
+                buttonsToDisable[i].removeAttribute("style");
+            }
             //Indicates drawer
             prepareCanvas(1);
         }
@@ -235,6 +239,10 @@
             //Indicates guesser
             while ($('canvas').length > 1) {
                 $('canvas').remove();
+            }
+            var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
+            for (var i = 0; i < buttonsToDisable.length; i++) {
+                buttonsToDisable[i].style.display = "none";
             }
             prepareCanvas(0);
         }
@@ -369,19 +377,19 @@ toastr.options = {
     <div class="row preventSelection" style="padding-top:5px;">
         <div class="col-md-5" style="border: black 1px solid; height:50px;  border-radius: 20px; padding-top:5px">
             <div> <!--Add some sort of javascript thing to disable drawing tools if the user is a guesser -->
-                <label title="Brush tool"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
+                <label title="Brush tool" class="disableButtonForGuesser"><img src="../icons/pencil_btn.png" onClick="pencilButtonClick()"
                                                height="30"/></label>
-                <label title="Eraser tool"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
+                <label title="Eraser tool" class="disableButtonForGuesser"><img src="../icons/eraser_btn.png" onClick="eraserButtonClick()"
                                                 height="30"/></label>
                 <label title="Sound tool"><img id="soundBtn" src="../icons/musicOn.png" onClick="toggleAudio();"
                                                         height="30"/></label>
-                <label title="Colour of the brush">
+                <label title="Colour of the brush" class="disableButtonForGuesser">
                     <input type="color" id="colourSelector" onchange="sendColor(this.value)" value="#000000"/></label>
-                <label title="Width of the brush">
+                <label title="Width of the brush" class="disableButtonForGuesser">
                     <input class="form-control" type="number" min="1" id="lineWidthSelector" style="width:75px;"
                            value="5"
                            onchange="autoValidateLineWidthInput()"/></label>
-                <label title="Clear the canvas">
+                <label title="Clear the canvas" class="disableButtonForGuesser">
                     <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top"
                             title="Clear the Canvas" onclick="sendClear()">
                         Clear
