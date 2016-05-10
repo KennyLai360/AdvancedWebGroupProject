@@ -56,7 +56,7 @@
                 initialiseDrawer();
 
                 //If there are 4 users in the room, show start button.
-                if (curRoomData.listOfUsers.length == 1) {
+                if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Start Game!";
                     // If you are the first user in the room.
