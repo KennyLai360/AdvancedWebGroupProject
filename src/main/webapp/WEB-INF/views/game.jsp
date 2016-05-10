@@ -45,18 +45,21 @@
                 console.log(data);
                 curRoomData = data;
                 createUserListDisplay();
-                if (curRoomData.listOfUsers.length == 1) {
+                if (curRoomData.listOfUsers.length == 4) {
                     console.log("HERE");
                     initialiseDrawer();
                     makeDrawer();
                     getMaxRounds();
+                } else {
+                    $('#myModal').modal('show');
+                    document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                 }
                 console.log("getjoinedroom thing");
                 return false;
             }
         });
     }
-    
+
     function newRound() {
         round++;
 //        var oldcanv = document.getElementById('canvasDiv');
@@ -204,7 +207,7 @@
 //        }
 //    }
     var time = 60;
-    setInterval(refreshTimer,1000);
+    //setInterval(refreshTimer,1000);
 
     function refreshTimer() {
         if (time > 0) {
@@ -218,6 +221,10 @@
 
     window.onload = function() {
         document.getElementById("timer").innerHTML=time;
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        })
     }
 
     function endGame() {
@@ -358,8 +365,27 @@
 
 <jsp:include page="../templates/footerTemplate.jsp"/>
 
+<button type="button" id="waitModal" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+
 </body>
 </html>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="waitingForUserModal">
+                    Waiting for Users... 1/4
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
