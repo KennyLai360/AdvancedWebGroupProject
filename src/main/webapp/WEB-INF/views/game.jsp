@@ -341,7 +341,7 @@ toastr.options = {
                     <div class="col-md-12">
                         <c:choose>
                             <c:when test = "${curRoomData.listOfUsers[getPositionInUserList(userData.name)].isDrawer == 1}">
-                                <b> Word: </b> ${word}
+                                <b> Word: </b> ${theWord}
                             </c:when>
                         </c:choose>
 
