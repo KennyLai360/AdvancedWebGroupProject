@@ -160,7 +160,7 @@
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify(userData),
-            success:function(data) {
+            complete:function(data) {
                 sendRoomCommand("remove");
                 spliceTheArray();
                 sendDisconnection(curRoom);
