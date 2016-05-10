@@ -20,6 +20,9 @@
     // Stores the word for guessing.
     var theWord;
 
+    // Timer.
+    var time = 60;
+
     /*
         This creates the user room display list and updates it when a change has been made.
         Shows users in the room.
@@ -198,6 +201,7 @@
                 userPosition = i;
             }
         }
+        createWordDisplay(userPosition);
         // Fix canvas bug.
         while ($('canvas').length > 0) {
             $('canvas').remove();
@@ -236,19 +240,6 @@
         }
     }
 
-
-//    function chooseRole() {
-//        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
-//            // Indicates Drawer
-//            prepareCanvas(1);
-//        } else {
-//            // Indicates Guesser
-//            prepareCanvas(0);
-//        }
-//    }
-    var time = 60;
-
-
     function refreshTimer() {
         if (time > 0) {
             time--;
@@ -281,7 +272,6 @@
             }
         }
         if (curRoomData.listOfUsers[userPosition].isWinner == 1) {
-//            Command: toastr["success"]("Congratulations, you won!", "You won!");
             swal({
                     title: "Congratulations!",
                     text: "You have won! This is your score: " + points + ". Press 'OK' to leave the room.",
@@ -291,7 +281,6 @@
                     window.location.href = '/join';
                 });
         } else {
-//            Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
             swal({
                     title: "Nice Try!",
                     text: "Better luck next time. This is your score:" + points + ". Press 'OK' to leave the room.",
@@ -303,25 +292,19 @@
         }
     }
 
+    function createWordDisplay(user){
+        if($('#theWordBar').length > 0){
+            $('#theWordBar').remove();
+        }
 
+        if(curRoomData.listOfUsers[user].isDrawer == 1) {
+            var source = $("#word-template").html();
+            var template = Handlebars.compile(source);
+            var newPage = template(theWord);
 
-//toastr.options = {
-//  "closeButton": true,
-//  "debug": false,
-//  "newestOnTop": false,
-//  "progressBar": false,
-//  "positionClass": "toast-top-full-width",
-//  "preventDuplicates": false,
-//  "onclick": null,
-//  "showDuration": "300",
-//  "hideDuration": "1000",
-//  "timeOut": "500000",
-//  "extendedTimeOut": "100000",
-//  "showEasing": "swing",
-//  "hideEasing": "linear",
-//  "showMethod": "fadeIn",
-//  "hideMethod": "fadeOut"
-//}
+            $('#wordBarDiv').append(newPage);
+        }
+    }
 
 </script>
 <script id="users-template" type="text/x-handlebars-template">
@@ -332,23 +315,17 @@
         {{/each}}
         </div>
 </script>
-
-
+<script id="word-template" type="text/x-handlebars-template">
+        <b id="theWordBar"> Word: </b> {{this}}
+</script>
 
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-offset-3" style="padding-bottom:5px">
             <div style="border: black 1px solid; height:30px; border-radius: 20px; ">
                 <div class="row">
-                    <div id="wordBar" class="col-md-12">
-                        <c:choose>
-                            <c:when test = "${curRoomData.listOfUsers[getPositionInUserList(userData.name)].isDrawer == 1}">
-                                <b> Word: </b> ${theWord}
-                            </c:when>
-                        </c:choose>
-
+                    <div id="wordBarDiv" class="col-md-12">
                         <b>Timer:</b> <a id="timer"></a>
-
                     </div>
                 </div>
             </div>
