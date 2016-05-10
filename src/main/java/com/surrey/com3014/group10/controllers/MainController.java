@@ -58,10 +58,10 @@ public class MainController {
         return "admin";
     }
 
-    @RequestMapping("/admin/deleteUser")
+    @RequestMapping("/dba/deleteUser")
     public ModelAndView deleteUser(@RequestParam int id) {
         userService.deleteUserById(id);
-        return new ModelAndView("redirect:/admin");
+        return new ModelAndView("redirect:/dba");
     }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
@@ -81,8 +81,17 @@ public class MainController {
     }
 
     @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
-    public String leaderboard() {
+    public String leaderboard(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
         return "leaderboard";
+    }
+
+    @RequestMapping(value = "/dba", method = RequestMethod.GET)
+    public String dba(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
+        return "dba";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

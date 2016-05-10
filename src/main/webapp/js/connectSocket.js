@@ -131,6 +131,8 @@ function sendMessage() {
     var msg = document.getElementById('messagebox').value;
     msg =  curUser + ": " + msg;
     stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
+    var objDiv = document.getElementById("scrollChat");
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function sendDrawing(x,y,drag,size,color) {

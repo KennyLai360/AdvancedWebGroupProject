@@ -7,8 +7,6 @@ var roomName = document.getElementById("roomName");
 function scrollToBottomOfChat() {
     sendMessage();
     $('#messagebox').val("");
-    var objDiv = document.getElementById("scrollChat");
-    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 $(document).ready(function(){

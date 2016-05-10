@@ -1,4 +1,5 @@
 <jsp:include page="../templates/gameHeaderTemplate.jsp"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
@@ -18,22 +19,18 @@
                             <table class="table" style="padding-left:10px; padding-right:10px;">
                                 <thead>
                                 <tr>
-                                    <th>Room Name</th>
-                                    <th>Room Number</th>
-                                    <th>Players</th>
-                                    <th>Rounds</th>
-                                    <th>Join?</th>
+                                    <th>Score</th>
+                                    <th>Medal</th>
+                                    <th>Username</th>
                                 </tr>
                                 </thead>
-                                <tr>
-                                    <td>uWotm8</td>
-                                    <td>345</td>
-                                    <td>1/4</td>
-                                    <td>12</td>
-                                    <td>
-                                        <button class="form-control btn btn-danger">Join</button>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${listOfUsers}" var="user">
+                                    <tr>
+                                        <td><c:out value="${user.score}"/></td>
+                                        <td><c:out value="${user.medal}"/></td>
+                                        <td><c:out value="${user.ssoId}"/></td>
+                                    </tr>
+                                </c:forEach>
 
                             </table>
 

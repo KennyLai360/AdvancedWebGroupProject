@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="text-center">
-                <h2>Dear <strong>${user}</strong>,Welcome to the Admin Page!</h2>
+                <h2>Dear <strong>${user}</strong>,Welcome to the DBA Page</h2>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
 
             <div  style="padding-left:20px; padding-right:20px;">
                 <div class="row">
-                    <h3><b>Admin Control Panel</b></h3>
+                    <h3><b>DB Control Panel</b></h3>
 
                     <hr>
                     <div class="row">
@@ -38,6 +38,7 @@
                                             <th>User Profiles</th>
                                             <th>Score</th>
                                             <th>Medal</th>
+                                            <th>Delete</th>
                                         </tr>
                                         </thead>
                                         <c:forEach items="${listOfUsers}" var="user">
@@ -47,6 +48,9 @@
                                                 <td><c:out value="${user.userProfiles}"/></td>
                                                 <td><c:out value="${user.score}"/></td>
                                                 <td><c:out value="${user.medal}"/></td>
+                                                <td>
+                                                    <button class="form-control btn btn-danger" onclick="deleteUser(${user.id})">Delete</button>
+                                                </td>
                                             </tr>
                                         </c:forEach>
 

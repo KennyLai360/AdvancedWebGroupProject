@@ -13,6 +13,8 @@
         #scrollChat {
             max-height: 250px;
             overflow-y: auto;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         #joinGameLobbyTable {
             max-height: 380px;
@@ -38,7 +40,7 @@
     <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
-    
+
 
 
 
