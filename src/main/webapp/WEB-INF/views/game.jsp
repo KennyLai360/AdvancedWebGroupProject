@@ -49,7 +49,7 @@
 
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
-                    document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").innerHTML = "Ready!";
 
                     chooseDrawer();
                     makeDrawer();
@@ -57,7 +57,7 @@
                 } else {
                     $('#myModal').modal('show');
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
-                    document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").innerHTML =  curRoomData.listOfUsers.length + "/4";
                 }
                 console.log("getjoinedroom thing");
                 return false;
@@ -100,11 +100,11 @@
 //            "showMethod": "fadeIn",
 //            "hideMethod": "fadeOut"
 //        }
-        
-        
+
+
     }
-    
-    
+
+
 
     /*
         Called on load.
@@ -236,7 +236,7 @@
             prepareCanvas(0);
         }
     }
-    
+
     function getPositionInUserList(name) {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (name == curRoomData.listOfUsers[i]) {
