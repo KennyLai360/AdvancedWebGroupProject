@@ -100,11 +100,11 @@
 //            "showMethod": "fadeIn",
 //            "hideMethod": "fadeOut"
 //        }
-        
-        
+
+
     }
-    
-    
+
+
 
     /*
         Called on load.
@@ -181,16 +181,16 @@
                 console.log(curUser);
             }
         }
-        updateRoomUserList();
+        updateRoom();
         sendInGameInfo("Updating the in-game Rooms.");
     }
     /*
      Removes user from GlobalList.
      Indicating that the user has logged out from the game server.
      */
-    function updateRoomUserList(){
+    function updateRoom(){
         $.ajax({
-            url:"/updateRoomUserList",
+            url:"/updateRoom",
             type:'POST',
             headers: {
                 'Accept': 'application/json',
@@ -238,13 +238,15 @@
             prepareCanvas(0);
         }
     }
-    
+
     function getPositionInUserList(name) {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (name == curRoomData.listOfUsers[i]) {
                 return i;
             }
+        }
     }
+
 
 //    function chooseRole() {
 //        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {

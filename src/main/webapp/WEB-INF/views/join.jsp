@@ -118,6 +118,7 @@
             gameRoomId: n,
             gameRoomName: rName,
             numberOfRounds: nRounds,
+            gameState: 0,
             listOfUsers: []
         };
         $.ajax({
