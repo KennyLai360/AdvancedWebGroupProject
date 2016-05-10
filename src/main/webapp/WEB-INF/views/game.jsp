@@ -23,6 +23,8 @@
     // Timer.
     var time = 60;
 
+    var wordStore=[];
+
     /*
         This creates the user room display list and updates it when a change has been made.
         Shows users in the room.
@@ -54,7 +56,7 @@
                 initialiseDrawer();
 
                 //If there are 4 users in the room, show start button.
-                if (curRoomData.listOfUsers.length == 4) {
+                if (curRoomData.listOfUsers.length == 1) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Start Game!";
                     // If you are the first user in the room.
@@ -63,6 +65,7 @@
                         console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
+                        getWord();
                     }
                     chooseDrawer();
                     makeDrawer();
@@ -224,7 +227,6 @@
             document.getElementById("messageSendButton").disabled = true;
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
-            getWord();
             //Create canvas with drawing enabled
             swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
             setTimeout(function(){ prepareCanvas(1); }, 3000);
@@ -242,6 +244,7 @@
             swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
             setTimeout(function(){ prepareCanvas(0); }, 3000);
         }
+        createWordDisplay(userPosition);
     }
 
     //Returns the position of a user in the list of users.
@@ -293,42 +296,30 @@
     //When the maximum number of rounds is reached, the game is over.
     //Show winners and losers.
     function endGame() {
+        // Stop Drawing.
         initialiseDrawer();
-        makeDrawer();
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (curRoomData.listOfUsers[i].name == curUser) {
                 userPosition = i;
             }
         }
         if (curRoomData.listOfUsers[userPosition].isWinner == 1) {
-            swal({
-                    title: "Congratulations!",
-                    text: "You have won! This is your score: " + curRoomData.listOfUsers[userPosition].points + ". Press 'OK' to leave the room.",
-                    type: "success"
-                },
-                function () {
-                    window.location.href = '/join';
-                });
+            swal({title: "Congratulations!", allowEscapeKey:"false", type: "success", text: "You have won! This is your score: " + curRoomData.listOfUsers[userPosition].points + ". Redirect in 10 seconds",   timer: 10000,  showConfirmButton: false });
+            setTimeout(function(){ window.location.href = '/join'; }, 10000);
+
         } else {
-            swal({
-                    title: "Nice Try!",
-                    text: "Better luck next time. This is your score:" + curRoomData.listOfUsers[userPosition].points + ". Press 'OK' to leave the room.",
-                    type: "error"
-                },
-                function () {
-                    window.location.href = '/join';
-                });
+            swal({title: "Nice Try!", allowEscapeKey:"false", type: "error", text: "Better luck next time. This is your score: " + curRoomData.listOfUsers[userPosition].points + ". Redirect in 10 seconds",   timer: 10000,  showConfirmButton: false });
+            setTimeout(function(){ window.location.href = '/join'; }, 10000);
+
         }
-        //Stop drawing.
-        initialiseDrawer();
     }
 
-    function createWordDisplay(user){
+    function createWordDisplay(userIndex){
         if($('#theWordBar').length > 0){
             $('#theWordBar').remove();
         }
 
-        if(curRoomData.listOfUsers[user].isDrawer == 1) {
+        if(curRoomData.listOfUsers[userIndex].isDrawer == 1) {
             var source = $("#word-template").html();
             var template = Handlebars.compile(source);
             var newPage = template(theWord);
@@ -347,7 +338,7 @@
         </div>
 </script>
 <script id="word-template" type="text/x-handlebars-template">
-        <b id="theWordBar"> Word: </b> {{theWord}}
+        <b id="theWordBar"> Word: </b> {{this}}
 </script>
 
 <div class="container preventSelection" style="padding-top:30px;">
