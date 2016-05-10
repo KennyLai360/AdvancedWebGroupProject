@@ -48,6 +48,7 @@
                 initialiseDrawer();
 
                 if (curRoomData.listOfUsers.length == 3) {
+                    sendInGameInfo("Update room");
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
                     //First user in game
