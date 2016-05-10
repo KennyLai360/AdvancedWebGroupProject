@@ -46,18 +46,25 @@
                 curRoomData = data;
                 createUserListDisplay();
                 if (curRoomData.listOfUsers.length == 4) {
-                    console.log("HERE");
+                    document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").disabled = false;
                     initialiseDrawer();
                     makeDrawer();
                     getMaxRounds();
                 } else {
                     $('#myModal').modal('show');
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
                 }
                 console.log("getjoinedroom thing");
                 return false;
             }
         });
+    }
+
+    function hideWaitingForUserModal() {
+        $('#myModal').modal('hide');
     }
 
     function newRound() {
@@ -366,10 +373,6 @@
 
 <jsp:include page="../templates/footerTemplate.jsp"/>
 
-<button type="button" id="waitModal" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
-</button>
-
 </body>
 </html>
 
@@ -383,6 +386,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button id="startGameBtn" type="button" class="btn btn-success" disabled onclick="hideWaitingForUserModal()"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
