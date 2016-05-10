@@ -70,7 +70,6 @@ public class DrawController {
 
     /*
         Retrives the rooms from the rooms list.
-        Called when updating rooms list.
      */
     @RequestMapping(value = "/getRooms", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -114,7 +113,7 @@ public class DrawController {
     }
 
     /*
-        Retrives user from the global user list.
+        Retrieves user from the global user list.
         Called when updating rooms list.
      */
     @RequestMapping(value = "/getUserList", method = RequestMethod.GET)
@@ -125,8 +124,8 @@ public class DrawController {
     }
 
     /*
-        Adds a user to the global user list.
-        Indicates that a user has logged in to the game.
+        Removes the user from the global List.
+        This indicates the user has logged out of the game service.
     */
     @RequestMapping(value = "/removeUser", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -147,7 +146,7 @@ public class DrawController {
 
     /*
         Retrieves user details.
-        Called when joined a room.
+        Returns the user object if successfully validated against the database.
     */
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -162,8 +161,10 @@ public class DrawController {
     }
 
     /*
-      Adds a user to the global user list.
-      Indicates that a user has logged in to the game.
+        'Joins' the user into a specific room.
+        This method is called when the user attempts to join a room.
+        It validates if the room exists and if the user exists from within the system before
+        appending the user to the particular room's user list.
     */
     @RequestMapping(value = "/joinRoom", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -201,6 +202,7 @@ public class DrawController {
 
     /*
         Retrieves the joined room information.
+        Checks the information of the room to user has joined and sends it over.
      */
     @RequestMapping(value = "/getJoinedRoom", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -219,8 +221,8 @@ public class DrawController {
     }
 
     /*
-        Adds a user to the global user list.
-        Indicates that a user has logged in to the game.
+        Resets the information of the user.
+        Sets the state and gameroom to 0 indicating the user is not in-game and not in a room.
     */
     @RequestMapping(value = "/resetUser", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -241,8 +243,8 @@ public class DrawController {
     }
 
     /*
-        Adds a user to the global user list.
-        Indicates that a user has logged in to the game.
+       Updates the room information.
+       Sets the state of the room and the user list.
     */
     @RequestMapping(value = "/updateRoom", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -251,6 +253,7 @@ public class DrawController {
     void updateRoom(
         @RequestBody GameRoom gameroom) throws ParseException, IOException {
         try {
+            // Checks for rooms.
             for (GameRoom gr : DrawController.rooms) {
                 if (gr.getGameRoomId() == gameroom.getGameRoomId()) {
                     if (gameroom.getListOfUsers().size() == 0) {
@@ -266,7 +269,9 @@ public class DrawController {
         }
     }
 
-    /*        Retrieves Word from list.
+    /*
+        Generates a random word and sends the word to the client-side.
+        This random word is taken from the list added to the controller.
      */
     @RequestMapping(value = "/getWord", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -274,12 +279,12 @@ public class DrawController {
     public String getWord() {
         WordController wc = new WordController();
         wc.randomWord();
-
         return wc.getWord();
     }
 
     /*
-        Tally's up scores.
+        POST method that tallys up the scores.
+        Recieves the user object of the user and updates the scores in the database.
     */
     @RequestMapping(value = "/tallyScore", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)

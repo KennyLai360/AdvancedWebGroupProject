@@ -1,11 +1,7 @@
 package com.surrey.com3014.group10.controllers;
 
 
-import com.surrey.com3014.group10.Client.GameRoom;
-import org.springframework.expression.ParseException;
-import org.springframework.http.HttpStatus;
 
-import com.surrey.com3014.group10.User.model.User;
 import com.surrey.com3014.group10.User.service.UserService;
 
 import org.springframework.security.core.Authentication;
@@ -19,13 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,10 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class MainController {
-
-    //private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
-
-    public static GameList gl = new GameList();
 
     public static WordController wc = new WordController();
 
@@ -137,7 +125,6 @@ public class MainController {
     @RequestMapping(value = "/join", method = RequestMethod.GET)
     public String menu(ModelMap model) {
         model.addAttribute("user", getPrincipal());
-        model.addAttribute("rooms", gl.getRooms());
         model.addAttribute("listOfUsers", userService.listAllUsers());
         return "join";
     }

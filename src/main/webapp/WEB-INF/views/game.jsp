@@ -65,7 +65,6 @@
                         console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
-                        getWord();
                     }
                     chooseDrawer();
                     makeDrawer();
@@ -185,6 +184,7 @@
 
     window.addEventListener("beforeunload", function (e) {
         resetUser();
+        window.location.href = '/join';
     });
 
     //Clears the canvas for drawer and guessers
@@ -218,6 +218,7 @@
             $('canvas').remove();
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
+            getWord();
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].removeAttribute("style");
@@ -359,7 +360,7 @@
             <div style="border: black 1px solid; height:30px; border-radius: 20px; ">
                 <div class="row">
                     <div id="wordBarDiv" class="col-md-12">
-                        <b>Timer:</b> <a id="timer"></a>
+
                     </div>
                 </div>
             </div>

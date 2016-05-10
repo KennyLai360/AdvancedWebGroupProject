@@ -5,27 +5,23 @@
  */
 package com.surrey.com3014.group10.controllers;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Jonny
  */
 public class WordController {
-    File file;
-    FileReader fr;
-    BufferedReader br;
     ArrayList<String> words = new ArrayList<>();
-    long seed =  System.currentTimeMillis();
     Random r = new Random();
     public static String word = "";
 
+
+    /*
+        The WordController constructor.
+        This adds the words to list upon construction.
+     */
     public WordController() {
         super();
         words.add("pineapple");
@@ -75,11 +71,17 @@ public class WordController {
     }
 
 
+    /*
+        Generates a random word from the list.
+     */
     public void randomWord() {
         word = words.get(r.nextInt(words.size()));
 //        console.log(word);
     }
 
+    /*
+        Gets the word.
+     */
     public String getWord() {
         return word;
     }

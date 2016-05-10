@@ -25,7 +25,7 @@ function drawConnect(theRoom) {
             stompClient.subscribe('/topic/roomOps/' + theRoom, function (connectionInfo) {
                 updateInGameInfo(JSON.parse(connectionInfo.body).content);
             });
-            stompClient.subscribe('/topic/wordOps/' + theRoom, function (getWordAnswer) {
+            stompClient.subscribe('/topic/wordOps/' + theRoom, function ( Answer) {
                 getTheWord(JSON.parse(getWordAnswer.body).content);
             });
             sendInGameInfo("connect"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.

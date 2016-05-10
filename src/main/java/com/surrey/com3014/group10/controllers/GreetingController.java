@@ -1,9 +1,9 @@
 package com.surrey.com3014.group10.controllers;
 
 /**
- * Created by Xyline on 03/05/2016.
+ * Created by Shane Tan on 03/05/2016.
  */
-import java.util.ArrayList;
+
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class GreetingController {
 
+    /*
+        Creates a mapping for the chat in the game.
+     */
     @MessageMapping("/chat/{room}")
     @SendTo("/topic/greetings/{room}")
     public Greeting greeting(ChatMessage message) throws Exception {
@@ -26,13 +29,13 @@ public class GreetingController {
             return new Greeting(message.getMessage());
         }
     }
-    
+
     @MessageMapping("chat/roomOps/{room}/word")
     @SendTo("/topic/roomsOps/{room{/word")
     public String word() throws Exception {
         return WordController.word;
     }
-    
+
     @MessageMapping("/chat/roomOps/{room}")
     @SendTo("/topic/roomOps/{room}")
     public Greeting connectionInfo(ChatMessage message) throws Exception {
