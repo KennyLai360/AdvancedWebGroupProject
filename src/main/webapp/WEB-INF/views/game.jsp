@@ -50,6 +50,7 @@
                 if (curRoomData.listOfUsers.length == 3) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
+                    // If you are the first user in the room.
                     if(curRoomData.listOfUsers[0].name == userData.name){
                         //First user in game
                         console.log("You are the first!");
@@ -207,6 +208,10 @@
                 userPosition = i;
             }
         }
+        // Fix canvas bug.
+        while ($('canvas').length > 0) {
+            $('canvas').remove();
+        }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
             console.log()
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
@@ -217,10 +222,6 @@
             prepareCanvas(1);
         }
         else {
-            //Indicates guesser
-            while ($('canvas').length > 1) {
-                $('canvas').remove();
-            }
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].style.display = "none";
@@ -231,7 +232,7 @@
 
     function getPositionInUserList(name) {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
-            if (name == curRoomData.listOfUsers[i]) {
+            if (name == curRoomData.listOfUsers[i].name) {
                 return i;
             }
         }
@@ -420,7 +421,7 @@ toastr.options = {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="hideWaitingForUserModal()"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start')"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
