@@ -47,7 +47,7 @@
                 createUserListDisplay();
                 initialiseDrawer();
 
-                if (curRoomData.listOfUsers.length == 3) {
+                if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
                     //First user in game
@@ -87,27 +87,7 @@
         time = 60;
 //        var word = ${word};
 //        console.log(word.toString());
-//        Command: toastr["success"]("Congratulations, you guessed correctly!",
-//        "The word was " + word.toString() + "!");
-
-//        toastr.options = {
-//            "closeButton": true,
-//            "debug": false,
-//            "newestOnTop": false,
-//            "progressBar": false,
-//            "positionClass": "toast-top-full-width",
-//            "preventDuplicates": false,
-//            "onclick": null,
-//            "showDuration": "300",
-//            "hideDuration": "1000",
-//            "timeOut": "500000",
-//            "extendedTimeOut": "100000",
-//            "showEasing": "swing",
-//            "hideEasing": "linear",
-//            "showMethod": "fadeIn",
-//            "hideMethod": "fadeOut"
-//        }
-
+        Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
 
     }
 
@@ -215,6 +195,8 @@
                 buttonsToDisable[i].removeAttribute("style");
             }
             //Indicates drawer
+            Command: toastr["success"]("You are now the drawer!", "The word is " + getWord());
+            getWord();
             prepareCanvas(1);
         }
         else {
@@ -232,7 +214,7 @@
 
     function getPositionInUserList(name) {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
-            if (name == curRoomData.listOfUsers[i]) {
+            if (name == curRoomData.listOfUsers[i].name) {
                 return i;
             }
         }
@@ -279,6 +261,10 @@
             Command: toastr["success"]("Congratulations, you won!", "You won!")
             console.log
         }
+        else {
+            Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
+        }
+        initialiseDrawer();
     }
 
 
