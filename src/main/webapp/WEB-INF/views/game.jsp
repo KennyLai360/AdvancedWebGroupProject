@@ -180,6 +180,11 @@
         });
     }
 
+    function callWhenClickStart(){
+        makeDrawer();
+        sendInGameInfo('Start');
+    }
+
     window.addEventListener("beforeunload", function (e) {
         resetUser();
 
@@ -426,7 +431,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start');makeDrawer();"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="callWhenClickStart()"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
