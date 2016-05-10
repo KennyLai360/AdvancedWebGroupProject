@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.surrey.com3014.group10.controllers.MainController.gl;
+import static com.surrey.com3014.group10.controllers.MainController.wc;
 
 /**
  *
@@ -264,5 +265,19 @@ public class DrawController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+
+    /*
+        Retrieves Word from list.
+     */
+    @RequestMapping(value = "/getWord", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public String getWord() {
+        WordController wc = new WordController();
+        wc.randomWord();
+
+        return wc.getWord();
     }
 }

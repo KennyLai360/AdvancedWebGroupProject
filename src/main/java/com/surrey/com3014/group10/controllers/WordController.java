@@ -31,35 +31,23 @@ public class WordController {
     public static String word = "";
 
     public WordController() {
-        words.add("poo");
-        words.add("copy");
-        words.add("paste");
-        words.add("bumhole digeridoo");
-        words.add("spaghetti-os");
-        words.add("dread");
-        words.add("dispair");
-        words.add("no hope");
-        words.add("i cry myself to sleep at night");
-        words.add("muffin man");
-
+        super();
+        file = new File("'../../static/wordlist.txt");
+        try {
+            this.fr = new FileReader(file);
+            this.br = new BufferedReader(fr);
+            String line;
+            while (br.readLine() != null) {
+                line = br.readLine();
+                words.add(line);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-//        file = new File("wordlist.txt");
-//        try {
-//            this.fr = new FileReader(file);
-//            this.br = new BufferedReader(fr);
-//            String line;
-//            while (br.readLine() != null) {
-//                line = br.readLine();
-//                words.add(line);
-//            }
-//            System.out.println(words.get(0));
-//
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+
 
     public void randomWord() {
         word = words.get(r.nextInt(words.size()));

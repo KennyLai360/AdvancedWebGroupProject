@@ -17,6 +17,9 @@
     // Current Room Object.
     var curRoomData;
 
+    // Stores the word for guessing.
+    var theWord;
+
     /*
         This creates the user room display list and updates it when a change has been made.
         Shows users in the room.
@@ -71,7 +74,19 @@
         });
     }
 
-
+    /*
+        Retrieves a random word from the server.
+        Only gets called by drawer.
+     */
+    function getWord(){
+        $.ajax({
+            url: "/getWord",
+            type: 'GET',
+            success: function (data) {
+                theWord = data;
+            }
+        });
+    }
 
     function hideWaitingForUserModal() {
         $('#myModal').modal('hide');
