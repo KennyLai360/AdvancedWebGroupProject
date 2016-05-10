@@ -383,7 +383,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" href="/join">Quit</button>
+                <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
     </div>
