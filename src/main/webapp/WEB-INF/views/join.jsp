@@ -118,7 +118,7 @@
             gameRoomId: n,
             gameRoomName: rName,
             numberOfRounds: nRounds,
-            gameState: 0,
+            gameState: "WAITING",
             listOfUsers: []
         };
         $.ajax({
@@ -181,7 +181,7 @@
         </thead>
         {{#each this}}
         <tr>
-            <td><button class="form-control btn btn-danger" disabled">Join</button></td>
+            <td><button class="form-control btn btn-info" disabled>{{gameState}}</button></td>
             <td>{{gameRoomName}}</td>
             <td>{{gameRoomId}}</td>
             <td>{{listOfUsers.length}}/4</td>
