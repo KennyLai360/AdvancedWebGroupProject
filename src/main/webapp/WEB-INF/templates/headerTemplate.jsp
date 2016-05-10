@@ -41,7 +41,7 @@
     <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
-    <script type="text/javascript" src="../../bower_components/sweetalert/sweetalert-dev.js"></script>
+    <script type="text/javascript" src="../../bower_components/sweetalert/dist/sweetalert-dev.js"></script>
 
 
 
