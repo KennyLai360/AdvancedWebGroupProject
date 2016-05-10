@@ -215,6 +215,9 @@
     }
 
     function makeDrawer() {
+        document.getElementById("roomIdInfo").innerHTML = "<a>Room Id: <b>" + curRoomData.gameRoomId + "</b></a>";
+        document.getElementById("roomNameInfo").innerHTML = "<a>Room Name: <b>" + curRoomData.gameRoomName + "</b></a>";
+        document.getElementById("roundsInfo").innerHTML = "<a>Rounds: <b>" + curRoomData.numberOfRounds + "</b></a>";
         var userPosition = 0;
         //Finds current user in curRoomData in order to access isDrawer
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
@@ -232,6 +235,8 @@
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].removeAttribute("style");
             }
+            document.getElementById("messageSendButton").disabled = true;
+            document.getElementById("messagebox").disabled = true;
             //Indicates drawer
             prepareCanvas(1);
         }
@@ -240,6 +245,8 @@
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].style.display = "none";
             }
+            document.getElementById("messageSendButton").disabled = false;
+            document.getElementById("messagebox").disabled = false;
             prepareCanvas(0);
         }
     }
@@ -399,9 +406,9 @@ toastr.options = {
                         Room Info
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a>Room id: ${curRoom}</a></li>
-                        <li><a>Room number: 123</a></li>
-
+                        <li id="roomIdInfo"><a>Room id:</a></li>
+                        <li id="roomNameInfo"><a>Room Name</a></li>
+                        <li id="roundsInfo"><a>Rounds</a></li>
                     </ul>
                 </div>
             </div>
@@ -410,7 +417,7 @@ toastr.options = {
             <input id="messagebox" type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
                         <div onclick="scrollToBottomOfChat()">
-                            <button class="btn btn-secondary" type="submit">Send</button>
+                            <button id="messageSendButton" class="btn btn-secondary" type="submit">Send</button>
                         </div>
                     </span>
         </div>
