@@ -232,7 +232,9 @@
         }
         else {
             //Indicates guesser
-            $('canvas').remove();
+            while ($('canvas').length > 1) {
+                $('canvas').remove();
+            }
             prepareCanvas(0);
         }
     }
