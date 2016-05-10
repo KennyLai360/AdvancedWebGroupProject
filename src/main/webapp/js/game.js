@@ -5,16 +5,15 @@ var roomName = document.getElementById("roomName");
  * Function used for chat
  */
 function scrollToBottomOfChat() {
-    var chat = $('#scrollChat');
-    var height = chat[0].scrollHeight;
-    chat.scrollTop(height);
     sendMessage();
     $('#messagebox').val("");
+    var objDiv = document.getElementById("scrollChat");
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 $(document).ready(function(){
     $('#messagebox').keyup(function(e){
-        if(e.keyCode==13 && document.getElementById("messagebox").value !== '')
+        if(e.keyCode==13 && document.getElementById("messagebox").value !== '' && document.getElementById("messagebox").disabled === false)
             scrollToBottomOfChat();
     });
 });

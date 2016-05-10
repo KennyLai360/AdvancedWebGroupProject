@@ -77,7 +77,6 @@ function disconnectMainChannel() {
 }
 
 function sendRoomCommand(msg){
-    console.log(msg);
     stompClient.send("/app/chat/global", {}, JSON.stringify({ 'message': msg }));
 }
 
@@ -91,6 +90,7 @@ function updateInGameInfo(message){
             getJoinedRoom();
             break;
         case "Update room":
+            console.log("Calling update room");
             getJoinedRoom();
             break;
         case "New round":
@@ -110,7 +110,6 @@ function startGame() {
 }
 
 function updateRoomInfo(message){
-    console.log("Incoming " + message + " command.");
     getRoom();
     getUser();
 }
@@ -124,7 +123,7 @@ function drawDisconnect(thisUser) {
 }
 
 function sendDisconnection() {
-    var msg = "test has disconnected.";
+    var msg = userData.name + "has disconnected.";
     stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
@@ -156,7 +155,7 @@ function showGreeting(message) {
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
-    }    
+    }
 }
 
 var drawUser;
@@ -168,7 +167,11 @@ function chooseDrawer() {
 
 function incrementDrawer() {
     drawUser++;
+    if(drawUser >= curRoomData.listOfUsers.length){
+        drawUser = 0;
+    }
     curRoomData.listOfUsers[drawUser].isDrawer = 1;
+    makeDrawer();
 }
 
 function getDrawUser() {
@@ -194,8 +197,6 @@ function findCorrectGuesser() {
             document.getElementById(curRoomData.listOfUsers[i].name).innerHTML =
                     curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + "points";
 //            findDrawer();
-            console.log(curRoomData.listOfUsers[0].name);
-            curRoomData.listOfUsers[i].isDrawer = 1;
         }
     }
     if (round < maxRounds) {

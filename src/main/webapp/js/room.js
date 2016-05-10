@@ -11,7 +11,6 @@ function getUserList(){
         type:'GET',
         success:function(data) {
             globalUserList = data;
-            console.log(data);
             return false;
         }
     });
@@ -39,7 +38,6 @@ function getRoom(){
         type:'GET',
         success:function(data) {
             availableRooms = data;
-            console.log(data);
             callThisOnLoad(data);
             return false;
         }
@@ -65,7 +63,6 @@ function resetUser(){
             spliceTheArray();
             sendDisconnection(curRoom);
             drawDisconnect(curRoom);
-            console.log("Success!!");
             return false;
         }
     });

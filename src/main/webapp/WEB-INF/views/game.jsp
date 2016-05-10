@@ -17,6 +17,9 @@
     // Current Room Object.
     var curRoomData;
 
+    // Stores the word for guessing.
+    var theWord;
+
     /*
         This creates the user room display list and updates it when a change has been made.
         Shows users in the room.
@@ -49,9 +52,11 @@
 
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
-                    document.getElementById("startGameBtn").innerHTML = "Ready!";
-                    //First user in game
-                    if (getPositionInUserList(userData.name) == 0) {
+                    document.getElementById("startGameBtn").innerHTML = "Start Game!";
+                    // If you are the first user in the room.
+                    if(curRoomData.listOfUsers[0].name == userData.name){
+                        //First user in game
+                        console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
                     }
@@ -64,13 +69,24 @@
                     document.getElementById("startGameBtn").innerHTML =  curRoomData.listOfUsers.length + "/4";
 
                 }
-                console.log("getjoinedroom thing");
                 return false;
             }
         });
     }
 
-
+    /*
+        Retrieves a random word from the server.
+        Only gets called by drawer.
+     */
+    function getWord(){
+        $.ajax({
+            url: "/getWord",
+            type: 'GET',
+            success: function (data) {
+                theWord = data;
+            }
+        });
+    }
 
     function hideWaitingForUserModal() {
         $('#myModal').modal('hide');
@@ -83,7 +99,6 @@
         $('canvas').remove();
         initialiseDrawer();
         incrementDrawer();
-        makeDrawer();
         time = 60;
 //        var word = ${word};
 //        console.log(word.toString());
@@ -128,7 +143,6 @@
             success:function(data) {
                 sendDisconnection(curRoom);
                 drawDisconnect(curRoom);
-                console.log("Success!!");
                 return false;
             }
         });
@@ -160,16 +174,16 @@
             },
             data: JSON.stringify(curRoomData),
             success:function(data) {
-                console.log("Success!!");
                 window.location.href = "/";
                 return false;
             }
         });
     }
 
-    $(window).on('beforeunload',function() {
+    window.addEventListener("beforeunload", function (e) {
         resetUser();
-        return null;
+
+        (e || window.event).returnValue = null;
     });
     function sendClear() {
         clearCanvas();
@@ -181,6 +195,9 @@
     }
 
     function makeDrawer() {
+        document.getElementById("roomIdInfo").innerHTML = "<a>Room Id: <b>" + curRoomData.gameRoomId + "</b></a>";
+        document.getElementById("roomNameInfo").innerHTML = "<a>Room Name: <b>" + curRoomData.gameRoomName + "</b></a>";
+        document.getElementById("roundsInfo").innerHTML = "<a>Rounds: <b>" + curRoomData.numberOfRounds + "</b></a>";
         var userPosition = 0;
         //Finds current user in curRoomData in order to access isDrawer
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
@@ -188,26 +205,30 @@
                 userPosition = i;
             }
         }
+        // Fix canvas bug.
+        while ($('canvas').length > 0) {
+            $('canvas').remove();
+        }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
             console.log()
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].removeAttribute("style");
             }
+            document.getElementById("messageSendButton").disabled = true;
+            document.getElementById("messagebox").disabled = true;
             //Indicates drawer
             Command: toastr["success"]("You are now the drawer!", "The word is " + getWord());
             getWord();
             prepareCanvas(1);
         }
         else {
-            //Indicates guesser
-            while ($('canvas').length > 1) {
-                $('canvas').remove();
-            }
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].style.display = "none";
             }
+            document.getElementById("messageSendButton").disabled = false;
+            document.getElementById("messagebox").disabled = false;
             prepareCanvas(0);
         }
     }
@@ -258,8 +279,7 @@
             }
         }
         if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
-            Command: toastr["success"]("Congratulations, you won!", "You won!")
-            console.log
+            Command: toastr["success"]("Congratulations, you won!", "You won!");
         }
         else {
             Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
@@ -307,7 +327,7 @@ toastr.options = {
                     <div class="col-md-12">
                         <c:choose>
                             <c:when test = "${curRoomData.listOfUsers[getPositionInUserList(userData.name)].isDrawer == 1}">
-                                <b> Word: </b> ${word}
+                                <b> Word: </b> ${theWord}
                             </c:when>
                         </c:choose>
 
@@ -372,9 +392,9 @@ toastr.options = {
                         Room Info
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a>Room id: ${curRoom}</a></li>
-                        <li><a>Room number: 123</a></li>
-
+                        <li id="roomIdInfo"><a>Room id:</a></li>
+                        <li id="roomNameInfo"><a>Room Name</a></li>
+                        <li id="roundsInfo"><a>Rounds</a></li>
                     </ul>
                 </div>
             </div>
@@ -383,7 +403,7 @@ toastr.options = {
             <input id="messagebox" type="text" class="form-control" placeholder="Send some message here!"/>
                     <span class="input-group-btn">
                         <div onclick="scrollToBottomOfChat()">
-                            <button class="btn btn-secondary" type="submit">Send</button>
+                            <button id="messageSendButton" class="btn btn-secondary" type="submit">Send</button>
                         </div>
                     </span>
         </div>
@@ -408,7 +428,7 @@ toastr.options = {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="hideWaitingForUserModal()"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start')"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>

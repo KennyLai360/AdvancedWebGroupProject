@@ -75,8 +75,9 @@ public class WordController {
         words.add("shirt");
         words.add("switch");
         words.add("gum");
-    }
-//        file = new File("wordlist.txt");
+
+//        super();
+//        file = new File("'../../static/wordlist.txt");
 //        try {
 //            this.fr = new FileReader(file);
 //            this.br = new BufferedReader(fr);
@@ -85,14 +86,13 @@ public class WordController {
 //                line = br.readLine();
 //                words.add(line);
 //            }
-//            System.out.println(words.get(0));
-//
 //        } catch (FileNotFoundException ex) {
 //            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
 //        } catch (IOException ex) {
 //            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//    }
+    }
+
 
     public void randomWord() {
         word = words.get(r.nextInt(words.size()));

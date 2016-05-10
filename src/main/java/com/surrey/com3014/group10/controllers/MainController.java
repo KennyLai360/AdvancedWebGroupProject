@@ -98,8 +98,6 @@ public class MainController {
     public String game(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         model.addAttribute("listOfUsers", userService.listAllUsers());
-        wc.randomWord();
-        model.addAttribute("word", wc.getWord());
         return "game";
     }
 
