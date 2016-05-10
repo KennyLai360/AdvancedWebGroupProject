@@ -197,6 +197,12 @@ function findCorrectGuesser() {
             document.getElementById(curRoomData.listOfUsers[i].name).innerHTML =
                     curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + "points";
 //            findDrawer();
+            if (userData.name === curRoomData.listOfUsers[i].name) {
+                Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
+            }
+            else {
+                Command: toastr["error"]("Oh no!", "You didn't guess the word in time!");
+            }
         }
     }
     if (round < maxRounds) {
