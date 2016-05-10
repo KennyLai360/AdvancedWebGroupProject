@@ -48,7 +48,7 @@
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
-                    document.getElementById("startGameBtn").disabled = false;
+
                     initialiseDrawer();
                     makeDrawer();
                     getMaxRounds();
