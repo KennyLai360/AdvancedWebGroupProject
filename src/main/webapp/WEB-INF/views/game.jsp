@@ -50,7 +50,7 @@
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
-
+                    document.getElementById("startGameBtn").disabled = false;
                     chooseDrawer();
                     makeDrawer();
                     getMaxRounds();
@@ -58,6 +58,7 @@
                     $('#myModal').modal('show');
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML =  curRoomData.listOfUsers.length + "/4";
+
                 }
                 console.log("getjoinedroom thing");
                 return false;
