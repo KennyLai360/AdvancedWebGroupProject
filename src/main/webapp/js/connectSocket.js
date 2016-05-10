@@ -10,22 +10,26 @@ var winner;
 
 
 function drawConnect(theRoom) {
-    var socket = new SockJS('/draw');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function(frame) {
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/drawings/'+theRoom, function(drawing){
-            showDrawing(JSON.parse(drawing.body).content);
+    if(theRoom != 0 || null) {
+        var socket = new SockJS('/draw');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/drawings/' + theRoom, function (drawing) {
+                showDrawing(JSON.parse(drawing.body).content);
+            });
+            stompClient.subscribe('/topic/greetings/' + theRoom, function (greeting) {
+                showGreeting(JSON.parse(greeting.body).content);
+            });
+            stompClient.subscribe('/topic/roomOps/' + theRoom, function (greeting) {
+                updateInGameInfo(JSON.parse(greeting.body).content);
+            });
+            sendInGameInfo("User connected"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
+            toggleAudio();
         });
-        stompClient.subscribe('/topic/greetings/'+theRoom, function(greeting){
-            showGreeting(JSON.parse(greeting.body).content);
-        });
-        stompClient.subscribe('/topic/roomOps/'+theRoom, function(greeting){
-            updateInGameInfo(JSON.parse(greeting.body).content);
-        });
-        sendInGameInfo("User connected"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
-        toggleAudio();
-    });
+    } else {
+        window.location.href = "/join";
+    }
 
 }
 

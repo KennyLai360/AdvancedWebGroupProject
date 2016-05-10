@@ -46,19 +46,29 @@
                 curRoomData = data;
                 createUserListDisplay();
                 initialiseDrawer();
-                if (curRoomData.listOfUsers.length == 3) {
-                    console.log("HERE");
-                    getMaxRounds();
+
+                if (curRoomData.listOfUsers.length == 4) {
+                    document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
+
                     chooseDrawer();
                     makeDrawer();
-                    setInterval(refreshTimer,1000);
+                    getMaxRounds();
+                } else {
+                    $('#myModal').modal('show');
+                    document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
+                    document.getElementById("startGameBtn").value = curRoomData.listOfUsers.length + "/4";
                 }
                 console.log("getjoinedroom thing");
                 return false;
             }
         });
     }
-    
+
+    function hideWaitingForUserModal() {
+        $('#myModal').modal('hide');
+    }
+
     function newRound() {
         round++;
 //        var oldcanv = document.getElementById('canvasDiv');
@@ -195,7 +205,7 @@
         });
     }
 
-    $( window ).on('beforeunload',function() {
+    $(window).on('beforeunload',function() {
         resetUser();
     });
     function sendClear() {
@@ -245,6 +255,7 @@
 //    }
     var time = 60;
 
+
     function refreshTimer() {
         if (time > 0) {
             time--;
@@ -257,6 +268,10 @@
 
     window.onload = function() {
         document.getElementById("timer").innerHTML=time;
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        })
     }
 
     function endGame() {
@@ -267,6 +282,7 @@
         }
         if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
             Command: toastr["success"]("Congratulations, you won!", "You won!")
+            console.log
         }
     }
 
@@ -399,6 +415,23 @@ toastr.options = {
 
 </body>
 </html>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="waitingForUserModal">
+                    Waiting for Users... 1/4
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="startGameBtn" type="button" class="btn btn-success" disabled onclick="hideWaitingForUserModal()"></button>
+                <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
