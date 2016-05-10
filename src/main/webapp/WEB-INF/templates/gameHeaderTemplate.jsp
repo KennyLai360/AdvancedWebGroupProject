@@ -27,6 +27,7 @@
         }
         <%@include file="../../bower_components/bootstrap/dist/css/bootstrap.css" %>
         <%@include file="../../bower_components/toastr/toastr.css" %>
+        <%@include file="../../bower_components/sweetalert/sweetalert.css" %>
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -39,6 +40,7 @@
     <script type="text/javascript" src="../../js/game.js"></script>
     <script type="text/javascript" src="../../js/draw.js"></script>
     <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
+    <script type="text/javascript" src="../../../bower_components/sweetalert/sweetalert-dev.js"></script>
 
 
 </head>
