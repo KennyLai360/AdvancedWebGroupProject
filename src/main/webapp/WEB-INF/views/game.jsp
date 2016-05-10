@@ -181,16 +181,16 @@
                 console.log(curUser);
             }
         }
-        updateRoomUserList();
-        sendInGameInfo("Updating the in-game Rooms.");
+        updateRoom();
+        sendInGameInfo("Update room");
     }
     /*
      Removes user from GlobalList.
      Indicating that the user has logged out from the game server.
      */
-    function updateRoomUserList(){
+    function updateRoom(){
         $.ajax({
-            url:"/updateRoomUserList",
+            url:"/updateRoom",
             type:'POST',
             headers: {
                 'Accept': 'application/json',
@@ -246,6 +246,7 @@
             }
         }
     }
+
 
 //    function chooseRole() {
 //        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {

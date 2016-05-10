@@ -10,6 +10,7 @@ public class GameRoom {
     private String gameRoomName;
     private ArrayList<User> listOfUsers;
     private int numberOfRounds;
+    private int gameState;
 
     public GameRoom() {
         super();
@@ -62,5 +63,13 @@ public class GameRoom {
         else {
             //Room full
         }
+    }
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
     }
 }

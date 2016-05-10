@@ -244,11 +244,11 @@ public class DrawController {
         Adds a user to the global user list.
         Indicates that a user has logged in to the game.
     */
-    @RequestMapping(value = "/updateRoomUserList", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateRoom", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public
     @ResponseBody
-    void updateRooms(
+    void updateRoom(
         @RequestBody GameRoom gameroom) throws ParseException, IOException {
         try {
             for (GameRoom gr : DrawController.rooms) {
@@ -257,6 +257,7 @@ public class DrawController {
                         DrawController.rooms.remove(gr);
                     } else {
                         gr.setListOfUsers(gameroom.getListOfUsers());
+                        gr.setGameState(gameroom.getGameState());
                     }
                 }
             }
