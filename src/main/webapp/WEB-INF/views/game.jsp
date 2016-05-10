@@ -235,6 +235,7 @@
         }
         if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
             Command: toastr["success"]("Congratulations, you won!", "You won!")
+            console.log
         }
     }
 
@@ -382,6 +383,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger" href="/join">Quit</button>
             </div>
         </div>
     </div>
