@@ -50,7 +50,12 @@
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
-                    document.getElementById("startGameBtn").disabled = false;
+                    //First user in game
+                    if (getPositionInUserList(userData.name) == 0) {
+                        document.getElementById("startGameBtn").disabled = false;
+                        document.getElementById("startGameBtn").show();
+
+                    }
                     chooseDrawer();
                     makeDrawer();
                     getMaxRounds();
@@ -65,6 +70,8 @@
             }
         });
     }
+    
+    
 
     function hideWaitingForUserModal() {
         $('#myModal').modal('hide');
@@ -298,6 +305,7 @@
             console.log
         }
     }
+    
 
 
 toastr.options = {
@@ -439,7 +447,7 @@ toastr.options = {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" disabled onclick="hideWaitingForUserModal()"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display:none" onclick="hideWaitingForUserModal()"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>

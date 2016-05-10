@@ -78,7 +78,7 @@ function disconnectMainChannel() {
 
 function sendRoomCommand(msg){
     console.log(msg);
-    stompClient.send("/app/chat/main", {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/global", {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendInGameInfo(msg){
@@ -96,10 +96,17 @@ function updateInGameInfo(message){
         case "New round":
             newRound();
             break;
+        case "Start":
+            startGame();
+            break;
         default:
             getJoinedRoom();
     }
     getJoinedRoom();
+}
+
+function startGame() {
+    hideWaitingForUserModal();
 }
 
 function updateRoomInfo(message){
@@ -142,12 +149,14 @@ function showGreeting(message) {
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
     if (lastMessage.startsWith("Correct")) {
          findCorrectGuesser();
+         sendInGameInfo("New round");
     }
 }
 
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
+        curRoomData.listOfUsers[i].isReady = 0;
     }    
 }
 
