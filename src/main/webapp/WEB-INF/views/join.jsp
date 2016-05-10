@@ -143,7 +143,8 @@
         getRoom();
         for(i=0; i < availableRooms.length; i++){
             if(userData.state == 1){
-                alert("Apparently... You're already in-game.");
+                alert("Apparently... You're already in-game. Removing you from existing game.");
+                resetUser();
             } else {
                 if (availableRooms[i].gameRoomId == roomId) {
                     if (availableRooms[i].listOfUsers.length < 4) {

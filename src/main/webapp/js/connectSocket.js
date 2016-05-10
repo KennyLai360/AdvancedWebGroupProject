@@ -10,7 +10,7 @@ var winner;
 
 
 function drawConnect(theRoom) {
-    if(theRoom != 0) {
+    if(theRoom != 0 || null) {
         var socket = new SockJS('/draw');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
