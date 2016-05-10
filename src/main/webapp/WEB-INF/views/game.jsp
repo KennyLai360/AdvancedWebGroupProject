@@ -93,7 +93,6 @@
     }
 
     function newRound() {
-        
 //        var oldcanv = document.getElementById('canvasDiv');
 //        document.removeChild(oldcanv);
         $('canvas').remove();
@@ -101,9 +100,6 @@
         incrementDrawer();
         time = 60;
     }
-
-
-
     /*
         Called on load.
         On load - Get User Object Data.
@@ -191,6 +187,7 @@
     }
 
     function makeDrawer() {
+        theWord = "";
         document.getElementById("roomIdInfo").innerHTML = "<a>Room Id: <b>" + curRoomData.gameRoomId + "</b></a>";
         document.getElementById("roomNameInfo").innerHTML = "<a>Room Name: <b>" + curRoomData.gameRoomName + "</b></a>";
         document.getElementById("roundsInfo").innerHTML = "<a>Rounds: <b>" + curRoomData.numberOfRounds + "</b></a>";
@@ -206,8 +203,6 @@
             $('canvas').remove();
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
-            getWord();
-            console.log()
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].removeAttribute("style");
@@ -216,9 +211,10 @@
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
             getWord();
-            Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
-            
-            prepareCanvas(1);
+//            Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
+            swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
+            setTimeout(function(){ prepareCanvas(1); }, 2000);
+
         }
         else {
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
@@ -227,7 +223,8 @@
             }
             document.getElementById("messageSendButton").disabled = false;
             document.getElementById("messagebox").disabled = false;
-            prepareCanvas(0);
+            swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
+            setTimeout(function(){ prepareCanvas(0); }, 2000);
         }
     }
 
@@ -258,7 +255,12 @@
             document.getElementById("timer").innerHTML= time;
         }
         else {
-
+            if(getPositionInUserList(userData.name).isDrawer == 1) {
+                console.log("You'll never find...");
+                sendWordOps();
+            }
+            swal({title: "Time Out!",   text: "The answer was " + theWord + ".",   timer: 2000,   showConfirmButton: false });
+            setTimeout(function(){ newRound(); }, 2000);
         }
     }
 
@@ -271,39 +273,55 @@
     }
 
     function endGame() {
+        initialiseDrawer();
+        makeDrawer();
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (curRoomData.listOfUsers[i].name == curUser) {
                 userPosition = i;
             }
         }
-        if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
-            Command: toastr["success"]("Congratulations, you won!", "You won!");
+        if (curRoomData.listOfUsers[userPosition].isWinner == 1) {
+//            Command: toastr["success"]("Congratulations, you won!", "You won!");
+            swal({
+                    title: "Congratulations!",
+                    text: "You have won! This is your score: " + points + ". Press 'OK' to leave the room.",
+                    type: "success"
+                },
+                function () {
+                    window.location.href = '/join';
+                });
+        } else {
+//            Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
+            swal({
+                    title: "Nice Try!",
+                    text: "Better luck next time. This is your score:" + points + ". Press 'OK' to leave the room.",
+                    type: "error"
+                },
+                function () {
+                    window.location.href = '/join';
+                });
         }
-        else {
-            Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
-        }
-        initialiseDrawer();
     }
 
 
 
-toastr.options = {
-  "closeButton": true,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-full-width",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "500000",
-  "extendedTimeOut": "100000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
+//toastr.options = {
+//  "closeButton": true,
+//  "debug": false,
+//  "newestOnTop": false,
+//  "progressBar": false,
+//  "positionClass": "toast-top-full-width",
+//  "preventDuplicates": false,
+//  "onclick": null,
+//  "showDuration": "300",
+//  "hideDuration": "1000",
+//  "timeOut": "500000",
+//  "extendedTimeOut": "100000",
+//  "showEasing": "swing",
+//  "hideEasing": "linear",
+//  "showMethod": "fadeIn",
+//  "hideMethod": "fadeOut"
+//}
 
 </script>
 <script id="users-template" type="text/x-handlebars-template">
