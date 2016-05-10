@@ -78,7 +78,7 @@ function disconnectMainChannel() {
 
 function sendRoomCommand(msg){
     console.log(msg);
-    stompClient.send("/app/chat/", {}, JSON.stringify({ 'message': msg }));
+    stompClient.send("/app/chat/global", {}, JSON.stringify({ 'message': msg }));
 }
 
 function sendInGameInfo(msg){
