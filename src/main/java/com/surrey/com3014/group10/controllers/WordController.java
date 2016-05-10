@@ -5,6 +5,10 @@
  */
 package com.surrey.com3014.group10.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,20 +36,7 @@ public class WordController {
 
     public WordController() {
         super();
-        file = new File("'../../static/wordlist.txt");
-        try {
-            this.fr = new FileReader(file);
-            this.br = new BufferedReader(fr);
-            String line;
-            while (br.readLine() != null) {
-                line = br.readLine();
-                words.add(line);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(WordController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
 
