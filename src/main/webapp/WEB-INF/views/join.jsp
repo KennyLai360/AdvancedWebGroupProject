@@ -129,7 +129,7 @@
             },
             data: JSON.stringify(room),
             complete:function(data) {
-//                sendRoomCommand("add");
+                sendRoomCommand("add");
                 joinRoom(n);
                 console.log("Success!!");
                 return false;
