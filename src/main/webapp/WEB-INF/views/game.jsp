@@ -185,8 +185,6 @@
 
     window.addEventListener("beforeunload", function (e) {
         resetUser();
-
-        (e || window.event).returnValue = null;
     });
 
     //Clears the canvas for drawer and guessers
@@ -255,19 +253,6 @@
             }
         }
     }
-
-
-//    function chooseRole() {
-//        if (confirm("Choose a role! OK is Drawer. Cancel is Guesser.") == true) {
-//            // Indicates Drawer
-//            prepareCanvas(1);
-//        } else {
-//            // Indicates Guesser
-//            prepareCanvas(0);
-//        }
-//    }
-
-    //Decrements timer. If it reaches 0, the next round is started.
 
     function refreshTimer() {
         if (time > 0) {

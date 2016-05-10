@@ -163,8 +163,6 @@
     // Disconnects from the MAIN Channel when the window is closed or page is changed.
     window.addEventListener("beforeunload", function (e) {
         disconnectMainChannel();
-
-        (e || window.event).returnValue = null;
     });
 
 </script>
