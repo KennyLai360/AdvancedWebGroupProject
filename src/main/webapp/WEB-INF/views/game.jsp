@@ -225,13 +225,9 @@
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
             getWord();
-            createWordDisplay(userPosition);
-            Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
             //Create canvas with drawing enabled
-            prepareCanvas(1);
-//            Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
-            swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
-            setTimeout(function(){ prepareCanvas(1); }, 2000);
+            swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
+            setTimeout(function(){ prepareCanvas(1); }, 3000);
 
         }
         else {
@@ -243,9 +239,8 @@
             document.getElementById("messageSendButton").disabled = false;
             document.getElementById("messagebox").disabled = false;
             //Create canvas with drawing disabled
-            prepareCanvas(0);
-            swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
-            setTimeout(function(){ prepareCanvas(0); }, 2000);
+            swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
+            setTimeout(function(){ prepareCanvas(0); }, 3000);
         }
     }
 
@@ -308,7 +303,7 @@
         if (curRoomData.listOfUsers[userPosition].isWinner == 1) {
             swal({
                     title: "Congratulations!",
-                    text: "You have won! This is your score: " + points + ". Press 'OK' to leave the room.",
+                    text: "You have won! This is your score: " + curRoomData.listOfUsers[i].points + ". Press 'OK' to leave the room.",
                     type: "success"
                 },
                 function () {
@@ -317,7 +312,7 @@
         } else {
             swal({
                     title: "Nice Try!",
-                    text: "Better luck next time. This is your score:" + points + ". Press 'OK' to leave the room.",
+                    text: "Better luck next time. This is your score:" + curRoomData.listOfUsers[i].points + ". Press 'OK' to leave the room.",
                     type: "error"
                 },
                 function () {

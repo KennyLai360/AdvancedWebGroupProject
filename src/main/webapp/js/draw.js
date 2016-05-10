@@ -153,5 +153,19 @@ function prepareCanvas(setDrawer) {
     }
     if(!drawer){
         setInterval(redraw,25);
+        $("#canvasDiv").mousedown(function (e) {
+
+        });
+
+        $("#canvasDiv").mousemove(function (e) {
+
+        });
+        $("#canvasDiv").mouseup(function (e) {
+
+        });
+        $("#canvasDiv").mouseleave(function (e) {
+
+        });
+
     }
 }

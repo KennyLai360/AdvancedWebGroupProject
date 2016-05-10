@@ -122,6 +122,7 @@ function getTheWord(message){
 function startGame() {
     hideWaitingForUserModal();
     updateRoom();
+    createWordDisplay(userPosition);
 }
 
 
@@ -232,7 +233,7 @@ function findCorrectGuesser() {
             }
         }
     }
-    if (round < maxRounds) {
+    if (round < maxRounds - 1) {
         round++;
         newRound();
         console.log(round);
