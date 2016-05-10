@@ -25,6 +25,9 @@ function drawConnect(theRoom) {
             stompClient.subscribe('/topic/roomOps/' + theRoom, function (connectionInfo) {
                 updateInGameInfo(JSON.parse(connectionInfo.body).content);
             });
+            stompClient.subscribe('/topic/wordOps/' + theRoom, function (getWordAnswer) {
+                getTheWord(JSON.parse(getWordAnswer.body).content);
+            });
             sendInGameInfo("connect"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
             toggleAudio();
         });
@@ -98,9 +101,6 @@ function updateInGameInfo(message){
             console.log("Calling update room");
             getJoinedRoom();
             break;
-        case "New round":
-            newRound();
-            break;
         case "Start":
             startGame();
             break;
@@ -111,8 +111,17 @@ function updateInGameInfo(message){
 }
 
 //Hides modal, allowing the game to begin
+function sendWordOps(msg){
+    stompClient.send("/app/chat/wordOps/" + curRoom, {}, JSON.stringify({ 'message' : msg}));
+}
+
+function getTheWord(message){
+    theWord = message;
+}
+
 function startGame() {
     hideWaitingForUserModal();
+    updateRoom();
 }
 
 
@@ -141,6 +150,8 @@ function sendMessage() {
     var msg = document.getElementById('messagebox').value;
     msg =  curUser + ": " + msg;
     stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
+    var objDiv = document.getElementById("scrollChat");
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 //Sends draw data
@@ -160,6 +171,9 @@ function showGreeting(message) {
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
     if (lastMessage.startsWith("Correct")) {
          findCorrectGuesser();
+    }
+    if(message == ""){
+
     }
 }
 
@@ -209,10 +223,12 @@ function findCorrectGuesser() {
                     curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + "points";
 //            findDrawer();
             if (userData.name === curRoomData.listOfUsers[i].name) {
-                Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
+                // Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
+                swal({title: "Correct!",  type: "success", text: "You guessed it correctly! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
             }
             else {
-                Command: toastr["error"]("Oh no!", "You didn't guess the word in time!");
+                // Command: toastr["error"]("Oh no!", "You didn't guess the word in time!");
+                swal({title: "Oh no!",  type: "error", text: "Someone else has guessed the word! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
             }
         }
     }
@@ -225,8 +241,6 @@ function findCorrectGuesser() {
         chooseWinner();
     }
 }
-
-
 
 function chooseWinner() {
     var biggest = 0;

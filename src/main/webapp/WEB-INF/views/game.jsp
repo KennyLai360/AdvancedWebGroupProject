@@ -20,6 +20,9 @@
     // Stores the word for guessing.
     var theWord;
 
+    // Timer.
+    var time = 60;
+
     /*
         This creates the user room display list and updates it when a change has been made.
         Shows users in the room.
@@ -94,17 +97,12 @@
     }
 
     function newRound() {
-        
-//        var oldcanv = document.getElementById('canvasDiv');
-//        document.removeChild(oldcanv);
         $('canvas').remove();
+        sendClear();
         initialiseDrawer();
         incrementDrawer();
         time = 60;
     }
-
-
-
     /*
         Called on load.
         On load - Get User Object Data.
@@ -162,6 +160,13 @@
      Indicating that the user has logged out from the game server.
      */
     function updateRoom(){
+        var room = {
+            gameRoomId: curRoomData.gameRoomId,
+            gameRoomName: curRoomData.gameRoomName,
+            numberOfRounds: curRoomData.numberOfRounds,
+            gameState: "IN GAME",
+            listOfUsers: curRoomData.listOfUsers
+        };
         $.ajax({
             url:"/updateRoom",
             type:'POST',
@@ -169,11 +174,9 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(curRoomData),
+            data: JSON.stringify(room),
             success:function(data) {
-                window.location.href = "/";
-                return false;
-            }
+                return false;}
         });
     }
 
@@ -198,6 +201,7 @@
     //Creates the canvases, one for the drawer with drawing enabled, and one for each
     //guesser with drawing disabled.
     function makeDrawer() {
+        theWord = "";
         document.getElementById("roomIdInfo").innerHTML = "<a>Room Id: <b>" + curRoomData.gameRoomId + "</b></a>";
         document.getElementById("roomNameInfo").innerHTML = "<a>Room Name: <b>" + curRoomData.gameRoomName + "</b></a>";
         document.getElementById("roundsInfo").innerHTML = "<a>Rounds: <b>" + curRoomData.numberOfRounds + "</b></a>";
@@ -213,8 +217,6 @@
             $('canvas').remove();
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
-            getWord();
-            console.log()
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].removeAttribute("style");
@@ -226,6 +228,10 @@
             Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
             //Create canvas with drawing enabled
             prepareCanvas(1);
+//            Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
+            swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
+            setTimeout(function(){ prepareCanvas(1); }, 2000);
+
         }
         else {
             //Disables drawing buttons for guessers
@@ -237,7 +243,10 @@
             document.getElementById("messagebox").disabled = false;
             //Create canvas with drawing disabled
             prepareCanvas(0);
+            swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
+            setTimeout(function(){ prepareCanvas(0); }, 2000);
         }
+        createWordDisplay(userPosition);
     }
 
     //Returns the position of a user in the list of users.
@@ -259,9 +268,9 @@
 //            prepareCanvas(0);
 //        }
 //    }
-    var time = 60;
 
     //Decrements timer. If it reaches 0, the next round is started.
+
     function refreshTimer() {
         if (time > 0) {
             time--;
@@ -269,6 +278,12 @@
         }
         else {
             nextRound();
+            if(getPositionInUserList(userData.name).isDrawer == 1) {
+                console.log("You'll never find...");
+                sendWordOps();
+            }
+            swal({title: "Time Out!",   text: "The answer was " + theWord + ".",   timer: 2000,   showConfirmButton: false });
+            setTimeout(function(){ newRound(); }, 2000);
         }
     }
 
@@ -283,21 +298,40 @@
     //When the maximum number of rounds is reached, the game is over.
     //Show winners and losers.
     function endGame() {
+        initialiseDrawer();
+        makeDrawer();
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (curRoomData.listOfUsers[i].name == curUser) {
                 userPosition = i;
             }
         }
-        if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
-            Command: toastr["success"]("Congratulations, you won!", "You won!");
-        }
-        else {
-            Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
+        if (curRoomData.listOfUsers[userPosition].isWinner == 1) {
+            swal({
+                    title: "Congratulations!",
+                    text: "You have won! This is your score: " + points + ". Press 'OK' to leave the room.",
+                    type: "success"
+                },
+                function () {
+                    window.location.href = '/join';
+                });
+        } else {
+            swal({
+                    title: "Nice Try!",
+                    text: "Better luck next time. This is your score:" + points + ". Press 'OK' to leave the room.",
+                    type: "error"
+                },
+                function () {
+                    window.location.href = '/join';
+                });
         }
         //Stop drawing.
         initialiseDrawer();
     }
 
+    function createWordDisplay(user){
+        if($('#theWordBar').length > 0){
+            $('#theWordBar').remove();
+        }
 
 toastr.options = {
   "closeButton": true,
@@ -316,6 +350,14 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+        if(curRoomData.listOfUsers[user].isDrawer == 1) {
+            var source = $("#word-template").html();
+            var template = Handlebars.compile(source);
+            var newPage = template(theWord);
+
+            $('#wordBarDiv').append(newPage);
+        }
+    }
 
 </script>
 <script id="users-template" type="text/x-handlebars-template">
@@ -326,23 +368,17 @@ toastr.options = {
         {{/each}}
         </div>
 </script>
-
-
+<script id="word-template" type="text/x-handlebars-template">
+        <b id="theWordBar"> Word: </b> {{this}}
+</script>
 
 <div class="container preventSelection" style="padding-top:30px;">
     <div class="row">
         <div class="col-md-offset-3" style="padding-bottom:5px">
             <div style="border: black 1px solid; height:30px; border-radius: 20px; ">
                 <div class="row">
-                    <div class="col-md-12">
-                        <c:choose>
-                            <c:when test = "${curRoomData.listOfUsers[getPositionInUserList(userData.name)].isDrawer == 1}">
-                                <b> Word: </b> ${theWord}
-                            </c:when>
-                        </c:choose>
-
+                    <div id="wordBarDiv" class="col-md-12">
                         <b>Timer:</b> <a id="timer"></a>
-
                     </div>
                 </div>
             </div>
@@ -438,7 +474,7 @@ toastr.options = {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start')"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start');"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>

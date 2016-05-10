@@ -26,6 +26,7 @@ import static com.surrey.com3014.group10.controllers.MainController.wc;
  */
 @RestController
 public class DrawController {
+
     private static List<GameRoom> rooms = new ArrayList<>();
     private static List<User> globalUserList = new ArrayList<>();
 
@@ -266,7 +267,6 @@ public class DrawController {
             ex.printStackTrace();
         }
     }
-
 
     /*
         Retrieves Word from list.

@@ -40,6 +40,13 @@ public class GreetingController {
         return new Greeting(message.getMessage());
     }
 
+    @MessageMapping("/chat/wordOps/{room}")
+    @SendTo("/topic/wordOps/{room}")
+    public Greeting getWordAnswer(ChatMessage message) throws Exception {
+//        Thread.sleep(1000); // simulated delay
+        return new Greeting(message.getMessage());
+    }
+
     @MessageMapping("/chat/global")
     @SendTo("/topic/main")
     public Greeting mainInfo(ChatMessage message) throws Exception {

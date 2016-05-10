@@ -13,6 +13,8 @@
         #scrollChat {
             max-height: 250px;
             overflow-y: auto;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         #joinGameLobbyTable {
             max-height: 380px;
@@ -30,6 +32,8 @@
             user-select: none;
         }
         <%@include file="../../bower_components/bootstrap/dist/css/bootstrap.css" %>
+        <%@include file="../../bower_components/sweetalert/dist/sweetalert.css" %>
+
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -37,11 +41,7 @@
     <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
-    <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
-    
-
-
-
+    <script type="text/javascript" src="../../bower_components/sweetalert/dist/sweetalert-dev.js"></script>
 
 </head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
