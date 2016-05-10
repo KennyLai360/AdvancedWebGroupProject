@@ -49,7 +49,8 @@
                 curRoomData = data;
                 createUserListDisplay();
                 initialiseDrawer();
-
+                
+                //If there are 4 users in the room, show start button.
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Start Game!";
@@ -181,15 +182,21 @@
 
         (e || window.event).returnValue = null;
     });
+    
+    //Clears the canvas for drawer and guessers 
     function sendClear() {
         clearCanvas();
         sendDrawing(-1);
     }
+    
+    //Sends color change data
     function sendColor(val) {
         onColourChange(val);
 //        sendDrawing(-2,1,false,1,val);
     }
 
+    //Creates the canvases, one for the drawer with drawing enabled, and one for each
+    //guesser with drawing disabled.
     function makeDrawer() {
         document.getElementById("roomIdInfo").innerHTML = "<a>Room Id: <b>" + curRoomData.gameRoomId + "</b></a>";
         document.getElementById("roomNameInfo").innerHTML = "<a>Room Name: <b>" + curRoomData.gameRoomName + "</b></a>";
@@ -217,20 +224,23 @@
             //Indicates drawer
             getWord();
             Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
-            
+            //Create canvas with drawing enabled
             prepareCanvas(1);
         }
         else {
+            //Disables drawing buttons for guessers
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].style.display = "none";
             }
             document.getElementById("messageSendButton").disabled = false;
             document.getElementById("messagebox").disabled = false;
+            //Create canvas with drawing disabled
             prepareCanvas(0);
         }
     }
 
+    //Returns the position of a user in the list of users.
     function getPositionInUserList(name) {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (name == curRoomData.listOfUsers[i].name) {
@@ -251,14 +261,14 @@
 //    }
     var time = 60;
 
-
+    //Decrements timer. If it reaches 0, the next round is started.
     function refreshTimer() {
         if (time > 0) {
             time--;
             document.getElementById("timer").innerHTML= time;
         }
         else {
-
+            nextRound();
         }
     }
 
@@ -270,6 +280,8 @@
         })
     }
 
+    //When the maximum number of rounds is reached, the game is over.
+    //Show winners and losers.
     function endGame() {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
             if (curRoomData.listOfUsers[i].name == curUser) {
@@ -282,9 +294,9 @@
         else {
             Command: toastr["error"]("Oh no! You lost!", "Better luck next time!")
         }
+        //Stop drawing.
         initialiseDrawer();
     }
-
 
 
 toastr.options = {

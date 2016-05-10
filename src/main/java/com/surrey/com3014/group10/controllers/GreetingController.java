@@ -26,6 +26,13 @@ public class GreetingController {
             return new Greeting(message.getMessage());
         }
     }
+    
+    @MessageMapping("chat/roomOps/{room}/word")
+    @SendTo("/topic/roomsOps/{room{/word")
+    public String word() throws Exception {
+        return WordController.word;
+    }
+    
     @MessageMapping("/chat/roomOps/{room}")
     @SendTo("/topic/roomOps/{room}")
     public Greeting connectionInfo(ChatMessage message) throws Exception {

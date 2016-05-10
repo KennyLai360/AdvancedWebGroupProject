@@ -7,8 +7,9 @@ var audio = new Audio('../../static/game.mp3');
 var round = 0;
 var maxRounds = 0;
 var winner;
+var drawUser;
 
-
+//Creates connection for sending draw data
 function drawConnect(theRoom) {
     if(theRoom != 0 || null) {
         var socket = new SockJS('/draw');
@@ -33,6 +34,7 @@ function drawConnect(theRoom) {
 
 }
 
+//Start/stop music
 function toggleAudio(){
     if(musicPlaying){
         $('#soundBtn').attr('src','../icons/musicOff.png');
@@ -48,7 +50,7 @@ function toggleAudio(){
         audio.play();
     }
 }
-
+//Creates connection for sending user and room data
 function connectMainChannel(){
     var socket = new SockJS('/chat');
 
@@ -65,10 +67,12 @@ function connectMainChannel(){
 
 }
 
+//Gets the number of rounds in a room
 function getMaxRounds() {
     maxRounds = curRoomData.numberOfRounds;
 }
 
+//Disconnects the main channel
 function disconnectMainChannel() {
     if (stompClient != null) {
         stompClient.disconnect();
@@ -84,6 +88,7 @@ function sendInGameInfo(msg){
     stompClient.send("/app/chat/roomOps/" + curRoom, {}, JSON.stringify({ 'message' : msg}));
 }
 
+//Used to call Javascript functions for all connected users in room
 function updateInGameInfo(message){
     switch (message) {
         case "connect":
@@ -105,15 +110,18 @@ function updateInGameInfo(message){
     // getJoinedRoom();
 }
 
+//Hides modal, allowing the game to begin
 function startGame() {
     hideWaitingForUserModal();
 }
+
 
 function updateRoomInfo(message){
     getRoom();
     getUser();
 }
 
+//Disconnects draw channel
 function drawDisconnect(thisUser) {
     if (stompClient != null) {
         stompClient.disconnect();
@@ -122,17 +130,20 @@ function drawDisconnect(thisUser) {
     console.log("Disconnected");
 }
 
+//Sends disconnect message
 function sendDisconnection() {
     var msg = userData.name + "has disconnected.";
     stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
+//Sends text messages for guessing/chat
 function sendMessage() {
     var msg = document.getElementById('messagebox').value;
     msg =  curUser + ": " + msg;
     stompClient.send("/app/chat/"+ curRoom, {}, JSON.stringify({ 'message': msg }));
 }
 
+//Sends draw data
 function sendDrawing(x,y,drag,size,color) {
     var hextoInt;
     if(color != null) {
@@ -143,6 +154,7 @@ function sendDrawing(x,y,drag,size,color) {
     stompClient.send("/app/draw/" + curRoom, {}, JSON.stringify({'drawing': arr}));
 }
 
+//Shows guess/chat message, detects correct guess
 function showGreeting(message) {
     $('#scrollChat').append('<p>' + message + '</p>');
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
@@ -151,14 +163,14 @@ function showGreeting(message) {
     }
 }
 
+//Initiailises all users to not be drawers
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
     }
 }
 
-var drawUser;
-
+//
 function chooseDrawer() {
     curRoomData.listOfUsers[0].isDrawer = 1;
     drawUser = 0;
