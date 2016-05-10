@@ -93,7 +93,7 @@
     }
 
     function newRound() {
-        round++;
+        
 //        var oldcanv = document.getElementById('canvasDiv');
 //        document.removeChild(oldcanv);
         $('canvas').remove();
@@ -218,8 +218,9 @@
             document.getElementById("messageSendButton").disabled = true;
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
-            Command: toastr["success"]("You are now the drawer!", "The word is " + getWord());
             getWord();
+            Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
+            
             prepareCanvas(1);
         }
         else {

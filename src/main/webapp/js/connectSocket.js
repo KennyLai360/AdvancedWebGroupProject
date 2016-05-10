@@ -200,6 +200,7 @@ function findCorrectGuesser() {
         }
     }
     if (round < maxRounds) {
+        round++;
         newRound();
         console.log(round);
     }
