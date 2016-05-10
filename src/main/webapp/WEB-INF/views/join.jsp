@@ -183,7 +183,7 @@
         </thead>
         {{#each this}}
         <tr>
-            <td><button class="form-control btn btn-info" disabled>{{gameState}}</button></td>
+            <td><span class="label label-warning">{{gameState}}</span></td>
             <td>{{gameRoomName}}</td>
             <td>{{gameRoomId}}</td>
             <td>{{listOfUsers.length}}/4</td>
@@ -272,14 +272,6 @@
                         </div>
                     </div>
 
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <span><b>Room Password</b></span>
-                            <input type="password" class="form-control" placeholder="Leave empty if not required">
-                        </div>
-                    </div>
                 </div>
 
 
