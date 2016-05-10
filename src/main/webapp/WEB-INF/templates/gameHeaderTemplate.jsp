@@ -13,6 +13,8 @@
         #scrollChat {
             max-height: 250px;
             overflow-y: auto;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         #joinGameLobbyTable {
             max-height: 380px;
