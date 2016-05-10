@@ -50,12 +50,12 @@
                 if (curRoomData.listOfUsers.length == 3) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
-                    //First user in game
-
+                    if(curRoomData.listOfUsers[0].name == userData.name){
+                        //First user in game
                         console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
-
+                    }
                     chooseDrawer();
                     makeDrawer();
                     getMaxRounds();
