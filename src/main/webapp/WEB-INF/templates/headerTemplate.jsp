@@ -16,11 +16,7 @@
             max-width: 100%;
             overflow-x: hidden;
         }
-        #joinGameLobbyTable {
-            max-height: 380px;
-            overflow-y: auto;
-        }
-        #deleteTable {
+        #deleteTable, #joinGameLobbyTable {
             max-height: 380px;
             overflow-y: auto;
         }

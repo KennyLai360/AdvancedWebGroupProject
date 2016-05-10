@@ -14,6 +14,8 @@ $(document).ready(function(){
         if(e.keyCode==13 && document.getElementById("messagebox").value !== '' && document.getElementById("messagebox").disabled === false)
             scrollToBottomOfChat();
     });
+    $("#leaderboardTable").tablesorter();
+    $("#leaderboardTable").tablesorter( {sortList: [[0,1]]} );
 });
 
 /**

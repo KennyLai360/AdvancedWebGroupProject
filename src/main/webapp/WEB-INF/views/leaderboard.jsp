@@ -16,7 +16,7 @@
                     <div class="col-md-12">
                         <div id="joinGameLobbyTable" class="table-responsive table-bordered">
 
-                            <table class="table" style="padding-left:10px; padding-right:10px;">
+                            <table id="leaderboardTable" class="table tablesorter" style="padding-left:10px; padding-right:10px;">
                                 <thead>
                                 <tr>
                                     <th>Score</th>
