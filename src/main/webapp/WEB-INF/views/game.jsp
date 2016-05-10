@@ -182,7 +182,7 @@
             }
         }
         updateRoomUserList();
-        sendInGameInfo("Updating the in-game Rooms.");
+        sendInGameInfo("Update room");
     }
     /*
      Removes user from GlobalList.
@@ -244,6 +244,7 @@
             if (name == curRoomData.listOfUsers[i]) {
                 return i;
             }
+        }
     }
 
 //    function chooseRole() {
