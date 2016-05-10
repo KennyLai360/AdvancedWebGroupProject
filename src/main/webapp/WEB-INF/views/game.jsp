@@ -323,7 +323,7 @@ toastr.options = {
         <div class="col-md-offset-3" style="padding-bottom:5px">
             <div style="border: black 1px solid; height:30px; border-radius: 20px; ">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div id="wordBar" class="col-md-12">
                         <c:choose>
                             <c:when test = "${curRoomData.listOfUsers[getPositionInUserList(userData.name)].isDrawer == 1}">
                                 <b> Word: </b> ${theWord}
