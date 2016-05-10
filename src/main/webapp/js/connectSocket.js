@@ -156,7 +156,6 @@ function showGreeting(message) {
 function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
-        curRoomData.listOfUsers[i].isReady = 0;
     }    
 }
 

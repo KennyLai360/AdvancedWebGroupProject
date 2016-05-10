@@ -53,8 +53,7 @@
                     //First user in game
                     if (getPositionInUserList(userData.name) == 0) {
                         document.getElementById("startGameBtn").disabled = false;
-                        document.getElementById("startGameBtn").show();
-
+                        document.getElementById("startGameBtn").style.visibility = "visible";
                     }
                     chooseDrawer();
                     makeDrawer();
@@ -184,7 +183,7 @@
     function spliceTheArray() {
 
         for(i=0;i<curRoomData.listOfUsers.length;i++){
-            if(curRoomData.listOfUsers[i].name == userData.name){
+            if(curRoomData.listOfUsers[i].name === userData.name){
                 curRoomData.listOfUsers.splice(i,1);
                 console.log(curUser);
             }
@@ -447,7 +446,7 @@ toastr.options = {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display:none" onclick="hideWaitingForUserModal()"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="visibility: hidden" onclick="hideWaitingForUserModal()"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>
