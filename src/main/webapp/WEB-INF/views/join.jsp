@@ -170,6 +170,7 @@
     <table id="roomsTable" class="table">
         <thead>
         <tr>
+            <th>Progress</th>
             <th>Room Name</th>
             <th>Room Number</th>
             <th>Players</th>
@@ -179,6 +180,7 @@
         </thead>
         {{#each this}}
         <tr>
+            <td>In Progress...</td>
             <td>{{gameRoomName}}</td>
             <td>{{gameRoomId}}</td>
             <td>{{listOfUsers.length}}/4</td>

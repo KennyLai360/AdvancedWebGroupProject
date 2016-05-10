@@ -244,6 +244,7 @@
             if (name == curRoomData.listOfUsers[i]) {
                 return i;
             }
+        }
     }
 
 //    function chooseRole() {
