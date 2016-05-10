@@ -13,7 +13,8 @@ package com.surrey.com3014.group10.User;
 public enum UserRoleType {
     
     USER("USER"),
-    ADMIN("ADMIN");
+    ADMIN("ADMIN"),
+    DBA("DBA");
 
     String userRoleType;
     

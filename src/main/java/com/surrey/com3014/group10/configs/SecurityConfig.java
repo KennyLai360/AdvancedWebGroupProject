@@ -52,13 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/", "/home", "/about", "contact", "/login").permitAll()
         .antMatchers("/admin/**").access("hasRole('ADMIN')")
            .antMatchers("/join/**", "/leaderboard").access("hasRole('ADMIN') or hasRole('USER')")
+        .antMatchers("/dba/**").access("hasRole('DBA')")
         .and().formLogin().loginPage("/login")
         .usernameParameter("ssoId").passwordParameter("password")
            .defaultSuccessUrl("/join")
            .and().exceptionHandling().accessDeniedPage("/Access_Denied")
            .and().csrf().disable();
-
-
     }
 
 

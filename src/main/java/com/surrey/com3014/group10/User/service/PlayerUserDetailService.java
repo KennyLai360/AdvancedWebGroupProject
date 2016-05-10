@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author maudf_000
+ * @author Ade Oladejo
  */
 
 @Service("playerUserDetailService")
