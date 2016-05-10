@@ -52,7 +52,7 @@
                 curRoomData = data;
                 createUserListDisplay();
                 initialiseDrawer();
-                
+
                 //If there are 4 users in the room, show start button.
                 if (curRoomData.listOfUsers.length == 4) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
@@ -185,13 +185,13 @@
 
         (e || window.event).returnValue = null;
     });
-    
-    //Clears the canvas for drawer and guessers 
+
+    //Clears the canvas for drawer and guessers
     function sendClear() {
         clearCanvas();
         sendDrawing(-1);
     }
-    
+
     //Sends color change data
     function sendColor(val) {
         onColourChange(val);
@@ -225,6 +225,7 @@
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
             getWord();
+            createWordDisplay(userPosition);
             Command: toastr["success"]("You are now the drawer!", "The word is " + theWord);
             //Create canvas with drawing enabled
             prepareCanvas(1);
@@ -246,7 +247,6 @@
             swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
             setTimeout(function(){ prepareCanvas(0); }, 2000);
         }
-        createWordDisplay(userPosition);
     }
 
     //Returns the position of a user in the list of users.
@@ -333,23 +333,6 @@
             $('#theWordBar').remove();
         }
 
-toastr.options = {
-  "closeButton": true,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-full-width",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "500000",
-  "extendedTimeOut": "100000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
         if(curRoomData.listOfUsers[user].isDrawer == 1) {
             var source = $("#word-template").html();
             var template = Handlebars.compile(source);
@@ -369,7 +352,7 @@ toastr.options = {
         </div>
 </script>
 <script id="word-template" type="text/x-handlebars-template">
-        <b id="theWordBar"> Word: </b> {{this}}
+        <b id="theWordBar"> Word: </b> {{theWord}}
 </script>
 
 <div class="container preventSelection" style="padding-top:30px;">
