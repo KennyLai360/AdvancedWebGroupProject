@@ -21,7 +21,7 @@
     var theWord;
 
     // Timer.
-    var time = 60;
+    var time = 100;
 
     var wordStore=[];
 
@@ -104,7 +104,7 @@
         sendClear();
         initialiseDrawer();
         incrementDrawer();
-        time = 60;
+        time = 100;
     }
     /*
         Called on load.
@@ -255,6 +255,7 @@
     }
 
     function refreshTimer() {
+        console.log("refresh timer")
         if (time > 0) {
             time--;
             document.getElementById("timer").innerHTML= time;
@@ -278,6 +279,32 @@
         })
     }
 
+
+    /*
+        This method tallys up the scores.
+        POST the user object to the server to be updated by the database.
+     */
+    function tallyScore(userpos){
+        var user = {
+            name: userData.name,
+            gameRoomId: 0,
+            state: 0,
+            score: curRoomData.listOfUsers[userpos].score;
+        };
+        $.ajax({
+            url:"/tallyScore",
+            type:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(user),
+            success:function(data) {
+                return false;
+            }
+        });
+    }
+
     //When the maximum number of rounds is reached, the game is over.
     //Show winners and losers.
     function endGame() {
@@ -295,8 +322,8 @@
         } else {
             swal({title: "Nice Try!", allowEscapeKey:"false", type: "error", text: "Better luck next time. This is your score: " + curRoomData.listOfUsers[userPosition].points + ". Redirect in 10 seconds",   timer: 10000,  showConfirmButton: false });
             setTimeout(function(){ window.location.href = '/join'; }, 10000);
-
         }
+        tallyScore(userPosition);
     }
 
     function createWordDisplay(userIndex){

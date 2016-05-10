@@ -1,7 +1,6 @@
 package com.surrey.com3014.group10.controllers;
 
 import com.surrey.com3014.group10.Client.GameRoom;
-import com.surrey.com3014.group10.Client.User;
 import com.surrey.com3014.group10.User.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
@@ -10,15 +9,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.surrey.com3014.group10.controllers.MainController.gl;
-import static com.surrey.com3014.group10.controllers.MainController.wc;
 
 /**
  *
@@ -28,7 +23,7 @@ import static com.surrey.com3014.group10.controllers.MainController.wc;
 public class DrawController {
 
     private static List<GameRoom> rooms = new ArrayList<>();
-    private static List<User> globalUserList = new ArrayList<>();
+    private static List<com.surrey.com3014.group10.Client.User> globalUserList = new ArrayList<>();
 
     @Autowired
     private UserService userService;
@@ -102,7 +97,7 @@ public class DrawController {
                     userExists = true;
                 }
             }
-            for (User userA : globalUserList) {
+            for (com.surrey.com3014.group10.Client.User userA : globalUserList) {
                 if (user.getName().equals(userA.getName())) {
                     alreadyListed = true;
                 }
@@ -140,7 +135,7 @@ public class DrawController {
     void removeUser(
         @RequestBody String userName) throws ParseException, IOException {
         try {
-            for (User userx : DrawController.globalUserList) {
+            for (com.surrey.com3014.group10.Client.User userx : DrawController.globalUserList) {
                 if (userx.getName().equals(userName)) {
                     DrawController.globalUserList.remove(userx);
                 }
@@ -157,8 +152,8 @@ public class DrawController {
     @RequestMapping(value = "/getUser", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public User getUser() {
-        for (User userx : DrawController.globalUserList) {
+    public com.surrey.com3014.group10.Client.User getUser() {
+        for (com.surrey.com3014.group10.Client.User userx : DrawController.globalUserList) {
             if (userx.getName().equals(getPrincipal())) {
                 return userx;
             }
@@ -175,34 +170,35 @@ public class DrawController {
     public
     @ResponseBody
     String joinRoom(
-        @RequestBody User user) throws ParseException, IOException {
+        @RequestBody com.surrey.com3014.group10.Client.User user) throws ParseException, IOException {
         try {
             // Check if room exists
             for (GameRoom gRoom : DrawController.rooms) {
                 if (user.getGameRoomId() == gRoom.getGameRoomId()) {
                     // Check if room is full
-                        // Check if user exists
-                        for (User userA : DrawController.globalUserList) {
-                            // Check if User is in a valid logged in user in the globalUserList.
-                            if (user.getName().equals(userA.getName())) {
-                                // Check if User is in Game.
-                                if (userA.getState() == 0) {
-                                    userA.setGameRoomId(gRoom.getGameRoomId());
-                                    userA.setState(1);
-                                    gRoom.addUser(userA);
-                                    return "Successfully added to room data.";
-                                } else {
-                                    return "User is already in game.";
-                                }
+                    // Check if user exists
+                    for (com.surrey.com3014.group10.Client.User userA : DrawController.globalUserList) {
+                        // Check if User is in a valid logged in user in the globalUserList.
+                        if (user.getName().equals(userA.getName())) {
+                            // Check if User is in Game.
+                            if (userA.getState() == 0) {
+                                userA.setGameRoomId(gRoom.getGameRoomId());
+                                userA.setState(1);
+                                gRoom.addUser(userA);
+                                return "Successfully added to room data.";
+                            } else {
+                                return "User is already in game.";
                             }
                         }
                     }
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return null;
     }
+
     /*
         Retrieves the joined room information.
      */
@@ -210,10 +206,10 @@ public class DrawController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public GameRoom getJoinedRoom() {
-        for (User userx: DrawController.globalUserList) {
-            if(userx.getName().equals(getPrincipal())){
-                for(GameRoom gr : DrawController.rooms){
-                    if(gr.getGameRoomId() == userx.getGameRoomId()) {
+        for (com.surrey.com3014.group10.Client.User userx : DrawController.globalUserList) {
+            if (userx.getName().equals(getPrincipal())) {
+                for (GameRoom gr : DrawController.rooms) {
+                    if (gr.getGameRoomId() == userx.getGameRoomId()) {
                         return gr;
                     }
                 }
@@ -221,6 +217,7 @@ public class DrawController {
         }
         return null;
     }
+
     /*
         Adds a user to the global user list.
         Indicates that a user has logged in to the game.
@@ -230,9 +227,9 @@ public class DrawController {
     public
     @ResponseBody
     void resetUser(
-        @RequestBody User user) throws ParseException, IOException {
+        @RequestBody com.surrey.com3014.group10.Client.User user) throws ParseException, IOException {
         try {
-            for (User userx : DrawController.globalUserList) {
+            for (com.surrey.com3014.group10.Client.User userx : DrawController.globalUserList) {
                 if (userx.getName().equals(user.getName())) {
                     userx.setState(0);
                     userx.setGameRoomId(0);
@@ -242,6 +239,7 @@ public class DrawController {
             ex.printStackTrace();
         }
     }
+
     /*
         Adds a user to the global user list.
         Indicates that a user has logged in to the game.
@@ -255,7 +253,7 @@ public class DrawController {
         try {
             for (GameRoom gr : DrawController.rooms) {
                 if (gr.getGameRoomId() == gameroom.getGameRoomId()) {
-                    if(gameroom.getListOfUsers().size() == 0){
+                    if (gameroom.getListOfUsers().size() == 0) {
                         DrawController.rooms.remove(gr);
                     } else {
                         gr.setListOfUsers(gameroom.getListOfUsers());
@@ -268,8 +266,7 @@ public class DrawController {
         }
     }
 
-    /*
-        Retrieves Word from list.
+    /*        Retrieves Word from list.
      */
     @RequestMapping(value = "/getWord", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -279,5 +276,18 @@ public class DrawController {
         wc.randomWord();
 
         return wc.getWord();
+    }
+
+    /*
+        Tally's up scores.
+    */
+    @RequestMapping(value = "/tallyScore", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public
+    @ResponseBody
+    void updateScores(
+        @RequestBody com.surrey.com3014.group10.Client.User user) throws ParseException, IOException {
+            userService.update(user);
+
     }
 }

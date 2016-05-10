@@ -103,6 +103,7 @@ function updateInGameInfo(message){
             break;
         case "Start":
             startGame();
+            console.log("Switch start")
             break;
         default:
             getJoinedRoom();
@@ -115,6 +116,7 @@ function sendWordOps(msg){
     stompClient.send("/app/chat/wordOps/" + curRoom, {}, JSON.stringify({ 'message' : msg}));
 }
 
+//Gets the word that the user is shown to draw2
 function getTheWord(message){
     theWord = message;
 }
@@ -122,6 +124,7 @@ function getTheWord(message){
 function startGame() {
     hideWaitingForUserModal();
     updateRoom();
+    startTimer();
 }
 
 
@@ -223,7 +226,7 @@ function findCorrectGuesser() {
             }
             curRoomData.listOfUsers[i].points += time;
             document.getElementById(curRoomData.listOfUsers[i].name).innerHTML =
-                    curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + "points";
+                    curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + " Pts.";
 //            findDrawer();
             if (userData.name === curRoomData.listOfUsers[i].name) {
                 // Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
@@ -263,6 +266,10 @@ function chooseWinner() {
         }
     }
     endGame();
+}
+
+function startTimer() {
+    setInterval(refreshTimer, 1000);
 }
 
 

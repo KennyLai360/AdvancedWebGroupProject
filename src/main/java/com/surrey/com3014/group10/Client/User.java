@@ -8,6 +8,7 @@ public class User {
     private String name;
     private long gameRoomId;
     private int state;
+    private int score;
 
     public String getName() {
         return name;
@@ -19,6 +20,14 @@ public class User {
 
     public int getState(){
         return state;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public User(){

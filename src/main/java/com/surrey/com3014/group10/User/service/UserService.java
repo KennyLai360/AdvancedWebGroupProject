@@ -10,20 +10,20 @@ import java.util.List;
 /**
  *
  * @author Ade Oladejo
- * This interface provides a layer of abstraction for 
- * Object Relationship Mapping. This will 
+ * This interface provides a layer of abstraction for
+ * Object Relationship Mapping. This will
  */
 public interface UserService {
 
     User findById(int id);
 
     User findByUserName(String userName);
-    
+
     void createUser( User user);
-    
+
     void deleteUserById(int id);
-    
+
     List<User> listAllUsers();
-    
-   void update( User user);
+
+   void update( com.surrey.com3014.group10.Client.User user);
 }

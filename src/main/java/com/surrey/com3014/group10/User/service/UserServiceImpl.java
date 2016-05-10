@@ -5,18 +5,20 @@
  */
 package com.surrey.com3014.group10.User.service;
 
+import com.surrey.com3014.group10.User.Medal;
 import com.surrey.com3014.group10.User.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.surrey.com3014.group10.User.model.User;
+
 import java.util.List;
 
 /**
  *
  * @author Ade Oladejo
  * This class is a Service class that handles Database operations
- * 
+ *
  */
 @Service("userService")
 @Transactional // starts a transaction on each method start, and commits it on each method exit
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
     public User findByUserName(String userName) {
         return dao.findByUserName(userName);
     }
-    
+
     /*
         Creates a new User
     */
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
     {
         dao.createUser(user);
     }
-    
+
     /*
         List all users stored in the database
     */
@@ -54,7 +56,7 @@ public class UserServiceImpl implements UserService {
     {
         return dao.findAllUsers();
     }
-    
+
     /*
         this method will delete an user by it's id
     */
@@ -62,21 +64,37 @@ public class UserServiceImpl implements UserService {
     {
         dao.deleteUser(id);
     }
-   
+
     /*
      * This method will update user's information in the database
      * Since the method is running with Transaction, there's need to call hibernate update explicitly.
      * Just fetch the entity from db and update it with proper values within transaction.
-     * It will be updated in db once transaction ends. 
+     * It will be updated in db once transaction ends.
      */
-   public void update(User user)
-   {
-        User entity = dao.findById(user.getId());
+    public void update(com.surrey.com3014.group10.Client.User user)
+    {
+        User entity = dao.findByUserName(user.getName());
         if(entity!=null){
-           // game logic
+            entity.setScore(entity.getScore() + user.getScore());
+            if( entity.getScore() <= 1000 )
+            {
+                entity.setMedal(Medal.NONE);
+            }
+            else if( entity.getScore() > 1000 && entity.getScore() < 3000 )
+            {
+                entity.setMedal(Medal.BRONZE);
+            }
+            else if(entity.getScore() >= 3000 && entity.getScore() < 5000 )
+            {
+                entity.setMedal(Medal.SILVER);
+            }
+            else
+            {
+                entity.setMedal(Medal.GOLD);
+            }
         }
-       
-   }
-    
+
+    }
+
 }
 

@@ -37,7 +37,8 @@
         var user = {
             name: userName,
             gameRoomId: 0,
-            state: 0
+            state: 0,
+            score: 0
         };
         $.ajax({
             url:"/addUser",
