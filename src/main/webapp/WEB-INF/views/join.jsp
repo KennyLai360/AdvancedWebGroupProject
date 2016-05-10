@@ -181,7 +181,7 @@
         </thead>
         {{#each this}}
         <tr>
-            <td>In Progress...</td>
+            <td><button class="form-control btn btn-danger" disabled">Join</button></td>
             <td>{{gameRoomName}}</td>
             <td>{{gameRoomId}}</td>
             <td>{{listOfUsers.length}}/4</td>
