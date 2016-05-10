@@ -84,7 +84,6 @@
         $('canvas').remove();
         initialiseDrawer();
         incrementDrawer();
-        makeDrawer();
         time = 60;
 //        var word = ${word};
 //        console.log(word.toString());
