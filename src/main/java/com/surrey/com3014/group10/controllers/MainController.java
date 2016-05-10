@@ -29,12 +29,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
- * @author maudff_000
+ * @author Ade Oladejo
  */
 @Controller
 public class MainController {
+
     //private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     public static GameList gl = new GameList();
@@ -44,13 +44,18 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-
+    /*
+     This method will serve the request of form "/home" and root
+    */
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         return "home";
     }
 
+    /*
+     This method will serve the request of form "/admin"
+    */
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
@@ -58,35 +63,9 @@ public class MainController {
         return "admin";
     }
 
-    @RequestMapping("/dba/deleteUser")
-    public ModelAndView deleteUser(@RequestParam int id) {
-        userService.deleteUserById(id);
-        return new ModelAndView("redirect:/dba");
-    }
-
-    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
-    public String accessDeniedPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "accessDenied";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
-        if (isAuthenticated()) {
-            return "redirect:/join";
-        } else {
-            return "login";
-        }
-
-    }
-
-    @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
-    public String leaderboard(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        model.addAttribute("listOfUsers", userService.listAllUsers());
-        return "leaderboard";
-    }
-
+    /*
+     This method will serve the request of form "/admin"
+    */
     @RequestMapping(value = "/dba", method = RequestMethod.GET)
     public String dba(ModelMap model) {
         model.addAttribute("user", getPrincipal());
@@ -94,6 +73,50 @@ public class MainController {
         return "dba";
     }
 
+
+    /*
+     This method will serve the request to delete user by id
+    */
+    @RequestMapping("/dba/deleteUser")
+    public ModelAndView deleteUser(@RequestParam int id) {
+        userService.deleteUserById(id);
+        return new ModelAndView("redirect:/dba");
+    }
+
+    /*
+     This method will serve the request of form "/AccessDenied"
+    */
+    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+    public String accessDeniedPage(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        return "accessDenied";
+    }
+
+    /*
+     This method will serve the request of form "/login"
+    */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage() {
+        if (isAuthenticated()) {
+            return "redirect:/join";
+        } else {
+            return "login";
+        }
+    }
+
+    /*
+     This method will serve the request of form "/leaderboard"
+    */
+    @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
+    public String leaderboard(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
+        return "leaderboard";
+    }
+
+    /*
+     This method will serve the request of form "/logout"
+    */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -102,6 +125,7 @@ public class MainController {
         }
         return "home";
     }
+
 
     @RequestMapping(value = "/game", method = RequestMethod.GET)
     public String game(ModelMap model) {
@@ -118,6 +142,9 @@ public class MainController {
         return "join";
     }
 
+    /*
+        This method get the current authenticated User's name
+    */
     private String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -130,6 +157,9 @@ public class MainController {
         return userName;
     }
 
+    /*
+        This method checks whether a user has been authenticated
+    */
     private boolean isAuthenticated() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -138,5 +168,7 @@ public class MainController {
         } else {
             return false;
         }
+
     }
+
 }

@@ -20,14 +20,17 @@ import org.springframework.web.servlet.view.JstlView;
  *
  * @author maudf_000
  */
-@Configuration
-@EnableWebMvc
+@Configuration // Makes this class a Configuration class
+@EnableWebMvc // EnableWebMvc is equivalent to mvc:annotation-driven in XML
 @EntityScan
 @ComponentScan(basePackages = "com.surrey.com3014.group10")
 public class JavaConfig extends WebMvcConfigurerAdapter {
 
 
-      @Bean(name="HelloWorld")
+    /*
+       viewResolver configures a view resolver to identify the real view
+    */
+    @Bean(name="HelloWorld")
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);

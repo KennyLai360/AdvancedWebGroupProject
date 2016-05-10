@@ -14,6 +14,8 @@ $(document).ready(function(){
         if(e.keyCode==13 && document.getElementById("messagebox").value !== '' && document.getElementById("messagebox").disabled === false)
             scrollToBottomOfChat();
     });
+    $("#leaderboardTable").tablesorter();
+    $("#leaderboardTable").tablesorter( {sortList: [[0,1]]} );
 });
 
 /**
@@ -33,6 +35,10 @@ function validateNewRoomSettings() {
     }
 }
 
+/**
+ * Function used to delete a user based off their unique user Id.
+ * @param value
+ */
 function deleteUser(value) {
     window.location.href = "/admin/deleteUser?id=" + value;
 }

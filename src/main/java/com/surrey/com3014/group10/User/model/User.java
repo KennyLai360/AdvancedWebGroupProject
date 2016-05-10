@@ -2,6 +2,7 @@ package com.surrey.com3014.group10.User.model;
 
 import com.surrey.com3014.group10.User.Medal;
 import com.surrey.com3014.group10.User.model.UserRole;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,22 +11,26 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "APP_USER")
-public class User {
+/*
+    This is an entity class that ensures that the class User is a persistent entity.
+    @author Ade Oladejo
+*/
+@Entity 
+@Table(name = "APP_USER") // Table Annotation explicitiy configures which table the entity is mapped to
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id; // auto generated primary key 
 
     @Column(name = "SSO_ID", unique = true, nullable = false)
-    private String ssoId;
+    private String ssoId; // maps user's name to column name on database 
 
     @Column(name = "PASSWORD", nullable = false)
-    private String password;
+    private String password; // maps password to column name on database 
 
     @Column(name = "SCORE", nullable = false)
-    private int score;
+    private int score; // maps score to column name on database 
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "APP_USER_USER_PROFILE",
@@ -35,7 +40,7 @@ public class User {
 
     @Column(name = "MEDAL", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Medal medal = Medal.NONE;
+    private Medal medal = Medal.NONE; 
 
     @Enumerated(EnumType.STRING)
     public Medal getMedal() {
@@ -115,6 +120,9 @@ public class User {
         return true;
     }
 
+     /*
+    Overided To String method to display user information
+    */
     @Override
     public String toString() {
         return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password

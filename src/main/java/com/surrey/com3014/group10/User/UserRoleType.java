@@ -7,7 +7,8 @@ package com.surrey.com3014.group10.User;
 
 /**
  *
- * @author maudf_000
+ * @author Ade Oladejo
+ * UserRoleType is an enum class that declares a set of roles a user can have
  */
 public enum UserRoleType {
     

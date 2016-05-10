@@ -16,11 +16,7 @@
             max-width: 100%;
             overflow-x: hidden;
         }
-        #joinGameLobbyTable {
-            max-height: 380px;
-            overflow-y: auto;
-        }
-        #deleteTable {
+        #deleteTable, #joinGameLobbyTable {
             max-height: 380px;
             overflow-y: auto;
         }
@@ -37,11 +33,14 @@
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/game.js"></script>
+    <script type="text/javascript" src="../../bower_components/tablesorter/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src="../../bower_components/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
     <script type="text/javascript" src="../../bower_components/sweetalert/dist/sweetalert-dev.js"></script>
+    <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
 
 </head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -71,7 +70,7 @@
                     <c:otherwise>
                         <span style="color: white">Hello ${user}!</span>
                         <a href="<c:url value='/logout' />"><button class="btn btn-danger" onclick="removeFromUserList();">Logout</button></a>
-                            <a href="<c:url value='/admin' />"<button class="btn btn-info">Admin Panel</button></a>
+                            <a href="/admin"><button class="btn btn-info">Admin Panel</button></a>
                     </c:otherwise>
                 </c:choose>
 

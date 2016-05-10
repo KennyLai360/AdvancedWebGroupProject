@@ -9,7 +9,9 @@ import java.util.List;
 
 /**
  *
- * @author maudf_000
+ * @author Ade Oladejo
+ * This interface provides a layer of abstraction for 
+ * Object Relationship Mapping. This will 
  */
 public interface UserService {
 
@@ -23,9 +25,5 @@ public interface UserService {
     
     List<User> listAllUsers();
     
-   void update( int id);
-   
-   void update(String username);
-
-
+   void update( User user);
 }

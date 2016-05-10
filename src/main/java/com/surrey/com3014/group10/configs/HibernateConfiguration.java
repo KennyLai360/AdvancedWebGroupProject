@@ -23,15 +23,21 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
  
-@Configuration
-@EnableTransactionManagement
+@Configuration // Makes this class a Configuration class
+@EnableTransactionManagement // enables Spring’s annotation-driven transaction management capability.
 @ComponentScan(basePackages ={ "com.surrey.com3014.group10.configs" } , excludeFilters = { @Filter(type = FilterType.ANNOTATION, value = Configuration.class)})
-@PropertySource(value = { "classpath:application.properties" })
+@PropertySource(value = { "classpath:application.properties" }) // sets the location to the class path containing the Application's properties
 public class HibernateConfiguration {
  
     @Autowired
-    private Environment environment;
+    /* Spring's run time environment */
+    private Environment environment; 
  
+    /*
+        
+        Method sessionFactory()creates LocalSessionFactoryBean object and returns it 
+        as a bean. This object is used to create sessions and ensure thread safety.
+    */
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -41,6 +47,11 @@ public class HibernateConfiguration {
         return sessionFactory;
      }
      
+    /*
+        dataSource() returns a DriverManagerDataSource object as bean.
+        This bean  serves as simple replacement for a full-blown connection pool.
+        It creates a new Connections on every call.
+    */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -51,6 +62,11 @@ public class HibernateConfiguration {
         return dataSource;
     }
      
+    
+    /*
+        Method that uses @PropertySource to declare 
+        a set of properties(defined in a properties file in application classpath)
+    */
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
@@ -59,6 +75,11 @@ public class HibernateConfiguration {
         return properties;        
     }
      
+    /*
+        Once the SessionFactory is created, it will be injected into Bean method 
+        transactionManager() which may eventually provide 
+        transaction support for the sessions created by this sessionFactory
+    */
     @Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory s) {
