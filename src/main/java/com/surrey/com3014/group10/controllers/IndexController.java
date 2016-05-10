@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /*
-    @author Kenny Lai 
+    @author Kenny Lai
 */
 @Controller
 public class IndexController {
@@ -22,7 +22,7 @@ public class IndexController {
     */
     @RequestMapping( value ="/contact" , method = RequestMethod.GET)
     public String contact(ModelMap model) {
-        model.addAttribute("user", MainController.getPrincipal());
+        model.addAttribute("user", getPrincipal());
         return "contact";
     }
 
@@ -31,23 +31,34 @@ public class IndexController {
     */
     @RequestMapping(value ="/about", method = RequestMethod.GET)
     public String about(ModelMap model) {
-        model.addAttribute("user", MainController.getPrincipal());
+        model.addAttribute("user", getPrincipal());
         return "about";
     }
 
-    @RequestMapping(value ="/game", method = RequestMethod.GET)
-    public String game(ModelMap model) {
-        model.addAttribute("user", MainController.getPrincipal());
-        return "game";
-    }
+//    @RequestMapping(value ="/game", method = RequestMethod.GET)
+//    public String game(ModelMap model) {
+//        model.addAttribute("user", MainController.getPrincipal());
+//        return "game";
+//    }
+//
+//    /*
+//     This method will serve the request of form "/join"
+//    */
+//    @RequestMapping(value ="/join", method = RequestMethod.GET)
+//    public String menu(ModelMap model) {
+//        model.addAttribute("user", MainController.getPrincipal());
+//        return "join";
+//    }
 
-    /*
-     This method will serve the request of form "/join"
-    */
-    @RequestMapping(value ="/join", method = RequestMethod.GET)
-    public String menu(ModelMap model) {
-        model.addAttribute("user", MainController.getPrincipal());
-        return "join";
-    }
+    private String getPrincipal() {
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
 }

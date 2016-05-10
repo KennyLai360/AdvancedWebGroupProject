@@ -1,24 +1,32 @@
 package com.surrey.com3014.group10.controllers;
 
+
+import com.surrey.com3014.group10.Client.GameRoom;
+import org.springframework.expression.ParseException;
+import org.springframework.http.HttpStatus;
+
 import com.surrey.com3014.group10.User.model.User;
 import com.surrey.com3014.group10.User.service.UserService;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 
 /**
  * @author Ade Oladejo
@@ -27,6 +35,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     //private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+
+    public static GameList gl = new GameList();
+
+    public static WordController wc = new WordController();
+
     @Autowired
     private UserService userService;
 
@@ -50,12 +63,23 @@ public class MainController {
     }
 
     /*
+     This method will serve the request of form "/admin"
+    */
+    @RequestMapping(value = "/dba", method = RequestMethod.GET)
+    public String dba(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
+        return "dba";
+    }
+
+
+    /*
      This method will serve the request to delete user by id
     */
-    @RequestMapping("/admin/deleteUser")
+    @RequestMapping("/dba/deleteUser")
     public ModelAndView deleteUser(@RequestParam int id) {
         userService.deleteUserById(id);
-        return new ModelAndView("redirect:/admin");
+        return new ModelAndView("redirect:/dba");
     }
 
     /*
@@ -101,10 +125,26 @@ public class MainController {
         return "home";
     }
 
+
+    @RequestMapping(value = "/game", method = RequestMethod.GET)
+    public String game(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
+        return "game";
+    }
+
+    @RequestMapping(value = "/join", method = RequestMethod.GET)
+    public String menu(ModelMap model) {
+        model.addAttribute("user", getPrincipal());
+        model.addAttribute("rooms", gl.getRooms());
+        model.addAttribute("listOfUsers", userService.listAllUsers());
+        return "join";
+    }
+
     /*
         This method get the current authenticated User's name
     */
-    public static String getPrincipal() {
+    private String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -121,7 +161,6 @@ public class MainController {
     */
     private boolean isAuthenticated() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             /* The user is logged in :) */
             return true;
