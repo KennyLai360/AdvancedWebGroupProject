@@ -174,7 +174,7 @@
         });
     }
 
-    $( window ).on('beforeunload',function() {
+    $(window).on('beforeunload',function() {
         resetUser();
     });
     function sendClear() {
