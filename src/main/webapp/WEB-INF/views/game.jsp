@@ -48,11 +48,12 @@
                 initialiseDrawer();
 
                 if (curRoomData.listOfUsers.length == 3) {
-                    sendInGameInfo("Update room");
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
                     document.getElementById("startGameBtn").innerHTML = "Ready!";
-                    //First user in game
-                    if (getPositionInUserList(userData.name) == 0) {
+                    // If you are the first user in the room.
+                    if(curRoomData.listOfUsers[0].name == userData.name){
+                        //First user in game
+                        console.log("You are the first!");
                         document.getElementById("startGameBtn").disabled = false;
                         document.getElementById("startGameBtn").removeAttribute("style");
                     }
@@ -65,7 +66,6 @@
                     document.getElementById("startGameBtn").innerHTML =  curRoomData.listOfUsers.length + "/4";
 
                 }
-                console.log("getjoinedroom thing");
                 return false;
             }
         });
@@ -84,7 +84,6 @@
         $('canvas').remove();
         initialiseDrawer();
         incrementDrawer();
-        makeDrawer();
         time = 60;
 //        var word = ${word};
 //        console.log(word.toString());
@@ -149,7 +148,6 @@
             success:function(data) {
                 sendDisconnection(curRoom);
                 drawDisconnect(curRoom);
-                console.log("Success!!");
                 return false;
             }
         });
@@ -181,16 +179,16 @@
             },
             data: JSON.stringify(curRoomData),
             success:function(data) {
-                console.log("Success!!");
                 window.location.href = "/";
                 return false;
             }
         });
     }
 
-    $(window).on('beforeunload',function() {
+    window.addEventListener("beforeunload", function (e) {
         resetUser();
-        return null;
+
+        (e || window.event).returnValue = null;
     });
     function sendClear() {
         clearCanvas();
@@ -212,6 +210,10 @@
                 userPosition = i;
             }
         }
+        // Fix canvas bug.
+        while ($('canvas').length > 0) {
+            $('canvas').remove();
+        }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
             console.log()
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
@@ -224,10 +226,6 @@
             prepareCanvas(1);
         }
         else {
-            //Indicates guesser
-            while ($('canvas').length > 1) {
-                $('canvas').remove();
-            }
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].style.display = "none";
@@ -240,7 +238,7 @@
 
     function getPositionInUserList(name) {
         for (i = 0; i < curRoomData.listOfUsers.length; i++) {
-            if (name == curRoomData.listOfUsers[i]) {
+            if (name == curRoomData.listOfUsers[i].name) {
                 return i;
             }
         }
@@ -284,8 +282,7 @@
             }
         }
         if (curRoomData.listOfUsers[userPosition].isWinner = 1) {
-            Command: toastr["success"]("Congratulations, you won!", "You won!")
-            console.log
+            Command: toastr["success"]("Congratulations, you won!", "You won!");
         }
     }
 
@@ -430,7 +427,7 @@ toastr.options = {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="hideWaitingForUserModal()"></button>
+                <button id="startGameBtn" type="button" class="btn btn-success" style="display: none" onclick="sendInGameInfo('Start')"></button>
                 <a href="/join"><button type="button" class="btn btn-danger">Quit</button></a>
             </div>
         </div>

@@ -48,9 +48,6 @@
             },
             data: JSON.stringify(user),
             success:function(data) {
-                console.log(userName)
-                console.log("this is the " + data);
-                console.log("Success!!");
                 return false;
             }
         });
@@ -70,7 +67,6 @@
             },
             data: JSON.stringify(thisUser),
             success:function(data) {
-                console.log("Success!!");
                 return false;
             }
         });
@@ -98,7 +94,6 @@
             complete:function(data){
                 sendRoomCommand("join");
                 window.location.href = "/game";
-                console.log("Success!!");
                 return false;
             }
         });
@@ -132,7 +127,6 @@
             complete:function(data) {
 //                sendRoomCommand("add");
                 joinRoom(n);
-                console.log("Success!!");
                 return false;
             }
         });
@@ -164,9 +158,10 @@
     // Retrieves room list from server.
     getRoom();
     // Disconnects from the MAIN Channel when the window is closed or page is changed.
-    $(window).on('beforeunload', function(){
+    window.addEventListener("beforeunload", function (e) {
         disconnectMainChannel();
-        return null;
+
+        (e || window.event).returnValue = null;
     });
 
 </script>
