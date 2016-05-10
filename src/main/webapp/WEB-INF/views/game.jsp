@@ -23,7 +23,11 @@
     // Timer.
     var time = 100;
 
-    var wordStore=[];
+    var realWord;
+
+    var onlyDoOnce = 1;
+
+    var onlyCanvasOnce = 1;
 
     /*
         This creates the user room display list and updates it when a change has been made.
@@ -90,6 +94,7 @@
             type: 'GET',
             success: function (data) {
                 theWord = data;
+                realWord = data;
             }
         });
     }
@@ -218,7 +223,10 @@
             $('canvas').remove();
         }
         if (curRoomData.listOfUsers[userPosition].isDrawer == 1) {
-            getWord();
+            if(onlyDoOnce){
+                getWord();
+                onlyDoOnce = 0;
+            }
             var buttonsToDisable = document.getElementsByClassName("disableButtonForGuesser");
             for (var i = 0; i < buttonsToDisable.length; i++) {
                 buttonsToDisable[i].removeAttribute("style");
@@ -227,8 +235,13 @@
             document.getElementById("messagebox").disabled = true;
             //Indicates drawer
             //Create canvas with drawing enabled
-            swal({title: "You are now the artist!", text: "The word is " + theWord + ". This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
-            setTimeout(function(){ prepareCanvas(1); }, 3000);
+            swal({title: "You are now the artist!", text: "The word is " + realWord + ". This box will close in 3 seconds.",   timer: 3000,   showConfirmButton: false });
+            if(onlyCanvasOnce) {
+                setTimeout(function () {
+                    prepareCanvas(1);
+                }, 3000);
+                onlyCanvasOnce = 0;
+            }
         }
         else {
             //Disables drawing buttons for guessers
@@ -279,6 +292,13 @@
         })
     }
 
+    /*
+        Called when user leaves room.
+     */
+    function leaveRoom(){
+        resetUser();
+        window.location.href= '/join';
+    }
 
     /*
         This method tallys up the scores.
@@ -334,7 +354,7 @@
         if(curRoomData.listOfUsers[userIndex].isDrawer == 1) {
             var source = $("#word-template").html();
             var template = Handlebars.compile(source);
-            var newPage = template(theWord);
+            var newPage = template(realWord);
 
             $('#wordBarDiv').append(newPage);
         }

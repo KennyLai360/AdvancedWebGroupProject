@@ -90,7 +90,7 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                 <%--<a href="<c:url value='/home' />">--%>
                 <a>
-                    <button class="btn btn-success" onclick="resetUser()">Yes</button>
+                    <button class="btn btn-success" onclick="leaveRoom();">Yes</button>
                 </a>
             </div>
         </div>

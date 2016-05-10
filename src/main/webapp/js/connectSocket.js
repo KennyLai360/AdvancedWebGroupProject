@@ -124,7 +124,7 @@ function getTheWord(message){
 function startGame() {
     hideWaitingForUserModal();
     updateRoom();
-    startTimer();
+    // startTimer();
 }
 
 
@@ -195,12 +195,14 @@ function chooseDrawer() {
 
 function incrementDrawer() {
     drawUser++;
+    onlyDoOnce = 1;
+    onlyCanvasOnce = 1;
     if(drawUser >= curRoomData.listOfUsers.length){
         drawUser = 0;
     }
     curRoomData.listOfUsers[drawUser].isDrawer = 1;
     if(curRoomData.listOfUsers[drawUser].name == userData.name){
-        getWord();
+        // getWord();
     }
     makeDrawer();
 }
