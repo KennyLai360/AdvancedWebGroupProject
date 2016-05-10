@@ -5,24 +5,42 @@ package com.surrey.com3014.group10.Client;
  */
 public class User {
 
-    private long id;
     private String name;
-    private boolean allowedToDraw;
-    private long gameSessionId;
-    
-    public long getUserId() {
-        return id;
-    }
+    private long gameRoomId;
+    private int state;
 
     public String getName() {
         return name;
     }
 
-    public void allowedToDraw(boolean value) {
-        allowedToDraw = value;
+    public long getGameRoomId() {
+        return gameRoomId;
     }
 
-    public long getGameSessionId() {
-        return gameSessionId;
+    public int getState(){
+        return state;
     }
+
+    public User(){
+        super();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGameRoomId(long gameRoomId) {
+        this.gameRoomId = gameRoomId;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+//    public User(long id, String name, int state, long gameRoomId){
+//        this.id = id;
+//        this.name = name;
+//        this.state = state;
+//        this.gameRoomId = gameRoomId;
+//    }
 }

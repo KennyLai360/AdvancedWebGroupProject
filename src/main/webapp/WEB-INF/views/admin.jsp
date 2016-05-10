@@ -38,7 +38,6 @@
                                             <th>User Profiles</th>
                                             <th>Score</th>
                                             <th>Medal</th>
-                                            <th>Delete</th>
                                         </tr>
                                         </thead>
                                         <c:forEach items="${listOfUsers}" var="user">
@@ -48,9 +47,6 @@
                                                 <td><c:out value="${user.userProfiles}"/></td>
                                                 <td><c:out value="${user.score}"/></td>
                                                 <td><c:out value="${user.medal}"/></td>
-                                                <td>
-                                                    <button class="form-control btn btn-danger" onclick="deleteUser(${user.id})">Delete</button>
-                                                </td>
                                             </tr>
                                         </c:forEach>
 

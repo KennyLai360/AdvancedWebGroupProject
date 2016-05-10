@@ -13,6 +13,8 @@
         #scrollChat {
             max-height: 250px;
             overflow-y: auto;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         #tableContent {
             max-height: 380px;
@@ -26,11 +28,22 @@
             user-select: none;
         }
         <%@include file="../../bower_components/bootstrap/dist/css/bootstrap.css" %>
+        <%@include file="../../bower_components/toastr/toastr.css" %>
+        <%@include file="../../bower_components/sweetalert/dist/sweetalert.css" %>
     </style>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/handlebars/handlebars.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+    <script type="text/javascript" src="../../js/connectSocket.js"></script>
+    <script type="text/javascript" src="../../js/room.js"></script>
     <script type="text/javascript" src="../../js/game.js"></script>
-    <script type="text/javascript" src="../../bower_components/tablesorter/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="../../js/draw.js"></script>
+    <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
+    <script type="text/javascript" src="../../../bower_components/sweetalert/sweetalert-dev.js"></script>
+    <script type="text/javascript" src="../../../bower_components/tablesorter/jquery.tablesorter.js"></script>
 
 </head>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -47,7 +60,8 @@
             <div class="navbar-form navbar-right">
 
                         <span style="color: white">Hello ${user}!</span>
-                        <a href="<c:url value='/logout' />"><button class="btn btn-danger">Logout</button></a>
+                        <%--<a href="<c:url value='/logout' />">--%>
+                            <a><button class="btn btn-danger">Logout</button></a>
 
 
             </div>
@@ -72,8 +86,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                <a href="/home">
-                    <button class="btn btn-success">Yes</button>
+                <%--<a href="<c:url value='/home' />">--%>
+                <a>
+                    <button class="btn btn-success" onclick="resetUser()">Yes</button>
                 </a>
             </div>
         </div>

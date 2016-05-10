@@ -1,20 +1,75 @@
 package com.surrey.com3014.group10.Client;
 
-import org.springframework.security.core.userdetails.User;
+import java.util.ArrayList;
 
 /**
  * Created by KENNY on 03/05/2016.
  */
 public class GameRoom {
     private long gameRoomId;
-    private int gameRoomNumber;
-    private User[] listOfUsers;
+    private String gameRoomName;
+    private ArrayList<User> listOfUsers;
+    private int numberOfRounds;
+    private String gameState;
 
-    public GameRoom(long gameRoomId, int gameRoomNumber) {
+    public GameRoom() {
         super();
-        this.gameRoomId = gameRoomId;
-        this.gameRoomNumber = gameRoomNumber;
-        this.listOfUsers = new User[4];
     }
 
+//    public GameRoom(long gameRoomId, String gameRoomName, int numberOfRounds) {
+//        super();
+//        this.gameRoomId = gameRoomId;
+//        this.gameRoomName = gameRoomName;
+//        this.numberOfRounds = numberOfRounds;
+//        this.listOfUsers = new ArrayList<>();
+//    }
+
+    public long getGameRoomId() {
+        return gameRoomId;
+    }
+
+    public void setGameRoomId(long gameRoomId) {
+        this.gameRoomId = gameRoomId;
+    }
+
+    public String getGameRoomName() {
+        return gameRoomName;
+    }
+
+    public void setGameRoomName(String gameRoomName) {
+        this.gameRoomName = gameRoomName;
+    }
+
+    public void setListOfUsers(ArrayList<User> listOfUsers) {
+        this.listOfUsers = listOfUsers;
+    }
+
+    public ArrayList<User> getListOfUsers() {
+        return listOfUsers;
+    }
+
+    public int getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
+    public void setNumberOfRounds(int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
+    }
+
+    public void addUser(User user) {
+        if (listOfUsers.size() < 4) {
+            listOfUsers.add(user);
+        }
+        else {
+            //Room full
+        }
+    }
+
+    public String getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(String gameState) {
+        this.gameState = gameState;
+    }
 }
