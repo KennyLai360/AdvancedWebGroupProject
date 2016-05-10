@@ -115,6 +115,7 @@ function getTheWord(message){
 
 function startGame() {
     hideWaitingForUserModal();
+    updateRoom();
 }
 
 function updateRoomInfo(message){

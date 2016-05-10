@@ -159,6 +159,13 @@
      Indicating that the user has logged out from the game server.
      */
     function updateRoom(){
+        var room = {
+            gameRoomId: curRoomData.gameRoomId,
+            gameRoomName: curRoomData.gameRoomName,
+            numberOfRounds: curRoomData.numberOfRounds,
+            gameState: "IN GAME",
+            listOfUsers: curRoomData.listOfUsers
+        };
         $.ajax({
             url:"/updateRoom",
             type:'POST',
@@ -166,11 +173,10 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(curRoomData),
+            data: JSON.stringify(room),
             success:function(data) {
                 window.location.href = "/";
-                return false;
-            }
+                return false;}
         });
     }
 
@@ -200,7 +206,6 @@
                 userPosition = i;
             }
         }
-        createWordDisplay(userPosition);
         // Fix canvas bug.
         while ($('canvas').length > 0) {
             $('canvas').remove();
@@ -229,6 +234,7 @@
             swal({title: "You are the guesser!", text: "Guess the word that the artist is drawing! This box will close in 2 seconds.",   timer: 2000,   showConfirmButton: false });
             setTimeout(function(){ prepareCanvas(0); }, 2000);
         }
+        createWordDisplay(userPosition);
     }
 
     function getPositionInUserList(name) {

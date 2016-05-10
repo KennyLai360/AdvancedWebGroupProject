@@ -268,7 +268,6 @@ public class DrawController {
         }
     }
 
-
     /*
         Retrieves Word from list.
      */
