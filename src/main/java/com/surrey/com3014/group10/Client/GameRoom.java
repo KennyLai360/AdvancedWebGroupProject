@@ -10,7 +10,7 @@ public class GameRoom {
     private String gameRoomName;
     private ArrayList<User> listOfUsers;
     private int numberOfRounds;
-    private int gameState;
+    private String gameState;
 
     public GameRoom() {
         super();
@@ -65,11 +65,11 @@ public class GameRoom {
         }
     }
 
-    public int getGameState() {
+    public String getGameState() {
         return gameState;
     }
 
-    public void setGameState(int gameState) {
+    public void setGameState(String gameState) {
         this.gameState = gameState;
     }
 }
