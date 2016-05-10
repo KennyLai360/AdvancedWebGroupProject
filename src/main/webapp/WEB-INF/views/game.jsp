@@ -45,7 +45,7 @@
                 console.log(data);
                 curRoomData = data;
                 createUserListDisplay();
-                if (curRoomData.listOfUsers.length == 4) {
+                if (curRoomData.listOfUsers.length == 1) {
                     console.log("HERE");
                     initialiseDrawer();
                     makeDrawer();
@@ -55,6 +55,14 @@
                 return false;
             }
         });
+    }
+    
+    function newRound() {
+        round++;
+//        var oldcanv = document.getElementById('canvasDiv');
+//        document.removeChild(oldcanv);
+        $('canvas').remove();
+        makeDrawer();
     }
 
     /*

@@ -124,7 +124,7 @@ function showGreeting(message) {
     $('#scrollChat').append('<p>' + message + '</p>');
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
     if (lastMessage.startsWith("Correct")) {
-        // findCorrectGuesser();
+         findCorrectGuesser();
     }
 }
 
@@ -143,25 +143,34 @@ function findCorrectGuesser() {
     var x = document.getElementById("scrollChat").lastChild.innerHTML;
     var y;
     for (i = 0; i < curRoomData.listOfUsers.length; i++) {
+        console.log(i);
         y = x.substring(0, x.indexOf(curRoomData.listOfUsers[i].name))
         if (x.indexOf(curRoomData.listOfUsers[i].name) !== -1) {
+            console.log(i);
             if (curRoomData.listOfUsers[i].points == undefined) {
                 curRoomData.listOfUsers[i].points = 0;
+            }
+            if (curRoomData.listOfUsers[i].isDrawer == undefined) {
+                curRoomData.listOfUsers[i].isDrawer = 0;
             }
             curRoomData.listOfUsers[i].points += time;
             document.getElementById(curRoomData.listOfUsers[i].name).innerHTML =
                     curRoomData.listOfUsers[i].name + ": " + curRoomData.listOfUsers[i].points + "points";
-            findDrawer();
+//            findDrawer();
+            console.log(curRoomData.listOfUsers[0].name);
             curRoomData.listOfUsers[i].isDrawer = 1;
         }
     }
     if (round != maxRounds) {
-        round++;
+        newRound();
+        console.log(round);
     }
     else {
         chooseWinner();
     }
 }
+
+
 
 function chooseWinner() {
     var biggest = 0;
@@ -181,15 +190,6 @@ function chooseWinner() {
         }
     }
     endGame();
-
-}
-
-function findDrawer() {
-    for (i = 0; i < curRoomData.listOfUsers.length; i++) {
-        if (curRoomData.listOfUsers[i].isDrawer == 1) {
-            curRoomData.listOfUsers[i].isDrawer == 0;
-        }
-    }
 }
 
 
