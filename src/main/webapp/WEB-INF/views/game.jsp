@@ -52,7 +52,7 @@
 
                 if (curRoomData.listOfUsers.length == 3) {
                     document.getElementById("waitingForUserModal").innerHTML = "Waiting for Users: " + curRoomData.listOfUsers.length + "/4";
-                    document.getElementById("startGameBtn").innerHTML = "Ready!";
+                    document.getElementById("startGameBtn").innerHTML = "Start Game!";
                     // If you are the first user in the room.
                     if(curRoomData.listOfUsers[0].name == userData.name){
                         //First user in game

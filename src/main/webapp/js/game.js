@@ -5,10 +5,10 @@ var roomName = document.getElementById("roomName");
  * Function used for chat
  */
 function scrollToBottomOfChat() {
-    var objDiv = document.getElementById("scrollChat");
-    objDiv.scrollTop = objDiv.scrollHeight;
     sendMessage();
     $('#messagebox').val("");
+    var objDiv = document.getElementById("scrollChat");
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 $(document).ready(function(){
