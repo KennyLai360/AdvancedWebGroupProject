@@ -100,8 +100,6 @@
         initialiseDrawer();
         incrementDrawer();
         time = 60;
-//        var word = ${word};
-//        console.log(word.toString());
         Command: toastr["success"]("Correct!", "Nice, you guessed correctly!");
 
     }

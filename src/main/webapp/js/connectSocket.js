@@ -148,7 +148,6 @@ function showGreeting(message) {
     var lastMessage = document.getElementById("scrollChat").lastChild.innerHTML;
     if (lastMessage.startsWith("Correct")) {
          findCorrectGuesser();
-         sendInGameInfo("New round");
     }
 }
 
@@ -200,7 +199,7 @@ function findCorrectGuesser() {
         }
     }
     if (round < maxRounds) {
-        newRound();
+        sendInGameInfo("New round");
         console.log(round);
     }
     else {
