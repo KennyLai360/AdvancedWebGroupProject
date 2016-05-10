@@ -21,8 +21,8 @@ function drawConnect(theRoom) {
             stompClient.subscribe('/topic/greetings/' + theRoom, function (greeting) {
                 showGreeting(JSON.parse(greeting.body).content);
             });
-            stompClient.subscribe('/topic/roomOps/' + theRoom, function (greeting) {
-                updateInGameInfo(JSON.parse(greeting.body).content);
+            stompClient.subscribe('/topic/roomOps/' + theRoom, function (connectionInfo) {
+                updateInGameInfo(JSON.parse(connectionInfo.body).content);
             });
             sendInGameInfo("connect"); // Sends message to all users in room to retrieve updated list from server. This also retrieves the joined room info.
             toggleAudio();
@@ -55,8 +55,8 @@ function connectMainChannel(){
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings/main', function(greeting){
-            updateRoomInfo(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/topic/greetings/main', function(maininfo){
+            updateRoomInfo(JSON.parse(maininfo.body).content);
         });
         getUser();
         addToUserList();
@@ -157,7 +157,7 @@ function initialiseDrawer() {
     for (i=0; i < curRoomData.listOfUsers.length; i++) {
         curRoomData.listOfUsers[i].isDrawer = 0;
         curRoomData.listOfUsers[i].isReady = 0;
-    }    
+    }
 }
 
 var drawUser;
