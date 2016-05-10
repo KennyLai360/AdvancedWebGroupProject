@@ -7,16 +7,16 @@
             <div style="border: black 1px solid; height:500px; border-radius: 20px;">
                 <div class="row">
                     <div class="text-center col-md-12">
-                        <h4>Leaderboards</h4>
+                        <h3>Leaderboards</h3>
                         <hr>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="joinGameLobbyTable" class="table-responsive table-bordered">
+                        <div id="tableContent" class="table-responsive table-bordered">
 
-                            <table class="table" style="padding-left:10px; padding-right:10px;">
+                            <table id="leaderboardTable" class="table tablesorter" style="padding-left:10px; padding-right:10px;">
                                 <thead>
                                 <tr>
                                     <th>Score</th>
@@ -33,7 +33,6 @@
                                 </c:forEach>
 
                             </table>
-
                         </div>
                     </div>
                 </div>

@@ -28,7 +28,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <div style="padding:10px;" id="deleteTable">
+                            <div style="padding:10px;" id="tableContent">
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
                                         <thead>

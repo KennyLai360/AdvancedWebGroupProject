@@ -141,14 +141,17 @@
                 alert("Apparently... You're already in-game. Removing you from existing game.");
                 resetUser();
                 window.location.href = "/join";
-
             } else {
                 if (availableRooms[i].gameRoomId == roomId) {
-                    if (availableRooms[i].listOfUsers.length < 4) {
-                        // Room is not full
-                        joinRoom(roomId);
+                    if(availableRooms[i].gameState == "IN GAME"){
+                        alert("Room is in session!");
                     } else {
-                        alert("Room is full!");
+                        if (availableRooms[i].listOfUsers.length < 4) {
+                            // Room is not full
+                            joinRoom(roomId);
+                        } else {
+                            alert("Room is full!");
+                        }
                     }
                 }
             }
@@ -160,8 +163,6 @@
     // Disconnects from the MAIN Channel when the window is closed or page is changed.
     window.addEventListener("beforeunload", function (e) {
         disconnectMainChannel();
-
-        (e || window.event).returnValue = null;
     });
 
 </script>

@@ -7,7 +7,9 @@ package com.surrey.com3014.group10.User;
 
 /**
  *
- * @author Jonny
+ * @author Ade Oladejo
+ * Medal is an enum class used to represent a set of medals
+ * a player can have
  */
 public enum Medal {
     

@@ -37,6 +37,7 @@
     <script type="text/javascript" src="../../../bower_components/json3/lib/json3.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/sockjs/sockjs.min.js"></script>
     <script type="text/javascript" src="../../../bower_components/stomp-websocket/lib/stomp.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/sweetalert/dist/sweetalert-dev.js"></script>
     <script type="text/javascript" src="../../../bower_components/toastr/toastr.js"></script>
 
 </head>
@@ -66,7 +67,7 @@
                     </c:when>
                     <c:otherwise>
                         <span style="color: white">Hello ${user}!</span>
-                        <a href="<c:url value='/logout' />"><button class="btn btn-danger" onclick="removeFromUserList();">Logout</button></a>
+                        <a href="</logout">><button class="btn btn-danger" onclick="removeFromUserList();">Logout</button></a>
                         <a href="/admin"><button class="btn btn-info">Admin Panel</button></a>
                         <a href="/dba"><button class="btn btn-warning">DBA Panel</button></a>
                         <a href="/leaderboard"><button class="btn btn-warning">Leaderboards</button></a>

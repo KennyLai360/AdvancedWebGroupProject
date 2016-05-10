@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author maudf_000
+ * This Generic class is the base class for all DAO implementation classes. 
+ * It provides the wrapper methods for common hibernate operations
+ * The SessionFactory object will be autowired in this class
  */
 public abstract class AbstractDao<PK extends Serializable, T> {
 	
