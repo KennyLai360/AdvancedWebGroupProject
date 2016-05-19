@@ -67,7 +67,7 @@
                     </c:when>
                     <c:otherwise>
                         <span style="color: white">Hello ${user}!</span>
-                        <a href="</logout">><button class="btn btn-danger" onclick="removeFromUserList();">Logout</button></a>
+                        <a href="/logout">><button class="btn btn-danger" onclick="removeFromUserList();">Logout</button></a>
                         <a href="/admin"><button class="btn btn-info">Admin Panel</button></a>
                         <a href="/dba"><button class="btn btn-warning">DBA Panel</button></a>
                         <a href="/leaderboard"><button class="btn btn-warning">Leaderboards</button></a>
